@@ -1,9 +1,8 @@
 import React from 'react';
-import { Component, PropTypes } from 'react';
 
 import CircularProgress from 'material-ui/CircularProgress';
 
-class Logout extends Component {
+class Logout extends React.Component {
   componentDidMount() {
     this.props.doLogout();
   }

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React  from 'react';
 import { bindActionCreators } from 'redux';
 
 import RaisedButton from 'material-ui/RaisedButton';
@@ -17,7 +17,7 @@ import Account from 'material-ui/svg-icons/action/account-circle';
 
 import theme from '../utils/theme';
 
-class Login extends Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
 

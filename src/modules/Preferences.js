@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React from 'react';
 
 import {
   Card,
@@ -22,7 +22,7 @@ const styles = {
   }
 };
 
-class Preferences extends Component {
+class Preferences extends React.Component {
   render() {
     return(
       <div style={styles.wrapper}>
