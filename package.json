@@ -1,7 +1,7 @@
 {
-  "name": "redux-react-starter",
-  "version": "1.1.2",
-  "description": "Get started with ES2015, React and Redux. Including Webpack, ESLint, react-router, fetch ...",
+  "name": "frontend-hipster-kit",
+  "version": "1.0.0",
+  "description": "Get started with frontend development",
   "scripts": {
     "start": "webpack-dev-server --open --config webpack/webpack.config.dev.js",
     "start-nobrowser": "webpack-dev-server --config webpack/webpack.config.dev.js",
@@ -13,19 +13,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/didierfranc/redux-react-starter.git"
+    "url": "git+https://github.com/FruitieX/frontend-hipster-kit.git"
   },
   "keywords": [
     "react",
     "redux",
     "async"
   ],
-  "author": "Didier Franc",
+  "author": "FruitieX",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/didierfranc/redux-react-starter/issues"
+    "url": "https://github.com/FruitieX/frontend-hipster-kit/issues"
   },
-  "homepage": "https://github.com/didierfranc/redux-react-starter#readme",
+  "homepage": "https://github.com/FruitieX/frontend-hipster-kit#readme",
   "devDependencies": {
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.0.0",
@@ -45,7 +45,6 @@
     "eslint-plugin-react": "^6.8.0",
     "html-webpack-plugin": "^2.24.1",
     "jest": "^18.0.0",
-    "react-hot-loader": "^3.0.0-beta.6",
     "react-test-renderer": "^15.4.1",
     "webpack": "2.2.0",
     "webpack-dev-server": "2.2.0-rc.0"
