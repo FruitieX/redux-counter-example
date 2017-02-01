@@ -12,7 +12,12 @@ import {
 import injectTapEventPlugin from 'react-tap-event-plugin';
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin();
+try {
+  injectTapEventPlugin();
+} catch (e) {
+  // ignore errors
+  // otherwise we break hot reloading
+}
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
