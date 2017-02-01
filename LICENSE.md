@@ -1,5 +1,8 @@
 MIT License
 
+Copyright (c) 2017 Futurice Oy
+Copyright (c) 2017 Rasmus Eskola
+
 Copyright (c) 2017 Didier Franc
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

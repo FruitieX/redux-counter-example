@@ -1,4 +1,4 @@
-const { resolve } = require('path')
+const { resolve, join } = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -31,6 +31,11 @@ module.exports = {
         use: 'babel-loader',
       },
     ],
+  },
+  resolve: {
+    alias: {
+      config: join(__dirname, '..', 'config', 'development')
+    }
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

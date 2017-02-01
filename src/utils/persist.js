@@ -1,6 +1,6 @@
-export const storeToken = token => sessionStorage.setItem('token', token)
-export const getToken = () => sessionStorage.getItem('token')
-export const clearToken = () => sessionStorage.removeItem('token')
+export const storeToken = token => localStorage.setItem('token', token)
+export const getToken = () => localStorage.getItem('token')
+export const clearToken = () => localStorage.removeItem('token')
 
 export const saveState = (state) => {
   try {
@@ -21,4 +21,8 @@ export const loadState = () => {
   } catch (err) {
     return undefined
   }
+}
+
+export const clearState = () => {
+  localStorage.clear()
 }

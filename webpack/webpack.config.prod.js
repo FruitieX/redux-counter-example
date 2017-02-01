@@ -1,4 +1,4 @@
-const { resolve } = require('path')
+const { resolve, join } = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OfflinePlugin = require('offline-plugin')
@@ -29,6 +29,11 @@ module.exports = {
         use: 'babel-loader',
       },
     ],
+  },
+  resolve: {
+    alias: {
+      config: join(__dirname, '..', 'config', 'production')
+    }
   },
   plugins: [
     new webpack.DefinePlugin({
