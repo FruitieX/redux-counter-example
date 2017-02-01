@@ -9,6 +9,8 @@ import {
   Redirect
 } from 'react-router-dom'
 
+import routes from './utils/routes';
+
 import injectTapEventPlugin from 'react-tap-event-plugin';
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -78,8 +80,13 @@ export const Root = () => (
 
             <Route exact path='/login' component={Login} />
 
-            <AuthRedirectRoute exact path='/logout' component={Logout} />
-            <AuthRedirectRoute exact path='/' component={Home} />
+            {
+              routes.map((route, index) => (
+                <AuthRedirectRoute exact key={index} path={route.path} component={route.component} />
+              ))
+            }
+
+            <AuthRedirectRoute exact path='/' component={routes[0].component} />
           </div>
         </Router>
       </IntlProvider>
