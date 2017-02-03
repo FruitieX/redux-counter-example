@@ -82,7 +82,18 @@ const rest = reduxApi({
 .use('fetch', adapterFetch(fetch))
 .use('responseHandler', (err, data) => {
   if (err) {
-    //store.dispatch(showError(err));
+    let msg = `Error`
+
+    // error code
+    msg += err.statusCode ? ` ${err.statusCode}` : ``
+
+    // error reason
+    msg += err.error ? ` ${err.error}` : ''
+
+    // error description
+    msg += err.message ? `: ${err.message}`: ''
+    console.log(msg);
+    store.dispatch(showError(msg))
   }
 })
 

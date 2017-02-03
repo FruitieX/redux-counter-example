@@ -6,7 +6,8 @@ class ErrorSnackbar extends React.Component {
     super();
     this.state = {
       open: false,
-      message: ''
+      id: -1,
+      message: '',
     }
   }
 
@@ -17,16 +18,16 @@ class ErrorSnackbar extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.message && nextProps.message !== this.state.message) {
+    if (nextProps.err.id !== this.state.id) {
       this.setState({
         open: true,
-        message: nextProps.message,
+        message: nextProps.err.msg,
+        id: nextProps.err.id,
       })
     }
   }
 
   render() {
-    const { errorMessage } = this.props;
     const { open, message } = this.state;
 
     return (<Snackbar
@@ -42,7 +43,7 @@ import { connect } from 'react-redux';
 
 export default connect(
   (state, ownProps) => ({
-    errorMessage: state.err
+    err: state.err
   }),
   (dispatch) => ({
   })
@@ -59,13 +60,13 @@ export const showError = createAction('Show error message');
 // Initial state
 const initialState = {
   err: '',
-  id: 0,
+  id: -1,
 };
 
 // Reducer
 export const reducer = createReducer({
   [showError]: (state, payload) => ({
-    err: payload,
+    msg: payload,
     id: state.id + 1,
   }),
 }, initialState);
