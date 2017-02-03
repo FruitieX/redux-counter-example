@@ -2,7 +2,8 @@ import { combineReducers } from 'redux'
 
 import { reducer as drawer } from '../modules/MenuDrawer';
 import { reducer as err } from '../modules/ErrorSnackbar';
-import { reducers as restReducers, } from './rest';
+import { reducer as intl } from './intl';
+import { reducers as restReducers } from './rest';
 
 const reducers = {
   // Menu drawer state
@@ -11,8 +12,8 @@ const reducers = {
   // Routing state (TODO!)
   //routing: routerReducer,
 
-  // Internationalization state (TODO!)
-  //intl: intlReducer,
+  // Internationalization state
+  intl,
 
   err,
 

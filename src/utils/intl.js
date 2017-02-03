@@ -6,17 +6,42 @@ import localeFi from 'react-intl/locale-data/fi';
 import en from '../../translations/en';
 import fi from '../../translations/fi';
 
+import { intlReducer } from 'react-intl-redux';
+
 addLocaleData([...localeEn, ...localeFi]);
-const translations = {
-  en,
-  fi
+export const languages = {
+  en: {
+    translations: en,
+    name: 'English'
+  },
+  fi: {
+    translations: fi,
+    name: 'Suomi'
+  }
 }
 
-let storedLocale = localStorage.locale;
-export const language = storedLocale ||
+export const defaultLang =
   (navigator.languages && navigator.languages[0]) ||
   navigator.language ||
   navigator.userLanguage;
 
-const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
-export const messages = translations[languageWithoutRegionCode] || translations[language] || translations['en'];
+const languageWithoutRegionCode = defaultLang.toLowerCase().split(/[_-]+/)[0];
+
+const initialState = {
+  messages: null,
+  locale: null
+}
+
+if (languages[languageWithoutRegionCode]) {
+  initialState.messages = languages[languageWithoutRegionCode].translations;
+  initialState.locale = languageWithoutRegionCode;
+} else if (languages[defaultLang]) {
+  initialState.messages = languages[defaultLang].translations;
+  initialState.locale = defaultLang;
+} else {
+  // default to 'en' locale
+  initialState.messages = languages['en'].translations;
+  initialState.locale = 'en';
+}
+
+export const reducer = (state = initialState, action) => intlReducer(state, action);

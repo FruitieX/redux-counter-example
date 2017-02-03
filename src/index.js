@@ -28,7 +28,7 @@ import store from './utils/store'
 import theme from './utils/theme';
 const muiTheme = getMuiTheme(theme);
 
-import { IntlProvider } from 'react-intl';
+import { IntlProvider } from 'react-intl-redux';
 import { language, messages } from './utils/intl';
 
 import MenuDrawer from './modules/MenuDrawer';
@@ -67,11 +67,7 @@ const AuthRedirectRoute = ({ component, ...rest }) => (
 export const Root = () => (
   <Provider store={store}>
     <MuiThemeProvider muiTheme={muiTheme}>
-      <IntlProvider
-        locale={language}
-        key={language}
-        messages={messages}
-      >
+      <IntlProvider>
         <Router>
           <div>
             <AuthRoute component={MenuDrawer} />

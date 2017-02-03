@@ -1,6 +1,7 @@
 export default {
   navigation: 'Navigation',
-  Home: 'Home',
+  Teams: 'Teams',
+  Companies: 'Companies',
   Preferences: 'Preferences',
   Logout: 'Logout',
 };
