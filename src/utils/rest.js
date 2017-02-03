@@ -3,6 +3,11 @@ import reduxApi, { transformers } from 'redux-api';
 import adapterFetch from 'redux-api/lib/adapters/fetch';
 import config from 'config';
 
+// TODO: circular dependency breaks this?
+import { store } from './store';
+
+import { showError } from '../modules/ErrorSnackbar';
+
 import { storeToken, getToken } from './persist'
 
 // Endpoint configurations
@@ -71,6 +76,11 @@ const rest = reduxApi({
 
   return { headers };
 })
-.use('fetch', adapterFetch(fetch));
+.use('fetch', adapterFetch(fetch))
+.use('responseHandler', (err, data) => {
+  if (err) {
+    //store.dispatch(showError(err));
+  }
+})
 
 export default rest;

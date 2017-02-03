@@ -5,6 +5,7 @@ import throttle from 'lodash/throttle'
 import { saveState, loadState } from './persist'
 
 import { reducer as drawer } from '../modules/MenuDrawer';
+import { reducer as err } from '../modules/ErrorSnackbar';
 import rest from './rest';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -21,6 +22,8 @@ const reducers = {
 
   // REST API
   ...rest.reducers,
+
+  err,
 }
 
 const rootReducer = combineReducers(reducers);

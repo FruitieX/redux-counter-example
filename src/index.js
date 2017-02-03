@@ -35,8 +35,7 @@ import MenuDrawer from './modules/MenuDrawer';
 import Header from './modules/Header';
 
 import Login from './modules/Login'
-import Logout from './modules/Logout'
-import Home from './modules/Home'
+import ErrorSnackbar from './modules/ErrorSnackbar'
 
 if (process.env.NODE_ENV === 'production') Offline.install()
 
@@ -77,6 +76,7 @@ export const Root = () => (
           <div>
             <AuthRoute component={MenuDrawer} />
             <AuthRoute component={Header} />
+            <AuthRoute component={ErrorSnackbar} />
 
             <Route exact path='/login' component={Login} />
 
