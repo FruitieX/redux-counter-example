@@ -67,7 +67,7 @@ export default connect(
       }));
     },
     clearState: () => {
-      clearState();
+      clearState(true);
 
       // reload app
       location.reload();

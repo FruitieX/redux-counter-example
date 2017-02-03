@@ -39,6 +39,10 @@ export const loadState = () => {
   }
 }
 
-export const clearState = () => {
-  localStorage.clear()
+export const clearState = (everything) => {
+  if (everything) {
+    localStorage.clear();
+  } else {
+    localStorage.setItem('state', undefined)
+  }
 }
