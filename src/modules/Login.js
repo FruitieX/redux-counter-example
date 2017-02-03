@@ -81,7 +81,7 @@ class Login extends React.Component {
             maxWidth: '350px'
           }}>
             <CardHeader
-              title='Welcome back!'
+              title='Super-Ada Admin app'
               subtitle='Please log in:'
               style={{
                 backgroundColor: theme.palette.primary1Color

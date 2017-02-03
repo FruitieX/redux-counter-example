@@ -3,6 +3,7 @@ import React from 'react';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
+import { FormattedMessage } from 'react-intl';
 
 import {
   Card,
@@ -33,7 +34,7 @@ const Preferences = ({ language, changeLanguage, clearState, user }) => (
   <div style={styles.wrapper}>
     <Card style={styles.card}>
       <CardTitle
-        title='Language' />
+        title={<FormattedMessage id='language' />} />
       <CardText>
         <DropDownMenu value={ language } onChange={ (event, index, locale) => changeLanguage(user, locale) }>
           {
@@ -44,10 +45,10 @@ const Preferences = ({ language, changeLanguage, clearState, user }) => (
         </DropDownMenu>
       </CardText>
       <CardTitle
-        title='Reset admin app state'
-        subtitle='Use this if you experience problems with the admin app. Only affects your session.'/>
+        title={<FormattedMessage id='resetState' />}
+        subtitle={<FormattedMessage id='resetStateExplanation' />} />
       <CardText>
-        <RaisedButton label='Clear app state' secondary={true} onTouchTap={ clearState }/>
+        <RaisedButton label={<FormattedMessage id='resetStateButton' />} secondary={true} onTouchTap={ clearState }/>
       </CardText>
     </Card>
   </div>
