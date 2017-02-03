@@ -5,7 +5,7 @@ import config from 'config';
 
 import { showError } from '../modules/ErrorSnackbar';
 
-import { storeToken, getToken } from './persist'
+import { storeToken, getToken } from './token'
 
 let store;
 

@@ -1,7 +1,3 @@
-export const storeToken = token => localStorage.setItem('token', token)
-export const getToken = () => localStorage.getItem('token')
-export const clearToken = () => localStorage.removeItem('token')
-
 import { reducers as restReducers } from './rest'
 
 export const saveState = (state) => {
