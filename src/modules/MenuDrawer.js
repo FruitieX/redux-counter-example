@@ -1,6 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { AppBar, Divider, Drawer, MenuItem } from 'material-ui';
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import Divider from 'material-ui/Divider';
+import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import {
   createAction,

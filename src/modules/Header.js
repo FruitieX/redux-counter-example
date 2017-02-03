@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar } from 'material-ui';
+import AppBar from 'material-ui/AppBar';
 import { FormattedMessage } from 'react-intl';
 
 import { withRouter } from 'react-router';
