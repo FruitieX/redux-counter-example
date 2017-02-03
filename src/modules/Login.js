@@ -15,6 +15,8 @@ import {
 } from 'material-ui/Card';
 import Account from 'material-ui/svg-icons/action/account-circle';
 
+import { languages } from '../utils/intl';
+
 import theme from '../utils/theme';
 
 class Login extends React.Component {
@@ -162,6 +164,9 @@ import rest from '../utils/rest';
 
 import { withRouter } from 'react-router';
 
+import { updateIntl } from 'react-intl-redux'
+import { getLocaleForUser } from '../utils/intl';
+
 export default withRouter(connect(
   (state, ownProps) => ({
     auth: state.auth,
@@ -172,6 +177,14 @@ export default withRouter(connect(
   (dispatch, ownProps) => ({
     doLogin(creds) {
       dispatch(rest.actions.auth({}, { body: JSON.stringify(creds) }));
+
+      let storedLocale = getLocaleForUser(creds.email);
+      if (storedLocale && languages[storedLocale]) {
+        dispatch(updateIntl({
+          locale: storedLocale,
+          messages: languages[storedLocale].translations,
+        }));
+      }
     },
     redirect(path) {
       ownProps.replace(path);

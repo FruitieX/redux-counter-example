@@ -8,6 +8,9 @@ import fi from '../../translations/fi';
 
 import { intlReducer } from 'react-intl-redux';
 
+export const storeLocaleForUser = (user, locale) => localStorage.setItem(`locale#${user}`, locale)
+export const getLocaleForUser = (user) => localStorage.getItem(`locale#${user}`)
+
 addLocaleData([...localeEn, ...localeFi]);
 export const languages = {
   en: {

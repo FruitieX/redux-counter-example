@@ -11,7 +11,9 @@ import {
 } from 'material-ui/Card';
 
 import theme from '../utils/theme';
-import { languages } from '../utils/intl'
+import { languages, storeLocaleForUser } from '../utils/intl'
+
+import jwtDecode from 'jwt-decode'
 
 const styles = {
   wrapper: {
@@ -27,13 +29,13 @@ const styles = {
   }
 };
 
-const Preferences = ({ language, changeLanguage, clearState }) => (
+const Preferences = ({ language, changeLanguage, clearState, user }) => (
   <div style={styles.wrapper}>
     <Card style={styles.card}>
       <CardTitle
         title='Language' />
       <CardText>
-        <DropDownMenu value={ language } onChange={ changeLanguage }>
+        <DropDownMenu value={ language } onChange={ (event, index, locale) => changeLanguage(user, locale) }>
           {
             Object.keys(languages).map((language, index) => (
               <MenuItem key={index} value={language} primaryText={languages[language].name} />
@@ -57,10 +59,12 @@ import { clearState } from '../utils/persist';
 
 export default connect(
   (state) => ({
-    language: state.intl.locale
+    language: state.intl.locale,
+    user: jwtDecode(state.auth.data.token),
   }),
   (dispatch) => ({
-    changeLanguage: (event, index, locale) => {
+    changeLanguage: (user, locale) => {
+      storeLocaleForUser(user.name, locale);
       dispatch(updateIntl({
         locale,
         messages: languages[locale].translations,

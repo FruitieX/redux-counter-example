@@ -50,6 +50,7 @@
     "webpack-dev-server": "2.2.0-rc.0"
   },
   "dependencies": {
+    "jwt-decode": "^2.1.0",
     "lodash": "^4.17.4",
     "material-ui": "^0.16.7",
     "offline-plugin": "^4.5.5",
