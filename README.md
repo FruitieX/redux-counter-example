@@ -40,6 +40,10 @@ stack quickly:
 
 [yarn](https://github.com/yarnpkg/yarn) 0.18+ must be present on your machine.
 
+### Install dependencies
+```
+yarn
+```
 
 ### Start
 
