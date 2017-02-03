@@ -3,12 +3,15 @@ import reduxApi, { transformers } from 'redux-api';
 import adapterFetch from 'redux-api/lib/adapters/fetch';
 import config from 'config';
 
-// TODO: circular dependency breaks this?
-import { store } from './store';
-
 import { showError } from '../modules/ErrorSnackbar';
 
 import { storeToken, getToken } from './persist'
+
+let store;
+
+export const injectStore = (_store) => {
+  store = _store;
+}
 
 // Endpoint configurations
 const rest = reduxApi({
@@ -84,3 +87,4 @@ const rest = reduxApi({
 })
 
 export default rest;
+export const reducers = rest.reducers;

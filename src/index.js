@@ -24,7 +24,7 @@ try {
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import { store } from './utils/store'
+import store from './utils/store'
 import theme from './utils/theme';
 const muiTheme = getMuiTheme(theme);
 

@@ -1,37 +1,24 @@
-import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import throttle from 'lodash/throttle'
 
 import { saveState, loadState } from './persist'
 
-import { reducer as drawer } from '../modules/MenuDrawer';
-import { reducer as err } from '../modules/ErrorSnackbar';
-import rest from './rest';
+import rootReducer from './reducer'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const reducers = {
-  // Menu drawer state
-  drawer,
-
-  // Routing state (TODO!)
-  //routing: routerReducer,
-
-  // Internationalization state (TODO!)
-  //intl: intlReducer,
-
-  // REST API
-  ...rest.reducers,
-
-  err,
-}
-
-const rootReducer = combineReducers(reducers);
-
-export const store = createStore(rootReducer, loadState(),
+const store = createStore(rootReducer, loadState(),
   composeEnhancers(
     applyMiddleware(thunk),
   ),
 )
+
+export default store;
+
+// this is to get rid of cyclic dependencies
+// TODO: better way?
+import { injectStore } from './rest';
+injectStore(store);
 
 store.subscribe(throttle(() => saveState(store.getState()), 1000))
