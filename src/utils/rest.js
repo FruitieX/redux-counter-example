@@ -16,7 +16,7 @@ export const injectStore = (_store) => {
 // Endpoint configurations
 const rest = reduxApi({
   auth: {
-    url: `${config.API_ROOT}/admins/authenticate`,
+    url: `${config.API_ROOT}/admin/authenticate`,
     transformer: (data = {
       token: getToken()
     }) => {
