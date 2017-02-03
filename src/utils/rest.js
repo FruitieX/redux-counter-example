@@ -5,8 +5,6 @@ import config from 'config';
 
 import { showError } from '../modules/ErrorSnackbar';
 
-import { storeToken, getToken } from './token'
-
 let store;
 
 export const injectStore = (_store) => {
@@ -17,14 +15,6 @@ export const injectStore = (_store) => {
 const rest = reduxApi({
   auth: {
     url: `${config.API_ROOT}/admin/authenticate`,
-    transformer: (data = {
-      token: getToken()
-    }) => {
-      if (data.token) {
-        storeToken(data.token);
-      }
-      return data;
-    },
     options: {
       method: 'POST'
     }
