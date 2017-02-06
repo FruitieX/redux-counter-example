@@ -28,6 +28,10 @@ module.exports = {
         include: [resolve(__dirname, '../src')],
         use: 'babel-loader',
       },
+      {
+        test: /\.(png|jpg)$/,
+        use: 'file-loader'
+      },
     ],
   },
   resolve: {
