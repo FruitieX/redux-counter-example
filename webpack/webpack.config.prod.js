@@ -58,6 +58,7 @@ module.exports = {
     new OfflinePlugin({
       ServiceWorker: {
         navigateFallbackURL: '/',
+        events: true,
       },
       AppCache: false,
     }),
