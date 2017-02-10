@@ -1,6 +1,6 @@
 {
-  "name": "redux-react-starter",
-  "short_name": "React",
+  "name": "frontend-hipster-kit",
+  "short_name": "frontend-hipster-kit",
   "lang": "en",
   "start_url": "/",
   "display": "standalone",
