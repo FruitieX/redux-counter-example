@@ -1,6 +1,12 @@
 import React from 'react';
 import Snackbar from 'material-ui/Snackbar';
 
+import { connect } from 'react-redux';
+import {
+  createAction,
+  createReducer,
+} from 'redux-act';
+
 class ErrorSnackbar extends React.Component {
   constructor() {
     super();
@@ -8,6 +14,16 @@ class ErrorSnackbar extends React.Component {
       open: false,
       id: -1,
       message: '',
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.err.id !== this.state.id) {
+      this.setState({
+        open: true,
+        message: nextProps.err.msg,
+        id: nextProps.err.id,
+      });
     }
   }
 
@@ -17,42 +33,23 @@ class ErrorSnackbar extends React.Component {
     });
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.err.id !== this.state.id) {
-      this.setState({
-        open: true,
-        message: nextProps.err.msg,
-        id: nextProps.err.id,
-      })
-    }
-  }
-
   render() {
     const { open, message } = this.state;
 
     return (<Snackbar
-      open={ open }
-      message={ message }
-      autoHideDuration={ 4000 }
-      onRequestClose={ this.handleRequestClose }
-    />)
+      open={open}
+      message={message}
+      autoHideDuration={4000}
+      onRequestClose={this.handleRequestClose}
+    />);
   }
 }
 
-import { connect } from 'react-redux';
-
 export default connect(
-  (state, ownProps) => ({
-    err: state.err
+  state => ({
+    err: state.err,
   }),
-  (dispatch) => ({
-  })
 )(ErrorSnackbar);
-
-import {
-  createAction,
-  createReducer
-} from 'redux-act';
 
 // Action creators
 export const showError = createAction('Show error message');

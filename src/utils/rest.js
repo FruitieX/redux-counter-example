@@ -9,15 +9,15 @@ let store;
 
 export const injectStore = (_store) => {
   store = _store;
-}
+};
 
 // Endpoint configurations
 const rest = reduxApi({
   auth: {
     url: `${config.API_ROOT}/admin/authenticate`,
     options: {
-      method: 'POST'
-    }
+      method: 'POST',
+    },
   },
   experts: {
     url: `${config.API_ROOT}/experts`,
@@ -55,37 +55,36 @@ const rest = reduxApi({
   */
 })
 .use('options', (url, params, getState) => {
-  const { auth: { data: { token }}} = getState();
+  const { auth: { data: { token } } } = getState();
 
   const headers = {
-    'Accept': 'application/json',
+    Accept: 'application/json',
     'Content-Type': 'application/json',
   };
 
   // Add token to request headers
   if (token) {
-    return { headers: {  ...headers, Authorization: `Bearer ${token}` } };
+    return { headers: { ...headers, Authorization: `Bearer ${token}` } };
   }
 
   return { headers };
 })
 .use('fetch', adapterFetch(fetch))
-.use('responseHandler', (err, data) => {
+.use('responseHandler', (err) => {
   if (err) {
-    let msg = `Error`
+    let msg = 'Error';
 
     // error code
-    msg += err.statusCode ? ` ${err.statusCode}` : ``
+    msg += err.statusCode ? ` ${err.statusCode}` : '';
 
     // error reason
-    msg += err.error ? ` ${err.error}` : ''
+    msg += err.error ? ` ${err.error}` : '';
 
     // error description
-    msg += err.message ? `: ${err.message}`: ''
-    console.log(msg);
-    store.dispatch(showError(msg))
+    msg += err.message ? `: ${err.message}` : '';
+    store.dispatch(showError(msg));
   }
-})
+});
 
 export default rest;
 export const reducers = rest.reducers;

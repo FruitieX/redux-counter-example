@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
@@ -6,19 +6,19 @@ import FlatButton from 'material-ui/FlatButton';
 
 class DialogWithButtons extends React.Component {
   constructor(props) {
-   super(props);
+    super(props);
 
-   this.state = {
-     value: '',
-   };
- }
+    this.state = {
+      value: '',
+    };
+  }
 
   keyDown = (event) => {
     const { submit, close } = this.props;
 
-    if (event.keyCode == 13) {
-      submit(this.state.value)
-      close()
+    if (event.keyCode === 13) {
+      submit(this.state.value);
+      close();
     }
   };
 
@@ -28,22 +28,22 @@ class DialogWithButtons extends React.Component {
     });
   };
 
-  render () {
+  render() {
     const { title, submitAction, submit, close, isOpen, description, textField } = this.props;
 
     return (
       <Dialog
-        title={ title }
+        title={title}
         actions={[
           <FlatButton
             label="Cancel"
-            primary={true}
+            primary
             onTouchTap={close}
           />,
           <FlatButton
-            label={ submitAction }
-            primary={true}
-            keyboardFocused={true}
+            label={submitAction}
+            primary
+            keyboardFocused
             disabled={textField && !this.state.value}
             onTouchTap={() => (submit(this.state.value) || close())}
           />,
@@ -62,7 +62,7 @@ class DialogWithButtons extends React.Component {
               floatingLabelText="Team name"
               value={this.state.value}
               onChange={this.handleChange}
-              autoFocus={true}
+              autoFocus
               onKeyDown={this.keyDown}
             />
           </div>
@@ -90,6 +90,11 @@ DialogWithButtons.propTypes = {
   submit: React.PropTypes.func.isRequired,
   close: React.PropTypes.func.isRequired,
   isOpen: React.PropTypes.bool.isRequired,
-}
+};
+
+DialogWithButtons.defaultProps = {
+  textField: null,
+  description: null,
+};
 
 export default DialogWithButtons;

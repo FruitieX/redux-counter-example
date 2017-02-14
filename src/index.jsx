@@ -1,17 +1,33 @@
-import Offline from 'offline-plugin/runtime'
-import React from 'react'
-import { Provider } from 'react-redux'
-import { render } from 'react-dom'
+import Offline from 'offline-plugin/runtime';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { render } from 'react-dom';
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
-  Redirect
-} from 'react-router-dom'
+  Redirect,
+} from 'react-router-dom';
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+import { IntlProvider } from 'react-intl-redux';
+
+import MenuDrawer from './modules/MenuDrawer';
+import Header from './modules/Header';
+
+import Login from './modules/Login';
+import ErrorSnackbar from './modules/ErrorSnackbar';
 
 import routes from './utils/routes';
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import store from './utils/store';
+import theme from './utils/theme';
+
+const muiTheme = getMuiTheme(theme);
+
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 try {
@@ -20,22 +36,6 @@ try {
   // ignore errors
   // otherwise we break hot reloading
 }
-
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
-import store from './utils/store'
-import theme from './utils/theme';
-const muiTheme = getMuiTheme(theme);
-
-import { IntlProvider } from 'react-intl-redux';
-import { language, messages } from './utils/intl';
-
-import MenuDrawer from './modules/MenuDrawer';
-import Header from './modules/Header';
-
-import Login from './modules/Login'
-import ErrorSnackbar from './modules/ErrorSnackbar'
 
 if (process.env.NODE_ENV === 'production') {
   Offline.install({
@@ -57,36 +57,61 @@ if (process.env.NODE_ENV === 'production') {
 
     onUpdateFailed: () => {
       console.log('SW Event:', 'onUpdateFailed');
-    }
+    },
   });
 }
 
 // Route that will only render if authenticated
 const AuthRoute = ({ component, ...rest }) => (
-  <Route {...rest} render={props => (
+  <Route
+    {...rest} render={props => (
     store.getState().auth.data.token ? (
       React.createElement(component, props)
     ) : (
       null
     )
-  )}/>
-)
+  )}
+  />
+);
+
+AuthRoute.propTypes = {
+  component: React.PropTypes.oneOfType([
+    React.PropTypes.func,
+    React.PropTypes.node,
+  ]).isRequired,
+};
 
 // Route that will redirect to /login if not authenticated
 const AuthRedirectRoute = ({ component, ...rest }) => (
-  <Route {...rest} render={props => (
+  <Route
+    {...rest} render={props => (
     store.getState().auth.data.token ? (
       React.createElement(component, props)
     ) : (
-      <Redirect to={{
-        pathname: '/login',
-        state: { from: props.location }
-      }}/>
+      <Redirect
+        to={{
+          pathname: '/login',
+          state: { from: props.location },
+        }}
+      />
     )
-  )}/>
-)
+  )}
+  />
+);
 
-export const Root = () => (
+AuthRedirectRoute.propTypes = {
+  component: React.PropTypes.oneOfType([
+    React.PropTypes.func,
+    React.PropTypes.node,
+  ]).isRequired,
+  location: React.PropTypes.string,
+};
+
+AuthRedirectRoute.defaultProps = {
+  location: '',
+};
+
+const Root = () => (
   <Provider store={store}>
     <MuiThemeProvider muiTheme={muiTheme}>
       <IntlProvider>
@@ -96,20 +121,27 @@ export const Root = () => (
             <AuthRoute component={Header} />
             <AuthRoute component={ErrorSnackbar} />
 
-            <Route exact path='/login' component={Login} />
+            <Route exact path="/login" component={Login} />
 
             {
-              routes.map((route, index) => (
-                <AuthRedirectRoute exact key={index} path={route.path} component={route.component} />
+              routes.map(route => (
+                <AuthRedirectRoute
+                  exact
+                  key={route.path}
+                  path={route.path}
+                  component={route.component}
+                />
               ))
             }
 
-            <AuthRedirectRoute exact path='/' component={routes[0].component} />
+            <AuthRedirectRoute exact path="/" component={routes[0].component} />
           </div>
         </Router>
       </IntlProvider>
     </MuiThemeProvider>
   </Provider>
-)
+);
 
-if (!module.hot) render(<Root />, document.querySelector('react'))
+export default Root;
+
+if (!module.hot) render(<Root />, document.querySelector('react'));

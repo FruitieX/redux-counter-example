@@ -1,10 +1,10 @@
-import Home from '../modules/Home';
-import Preferences from '../modules/Preferences';
-import Logout from '../modules/Logout';
-
 import HomeIcon from 'material-ui/svg-icons/action/home';
 import PreferencesIcon from 'material-ui/svg-icons/action/settings';
 import LogoutIcon from 'material-ui/svg-icons/action/exit-to-app';
+
+import Home from '../modules/Home';
+import Preferences from '../modules/Preferences';
+import Logout from '../modules/Logout';
 
 // First route is the index route
 export default [{

@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
 import { reducer as drawer } from '../modules/MenuDrawer';
 import { reducer as err } from '../modules/ErrorSnackbar';
@@ -10,7 +10,7 @@ const reducers = {
   drawer,
 
   // Routing state (TODO!)
-  //routing: routerReducer,
+  // routing: routerReducer,
 
   // Internationalization state
   intl,
@@ -19,7 +19,7 @@ const reducers = {
 
   // REST API
   ...restReducers,
-}
+};
 
 const rootReducer = combineReducers(reducers);
 export default rootReducer;

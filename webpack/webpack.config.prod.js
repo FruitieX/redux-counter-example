@@ -1,7 +1,7 @@
-const { resolve, join } = require('path')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const OfflinePlugin = require('offline-plugin')
+const { resolve, join } = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 
 module.exports = {
   entry: {
@@ -30,14 +30,15 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|json)$/,
-        use: 'file-loader'
+        use: 'file-loader',
       },
     ],
   },
   resolve: {
     alias: {
-      config: join(__dirname, '..', 'config', 'production')
-    }
+      config: join(__dirname, '..', 'config', 'production'),
+    },
+    extensions: ['.js', '.jsx'],
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -63,4 +64,4 @@ module.exports = {
       AppCache: false,
     }),
   ],
-}
+};

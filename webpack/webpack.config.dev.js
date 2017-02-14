@@ -1,6 +1,6 @@
-const { resolve, join } = require('path')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { resolve, join } = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -30,14 +30,15 @@ module.exports = {
       },
       {
         test: /\.(png|jpg)$/,
-        use: 'file-loader'
+        use: 'file-loader',
       },
     ],
   },
   resolve: {
     alias: {
-      config: join(__dirname, '..', 'config', 'development')
-    }
+      config: join(__dirname, '..', 'config', 'development'),
+    },
+    extensions: ['.js', '.jsx'],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -49,4 +50,4 @@ module.exports = {
     }),
   ],
   performance: { hints: false },
-}
+};
