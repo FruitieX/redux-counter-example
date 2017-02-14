@@ -13,7 +13,6 @@ module.exports = {
     path: resolve(__dirname),
     publicPath: '/',
   },
-  context: resolve(__dirname, '../src'),
   devtool: 'inline-source-map',
   devServer: {
     hot: true,
@@ -44,8 +43,9 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
-      title: 'redux-react-starter',
-      template: '../webpack/template.html',
+      title: 'frontend-hipster-kit',
+      favicon: 'assets/favicon.ico',
+      template: 'webpack/template.html',
     }),
   ],
   performance: { hints: false },
