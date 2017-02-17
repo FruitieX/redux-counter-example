@@ -52,6 +52,8 @@
     "webpack-dev-server": "2.2.0-rc.0"
   },
   "dependencies": {
+    "connected-react-router": "^4.0.0-beta.3",
+    "history": "^4.5.1",
     "isomorphic-fetch": "^2.2.1",
     "jwt-decode": "^2.1.0",
     "lodash": "^4.17.4",

@@ -3,9 +3,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 import {
-  BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -19,7 +19,7 @@ import ErrorSnackbar from './modules/ErrorSnackbar';
 
 import routeConfigs, { IndexRoute, ConfiguredRoutes } from './utils/routes';
 
-import store from './utils/store';
+import store, { history } from './utils/store';
 import theme from './utils/theme';
 
 const muiTheme = getMuiTheme(theme);
@@ -64,7 +64,7 @@ const Root = () => (
   <Provider store={store}>
     <MuiThemeProvider muiTheme={muiTheme}>
       <IntlProvider>
-        <Router>
+        <ConnectedRouter history={history}>
           <div>
             <Route exact path="/login" component={Login} />
             <IndexRoute routeConfig={routeConfigs[0]} />
@@ -72,7 +72,7 @@ const Root = () => (
 
             <ErrorSnackbar />
           </div>
-        </Router>
+        </ConnectedRouter>
       </IntlProvider>
     </MuiThemeProvider>
   </Provider>
