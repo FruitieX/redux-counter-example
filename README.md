@@ -15,6 +15,7 @@ stack quickly:
 * [redux](http://redux.js.org/), predictable container for app state
 * [redux-thunk](https://github.com/gaearon/redux-thunk), async support for redux actions
 * [redux-api](https://github.com/lexich/redux-api), store REST API responses and status in redux
+* [connected-react-router](https://github.com/supasate/connected-react-router), sync router state with redux
 * [redux-act](https://github.com/pauldijou/redux-act), use actions themselves as references inside reducers
 
 ### Tech stack (misc)
@@ -26,15 +27,13 @@ stack quickly:
 
 * [babel](https://babeljs.io/), transpile ES6 and React's JSX syntax into ES5
 * [webpack v2](https://webpack.github.io/), bundle everything together
-* [eslint](http://eslint.org/), make sure your code is remotely sane (**TODO: rules**)
+* [eslint](http://eslint.org/), make sure your code is remotely sane, using [Airbnb's JS style guide](https://github.com/airbnb/javascript)
 * [jest](https://facebook.github.io/jest/), painless JavaScript testing
 
 ### TODO
 
-* Sync redux store with browser history
-* Changing languages
-* Redirect non-existing routes to /
-* Do not restore redux-api store state
+* Replace connected-react-router with something more recent once available? This library currently [breaks browser back button when time-traveling](https://github.com/ReactTraining/react-router/commit/9c69957c2fc34920b3b6761bdb983d0f13320d79#commitcomment-20862310)
+* Load localisation files on demand
 
 ## Setup
 
@@ -81,6 +80,8 @@ surge ./dist -d subdomain.surge.sh
 #### [Github Pages](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/)
 ```
 mv dist docs
+git add docs
+git commit
 git push upstream master
 ```
 
