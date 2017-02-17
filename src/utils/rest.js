@@ -14,13 +14,13 @@ export const injectStore = (_store) => {
 // Endpoint configurations
 const rest = reduxApi({
   auth: {
-    url: `${config.API_ROOT}/admin/authenticate`,
+    url: `${config.apiRoot}/admin/authenticate`,
     options: {
       method: 'POST',
     },
   },
   experts: {
-    url: `${config.API_ROOT}/experts`,
+    url: `${config.apiRoot}/experts`,
     transformer: transformers.array,
     crud: true,
   },
@@ -37,19 +37,19 @@ const rest = reduxApi({
 
   // Endpoints which return an array (data defaults to [])
   teams: {
-    url: `${config.API_ROOT}/teams`,
+    url: `${config.apiRoot}/teams`,
     transformer: transformers.array,
     crud: true,
   },
   companies: {
-    url: `${config.API_ROOT}/companies`,
+    url: `${config.apiRoot}/companies`,
     transformer: transformers.array,
     crud: true,
   }
 
   // Endpoint which returns an object (data defaults to {})
   profile: {
-    url: `${config.API_ROOT}/profile`,
+    url: `${config.apiRoot}/profile`,
     crud: true,
   }
   */

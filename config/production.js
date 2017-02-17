@@ -1,3 +1,3 @@
 export default {
-  API_ROOT: 'https://app.herokuapp.com',
+  apiRoot: 'https://app.herokuapp.com',
 };
