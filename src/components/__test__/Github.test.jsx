@@ -14,3 +14,7 @@ it('Properly render Github component', () => {
   expect(tree).toMatchSnapshot();
 });
 */
+
+it('should pass test with dummy test', () => {
+  expect(1).toEqual(1);
+});
