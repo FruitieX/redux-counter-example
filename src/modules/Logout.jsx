@@ -35,7 +35,7 @@ export default connect(
       clearState();
 
       // reload app
-      location.reload();
+      location.pathname = '/';
     },
   }),
 )(Logout);

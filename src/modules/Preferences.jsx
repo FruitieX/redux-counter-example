@@ -74,10 +74,17 @@ Preferences.propTypes = {
   doClearState: React.PropTypes.func.isRequired,
 };
 
+Preferences.defaultProps = {
+  user: {
+    name: 'Default',
+    scope: 'user',
+  },
+};
+
 export default connect(
   state => ({
     activeLanguage: state.intl.locale,
-    user: jwtDecode(state.auth.data.token),
+    user: state.auth.data.token && jwtDecode(state.auth.data.token),
   }),
   dispatch => ({
     changeLanguage: (user, locale) => {
