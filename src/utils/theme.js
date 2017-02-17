@@ -2,6 +2,7 @@ import * as Colors from 'material-ui/styles/colors';
 import * as ColorManipulator from 'material-ui/utils/colorManipulator';
 
 export default {
+  // Spacing config of app. Sets the size of various components.
   spacing: {
     iconSize: 24,
 
@@ -16,17 +17,29 @@ export default {
     desktopSubheaderHeight: 48,
     desktopToolbarHeight: 56,
   },
+
+  // Font config of app. Font must be included in `webpack/template.html`
   fontFamily: 'Roboto, sans-serif',
+
+  /*
+  Palette of the app. Colors can be supplied as:
+    - material-ui color codes (http://www.material-ui.com/#/customization/colors):
+        Colors.green300
+    - HTML hex color codes:
+        '#123456'
+    - RGBA colors:
+        'rgba(255, 255, 255, 1) '
+  */
   palette: {
     primary1Color: Colors.green500,
     primary2Color: Colors.green300,
     primary3Color: Colors.grey700,
-    accent1Color: Colors.green200,
+    accent1Color: Colors.red500,
     accent2Color: Colors.grey100,
     accent3Color: Colors.grey500,
     textColor: Colors.darkBlack,
     alternateTextColor: Colors.white,
-    canvasColor: '#fafafa',
+    canvasColor: Colors.grey50,
     borderColor: Colors.grey300,
     disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3),
     pickerHeaderColor: Colors.yellow500,
