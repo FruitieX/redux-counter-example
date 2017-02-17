@@ -12,7 +12,7 @@ import Home from '../modules/Home';
 import Preferences from '../modules/Preferences';
 import Logout from '../modules/Logout';
 
-import MenuDrawer from '../modules/MenuDrawer';
+import NavigationDrawer from '../modules/NavigationDrawer';
 import Header from '../modules/Header';
 
 /*
@@ -84,7 +84,7 @@ let AuthRedirectRoute = ({ loggedIn, routeConfig, ...rest }) => (
         {
           routeConfig.showHeader && (
             <div>
-              <MenuDrawer />
+              <NavigationDrawer />
               <Header />
             </div>
           )

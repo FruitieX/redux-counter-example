@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { reducer as drawer } from '../modules/MenuDrawer';
+import { reducer as drawer } from '../modules/NavigationDrawer';
 import { reducer as err } from '../modules/ErrorSnackbar';
 import { reducer as intl } from './intl';
 import { reducers as restReducers } from './rest';

@@ -6,7 +6,7 @@ import { withRouter } from 'react-router';
 
 import { connect } from 'react-redux';
 
-import { toggleDrawer } from './MenuDrawer';
+import { toggleDrawer } from './NavigationDrawer';
 import routes from '../utils/routes';
 
 const getTitle = (path) => {

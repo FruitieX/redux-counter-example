@@ -16,7 +16,7 @@ import { withRouter } from 'react-router';
 import routes from '../utils/routes';
 import theme from '../utils/theme';
 
-const MenuDrawer = ({ closeDrawer, changeView, drawerOpened, path }) => (
+const NavigationDrawer = ({ closeDrawer, changeView, drawerOpened, path }) => (
   <Drawer
     open={drawerOpened}
     docked={false}
@@ -53,7 +53,7 @@ const MenuDrawer = ({ closeDrawer, changeView, drawerOpened, path }) => (
   </Drawer>
 );
 
-MenuDrawer.propTypes = {
+NavigationDrawer.propTypes = {
   closeDrawer: React.PropTypes.func.isRequired,
   changeView: React.PropTypes.func.isRequired,
   drawerOpened: React.PropTypes.bool.isRequired,
@@ -79,7 +79,7 @@ export default withRouter(connect(
       dispatch(toggleDrawer());
     },
   }),
-)(MenuDrawer));
+)(NavigationDrawer));
 
 // Initial state
 const initialState = {
