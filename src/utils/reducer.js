@@ -6,18 +6,16 @@ import { reducer as intl } from './intl';
 import { reducers as restReducers } from './rest';
 
 const reducers = {
-  // Menu drawer state
+  // Navigation drawer state
   drawer,
-
-  // Routing state (TODO!)
-  // routing: routerReducer,
 
   // Internationalization state
   intl,
 
+  // Error snackbar component state
   err,
 
-  // REST API
+  // REST API endpoints' state
   ...restReducers,
 };
 

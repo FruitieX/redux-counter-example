@@ -11,7 +11,17 @@ export const injectStore = (_store) => {
   store = _store;
 };
 
+/*
 // Endpoint configurations
+These example endpoints can be called by dispatching the respective actions, e.g:
+
+dispatch(rest.actions.teams.post({teamId: 42}, { body: JSON.stringify(exampleData) }));
+Results in: POST /teams?teamId=42 with POST data from 'exampleData'
+
+Result of request can be found in: `state.teams.data`
+Information about request: `state.teams.error`, `state.teams.sync`, `state.teams.error`...
+*/
+
 const rest = reduxApi({
   auth: {
     url: `${config.apiRoot}/users/authenticate`,
@@ -27,14 +37,6 @@ const rest = reduxApi({
   // Add more API endpoints here! Examples below:
 
   /*
-  // These example endpoints can be called by dispatching the respective actions, e.g:
-  //
-  // dispatch(rest.actions.teams.post({teamId: 42}, { body: JSON.stringify(exampleData) }));
-  // Results in: POST /teams?teamId=42 with POST data from 'exampleData'
-  //
-  // Result of request can be found in: `state.teams.data`
-  // Information about request: `state.teams.error`, `state.teams.sync`, `state.teams.error`...
-
   // Endpoints which return an array (data defaults to [])
   teams: {
     url: `${config.apiRoot}/teams`,
