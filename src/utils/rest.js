@@ -14,13 +14,13 @@ export const injectStore = (_store) => {
 // Endpoint configurations
 const rest = reduxApi({
   auth: {
-    url: `${config.apiRoot}/admin/authenticate`,
+    url: `${config.apiRoot}/users/authenticate`,
     options: {
       method: 'POST',
     },
   },
-  experts: {
-    url: `${config.apiRoot}/experts`,
+  users: {
+    url: `${config.apiRoot}/users`,
     transformer: transformers.array,
     crud: true,
   },
