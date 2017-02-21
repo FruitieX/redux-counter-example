@@ -2,8 +2,14 @@ export default {
   // Navigation
   navigation: 'Navigation',
   Home: 'Home',
+  Users: 'Users',
   Preferences: 'Preferences',
   Logout: 'Logout',
+
+  // Users view
+  userId: 'User ID',
+  email: 'User e-mail',
+  description: 'User description',
 
   // Preferences view
   language: 'App language',

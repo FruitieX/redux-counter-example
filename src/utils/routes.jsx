@@ -4,11 +4,13 @@ import { Route, Redirect } from 'react-router-dom';
 
 // Icons
 import HomeIcon from 'material-ui/svg-icons/action/home';
+import UsersIcon from 'material-ui/svg-icons/action/supervisor-account';
 import PreferencesIcon from 'material-ui/svg-icons/action/settings';
 import LogoutIcon from 'material-ui/svg-icons/action/exit-to-app';
 
 // Components
 import Home from '../modules/Home';
+import Users from '../modules/Users';
 import Preferences from '../modules/Preferences';
 import Logout from '../modules/Logout';
 
@@ -26,6 +28,9 @@ Each route contains the following keys:
   requiresLogin: Does the route require user to be authenticated?
   showHeader: Should the header be visible when route is active?
 
+Routes may optionally contain the following keys:
+  separator: Whether to show a separator above route in the navigation drawer
+
 The first route will be aliased to '/' (index route)
 */
 
@@ -34,6 +39,13 @@ const routeConfigs = [{
   name: 'Home',
   component: Home,
   icon: HomeIcon,
+  requiresLogin: true,
+  showHeader: true,
+}, {
+  path: '/users',
+  name: 'Users',
+  component: Users,
+  icon: UsersIcon,
   requiresLogin: true,
   showHeader: true,
 }, {
