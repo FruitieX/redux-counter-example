@@ -67,7 +67,7 @@ const Preferences = ({ activeLanguage, changeLanguage, doClearState, user }) => 
 Preferences.propTypes = {
   activeLanguage: React.PropTypes.string.isRequired,
   user: React.PropTypes.shape({
-    name: React.PropTypes.string.isRequired,
+    email: React.PropTypes.string.isRequired,
     scope: React.PropTypes.string.isRequired,
   }).isRequired,
   changeLanguage: React.PropTypes.func.isRequired,
@@ -76,7 +76,7 @@ Preferences.propTypes = {
 
 Preferences.defaultProps = {
   user: {
-    name: 'Default',
+    email: 'Default user',
     scope: 'user',
   },
 };
@@ -88,7 +88,7 @@ export default connect(
   }),
   dispatch => ({
     changeLanguage: (user, locale) => {
-      storeLocaleForUser(user.name, locale);
+      storeLocaleForUser(user.email, locale);
       dispatch(updateIntl({
         locale,
         messages: languages[locale].translations,
