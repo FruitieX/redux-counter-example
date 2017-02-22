@@ -58,7 +58,7 @@ Share your localhost running app to anyone with an internet connection
 yarn ngrok
 ```
 
-### Build
+### Build for production
 
 Bundle your app. It will create `index.html`, `main.[hash].js`, `vendor.[hash].js` and `manifest.[hash].js`
 ```
