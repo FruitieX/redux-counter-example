@@ -101,12 +101,6 @@ let AuthRedirectRoute = ({ loggedIn, routeConfig, ...rest }) => (
       />
     ) : (
       <div>
-        {
-          routeConfig.showHeader && (
-            <div>
-            </div>
-          )
-        }
         { React.createElement(routeConfig.component, props) }
       </div>
     )
