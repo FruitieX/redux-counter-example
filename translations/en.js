@@ -5,6 +5,7 @@ export default {
   Users: 'Users',
   Preferences: 'Preferences',
   Logout: 'Logout',
+  Login: 'Login',
 
   // Users view
   userId: 'ID',

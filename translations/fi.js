@@ -5,6 +5,7 @@ export default {
   Users: 'Käyttäjät',
   Preferences: 'Asetukset',
   Logout: 'Kirjaudu ulos',
+  Login: 'Kirjaudu sisään',
 
   // Users view
   userId: 'ID',
