@@ -62,19 +62,34 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+const style = {
+  appContainer: {
+    height: '100vh',
+    overflow: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  viewContainer: {
+    flex: 1,
+    overflow: 'auto',
+  },
+};
+
 const Root = () => (
   <Provider store={store}>
     <MuiThemeProvider muiTheme={muiTheme}>
       <IntlProvider>
         <ConnectedRouter history={history}>
-          <div>
+          <div style={style.appContainer}>
             <NavigationDrawer />
             <Header />
 
-            <IndexRoute routeConfig={routeConfigs[0]} />
-            <ConfiguredRoutes />
+            <div style={style.viewContainer}>
+              <IndexRoute routeConfig={routeConfigs[0]} />
+              <ConfiguredRoutes />
 
-            <ErrorSnackbar />
+              <ErrorSnackbar />
+            </div>
           </div>
         </ConnectedRouter>
       </IntlProvider>
