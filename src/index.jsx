@@ -67,7 +67,8 @@ const style = {
   },
   viewContainer: {
     flex: 1,
-    overflow: 'auto',
+    overflowY: 'scroll',
+    WebkitOverflowScrolling: 'touch',
   },
 };
 
