@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+
 import { FormattedMessage } from 'react-intl';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
@@ -63,12 +64,12 @@ const NavigationDrawer = ({ closeDrawer, changeView, drawerOpened, path, user })
 );
 
 NavigationDrawer.propTypes = {
-  closeDrawer: React.PropTypes.func.isRequired,
-  changeView: React.PropTypes.func.isRequired,
-  drawerOpened: React.PropTypes.bool.isRequired,
-  path: React.PropTypes.string.isRequired,
-  user: React.PropTypes.shape({
-    scope: React.PropTypes.string.isRequired,
+  closeDrawer: PropTypes.func.isRequired,
+  changeView: PropTypes.func.isRequired,
+  drawerOpened: PropTypes.bool.isRequired,
+  path: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    scope: PropTypes.string.isRequired,
   }),
 };
 

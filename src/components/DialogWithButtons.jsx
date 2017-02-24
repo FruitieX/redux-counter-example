@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
@@ -157,25 +157,25 @@ class DialogWithButtons extends React.Component {
 }
 
 DialogWithButtons.propTypes = {
-  textField: React.PropTypes.shape({
-    label: React.PropTypes.string.isRequired,
-    textAfter: React.PropTypes.string,
+  textField: PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    textAfter: PropTypes.string,
   }),
-  imageUpload: React.PropTypes.shape({
-    label: React.PropTypes.string.isRequired,
-    textAfter: React.PropTypes.string,
+  imageUpload: PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    textAfter: PropTypes.string,
   }),
-  title: React.PropTypes.string.isRequired,
-  cancelAction: React.PropTypes.string,
-  submitAction: React.PropTypes.string.isRequired,
-  description: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.node,
+  title: PropTypes.string.isRequired,
+  cancelAction: PropTypes.string,
+  submitAction: PropTypes.string.isRequired,
+  description: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
   ]),
-  submit: React.PropTypes.func.isRequired,
-  close: React.PropTypes.func.isRequired,
-  isOpen: React.PropTypes.bool.isRequired,
-  loading: React.PropTypes.bool,
+  submit: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
 };
 
 DialogWithButtons.defaultProps = {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import AppBar from 'material-ui/AppBar';
 
@@ -116,17 +116,17 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  path: React.PropTypes.string.isRequired,
-  doToggleDrawer: React.PropTypes.func.isRequired,
-  login: React.PropTypes.func.isRequired,
-  logout: React.PropTypes.func.isRequired,
-  preferences: React.PropTypes.func.isRequired,
-  user: React.PropTypes.shape({
-    email: React.PropTypes.string.isRequired,
-    scope: React.PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
+  doToggleDrawer: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+  preferences: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    scope: PropTypes.string.isRequired,
   }),
-  intl: React.PropTypes.shape({
-    formatMessage: React.PropTypes.func.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
   }).isRequired,
 };
 

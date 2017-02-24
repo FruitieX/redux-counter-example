@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+
 import CircularProgress from 'material-ui/CircularProgress';
 import { connect } from 'react-redux';
 import { clearState } from '../utils/persist';
@@ -25,7 +26,7 @@ class Logout extends React.Component {
 }
 
 Logout.propTypes = {
-  doLogout: React.PropTypes.func.isRequired,
+  doLogout: PropTypes.func.isRequired,
 };
 
 export default connect(

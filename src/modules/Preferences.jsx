@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -65,13 +65,13 @@ const Preferences = ({ activeLanguage, changeLanguage, doClearState, user }) => 
 );
 
 Preferences.propTypes = {
-  activeLanguage: React.PropTypes.string.isRequired,
-  user: React.PropTypes.shape({
-    email: React.PropTypes.string.isRequired,
-    scope: React.PropTypes.string.isRequired,
+  activeLanguage: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    scope: PropTypes.string.isRequired,
   }).isRequired,
-  changeLanguage: React.PropTypes.func.isRequired,
-  doClearState: React.PropTypes.func.isRequired,
+  changeLanguage: PropTypes.func.isRequired,
+  doClearState: PropTypes.func.isRequired,
 };
 
 Preferences.defaultProps = {
@@ -84,6 +84,7 @@ Preferences.defaultProps = {
 export default connect(
   state => ({
     activeLanguage: state.intl.locale,
+    // TODO: get rid of this jwtDecode()
     user: state.auth.data.token && jwtDecode(state.auth.data.token),
   }),
   dispatch => ({

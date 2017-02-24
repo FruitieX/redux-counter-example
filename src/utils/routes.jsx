@@ -117,7 +117,7 @@ let AuthRedirectRoute = ({ loggedIn, routeConfig, ...rest }) => (
 AuthRedirectRoute.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   routeConfig: RouteConfigShape.isRequired,
-  location: React.PropTypes.string,
+  location: PropTypes.string,
 };
 
 AuthRedirectRoute.defaultProps = {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const styles = {
@@ -65,8 +65,8 @@ class ImageUpload extends React.Component {
 }
 
 ImageUpload.propTypes = {
-  label: React.PropTypes.string.isRequired,
-  setImageUrl: React.PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired,
+  setImageUrl: PropTypes.func.isRequired,
 };
 
 export default ImageUpload;

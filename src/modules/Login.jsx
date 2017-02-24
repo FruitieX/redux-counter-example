@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -174,13 +174,13 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  redirectPath: React.PropTypes.string.isRequired,
-  doLogin: React.PropTypes.func.isRequired,
-  redirect: React.PropTypes.func.isRequired,
-  auth: React.PropTypes.shape({
-    sync: React.PropTypes.bool,
-    syncing: React.PropTypes.bool,
-    loading: React.PropTypes.bool,
+  redirectPath: PropTypes.string.isRequired,
+  doLogin: PropTypes.func.isRequired,
+  redirect: PropTypes.func.isRequired,
+  auth: PropTypes.shape({
+    sync: PropTypes.bool,
+    syncing: PropTypes.bool,
+    loading: PropTypes.bool,
   }).isRequired,
 };
 
