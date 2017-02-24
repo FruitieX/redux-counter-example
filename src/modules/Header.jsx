@@ -65,7 +65,6 @@ class Header extends React.Component {
       intl: { formatMessage },
     } = this.props;
 
-    console.log(user);
     const rightElement = user ? (
       <IconMenu
         iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
@@ -126,6 +125,9 @@ Header.propTypes = {
     email: React.PropTypes.string.isRequired,
     scope: React.PropTypes.string.isRequired,
   }),
+  intl: React.PropTypes.shape({
+    formatMessage: React.PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 Header.defaultProps = {

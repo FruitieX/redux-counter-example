@@ -16,6 +16,8 @@ import { IntlProvider } from 'react-intl-redux';
 
 import Login from './modules/Login';
 import ErrorSnackbar from './modules/ErrorSnackbar';
+import NavigationDrawer from './modules/NavigationDrawer';
+import Header from './modules/Header';
 
 import routeConfigs, { IndexRoute, ConfiguredRoutes } from './utils/routes';
 
@@ -66,7 +68,9 @@ const Root = () => (
       <IntlProvider>
         <ConnectedRouter history={history}>
           <div>
-            <Route exact path="/login" component={Login} />
+            <NavigationDrawer />
+            <Header />
+
             <IndexRoute routeConfig={routeConfigs[0]} />
             <ConfiguredRoutes />
 
