@@ -31,12 +31,12 @@ export default {
         'rgba(255, 255, 255, 1) '
   */
   palette: {
-    primary1Color: Colors.green500,
+    primary1Color: Colors.green600,
     primary2Color: Colors.green300,
     primary3Color: Colors.grey700,
-    accent1Color: Colors.red500,
-    accent2Color: Colors.grey100,
-    accent3Color: Colors.grey500,
+    accent1Color: Colors.red600,
+    accent2Color: Colors.grey200,
+    accent3Color: Colors.grey600,
     textColor: Colors.darkBlack,
     alternateTextColor: Colors.white,
     canvasColor: Colors.grey50,
