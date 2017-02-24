@@ -66,6 +66,7 @@
     "react-redux": "^5.0.2",
     "react-router": "next",
     "react-router-dom": "next",
+    "react-style-proptype": "^2.0.1",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.5.2",
     "redux-act": "^1.1.0",

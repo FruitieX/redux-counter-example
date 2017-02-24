@@ -1,66 +1,68 @@
 import React from 'react';
 
+import {
+  CardText,
+  CardTitle,
+  CardMedia,
+} from 'material-ui/Card';
+
+import CardWrapper from '../components/CardWrapper';
+import ResponsiveCard from '../components/ResponsiveCard';
+
 import theme from '../utils/theme';
-import HomeCard from '../components/HomeCard';
+
+import chilicorn from '../../assets/chilicorn/chilicorn_no_text-256.png';
+import placeholder from '../../assets/placeholder.png';
 
 const styles = {
-  wrapper: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    padding: theme.spacing.desktopGutter,
+  chilicornHeader: {
+    height: 240,
+    background: `url(${chilicorn})`,
+    backgroundColor: theme.palette.primary3Color,
+    backgroundSize: 'contain',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+  },
+  loremHeader: {
+    objectFit: 'cover',
+    height: 240,
   },
 };
 
 const Home = () => (
-  <div style={styles.wrapper}>
-    <HomeCard
-      title="Card 1 title"
-      subtitle="Card 1 subtitle"
-    >
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc turpis leo, ultrices et mollis
-        ac, eleifend ut ligula. Aenean porttitor ullamcorper urna, ac tincidunt justo hendrerit
-        dapibus. Quisque dapibus posuere consequat. Pellentesque tristique, ex non rutrum
-        consectetur, lacus nulla tempor odio, quis consequat diam ipsum quis erat.
-      </p>
+  <CardWrapper>
+    <ResponsiveCard>
+      <CardMedia
+        overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
+      >
+        <div style={styles.chilicornHeader} />
+      </CardMedia>
+      <CardText>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lobortis, diam id dapibus
+        auctor, augue urna bibendum ligula, id finibus est tortor vel dolor. Phasellus a nulla
+        tellus. Phasellus augue ante, consequat vel condimentum eu, vulputate vitae nulla. Morbi ut
+        finibus risus. Etiam gravida felis lectus, eu sagittis dolor auctor et. Vivamus nec leo non
+        ligula tincidunt vulputate quis efficitur mi. In est eros, dignissim ut aliquet ut, ultrices
+        eget nisi.
+      </CardText>
+    </ResponsiveCard>
 
-      <p>
-        Donec est ante, efficitur eget cursus id, viverra sit amet diam.
-      </p>
-      <ul>
-        <li>
-          Nulla facilisi.
-        </li>
-        <li>
-          Curabitur faucibus, nibh mollis porttitor mollis, tellus ligula blandit erat, sit amet
-          tempor magna ligula vitae massa.
-        </li>
-        <li>
-          Sed turpis leo, sodales auctor ex quis, vehicula iaculis augue. Donec condimentum
-          consequat augue, in bibendum nisl cursus vulputate. Aenean faucibus ex nec ligula euismod,
-          et euismod magna eleifend.
-        </li>
-      </ul>
-    </HomeCard>
-    <HomeCard
-      title="Card 2 title"
-      subtitle="Card 2 subtitle"
-    >
-      <p>
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-        laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-        aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-        voluptatem sequi nesciunt.
-      </p>
-      <p>
-        Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
-        velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
-        quaerat voluptatem.
-      </p>
-    </HomeCard>
-  </div>
+    <ResponsiveCard>
+      <CardMedia
+        overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
+      >
+        <img src={placeholder} alt="Placeholder" style={styles.loremHeader} />
+      </CardMedia>
+      <CardText>
+        Proin odio dolor, aliquet ac tellus sit amet, blandit venenatis massa. Phasellus id aliquet
+        dui, eu rutrum lectus. Suspendisse hendrerit sollicitudin mauris, sed venenatis augue
+        tristique et. Proin sed tortor lacinia, finibus diam eget, vulputate elit. Sed venenatis
+        nunc nec urna molestie aliquet a at tortor. Proin dignissim diam ac turpis viverra auctor.
+        Sed ac faucibus mauris, at consequat ipsum. Nunc cursus nunc id augue aliquet, sed vulputate
+        nisl commodo.
+      </CardText>
+    </ResponsiveCard>
+  </CardWrapper>
 );
 
 export default Home;
