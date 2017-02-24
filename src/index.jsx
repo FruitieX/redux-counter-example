@@ -2,9 +2,6 @@ import Offline from 'offline-plugin/runtime';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
-import {
-  Route,
-} from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -14,7 +11,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import { IntlProvider } from 'react-intl-redux';
 
-import Login from './modules/Login';
 import ErrorSnackbar from './modules/ErrorSnackbar';
 import NavigationDrawer from './modules/NavigationDrawer';
 import Header from './modules/Header';
