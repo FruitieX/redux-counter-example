@@ -1,16 +1,16 @@
 import React, { PropTypes } from 'react';
 
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
+import TextField from 'material-ui-old/TextField';
 
-import CircularProgress from 'material-ui/CircularProgress';
+import CircularProgress from 'material-ui-old/CircularProgress';
 import {
   Card,
   CardActions,
   CardHeader,
   CardText,
-} from 'material-ui/Card';
-import Account from 'material-ui/svg-icons/action/account-circle';
+} from 'material-ui-old/Card';
+import Account from 'material-ui-old/svg-icons/action/account-circle';
 
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -91,13 +91,13 @@ class Login extends React.Component {
               title="frontend-hipster-kit"
               subtitle="Please log in:"
               style={{
-                backgroundColor: theme.palette.primary1Color,
+                backgroundColor: theme.legacyPalette.primary1Color,
               }}
               titleStyle={{
-                color: theme.palette.alternateTextColor,
+                color: theme.legacyPalette.alternateTextColor,
               }}
               subtitleStyle={{
-                color: theme.palette.accent2Color,
+                color: theme.legacyPalette.accent2Color,
               }}
             />
             <div style={{ textAlign: 'center', marginTop: theme.spacing.desktopGutter }}>
@@ -106,7 +106,7 @@ class Login extends React.Component {
                   height: '100px',
                   width: '100px',
                   textAlign: 'center',
-                  color: theme.palette.primary3Color,
+                  color: theme.legacyPalette.primary3Color,
                 }}
               />
             </div>
@@ -159,11 +159,21 @@ class Login extends React.Component {
                 marginTop: '0px',
               }}
             >
-              <RaisedButton
+              <Button
+                raised
                 disabled={
-                loading || !this.state.email.length || !this.state.password.length
-              } label="Login" fullWidth primary onTouchTap={() => this.props.doLogin({ email: this.state.email, password: this.state.password })}
-              />
+                  loading || !this.state.email.length || !this.state.password.length
+                }
+                style={{
+                  width: '100%',
+                }}
+                primary
+                onTouchTap={() =>
+                  this.props.doLogin({ email: this.state.email, password: this.state.password })
+                }
+              >
+                Login
+              </Button>
             </CardActions>
           </Card>
         </div>

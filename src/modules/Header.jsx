@@ -1,16 +1,16 @@
 import React, { PropTypes } from 'react';
 
-import AppBar from 'material-ui/AppBar';
+import AppBar from 'material-ui-old/AppBar';
 
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton';
+import IconMenu from 'material-ui-old/IconMenu';
+import MenuItem from 'material-ui-old/MenuItem';
+import IconButton from 'material-ui-old/IconButton';
 
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import AvatarIcon from 'material-ui/svg-icons/action/account-circle';
-import LogOutIcon from 'material-ui/svg-icons/action/exit-to-app';
+import MoreVertIcon from 'material-ui-old/svg-icons/navigation/more-vert';
+import AvatarIcon from 'material-ui-old/svg-icons/action/account-circle';
+import LogOutIcon from 'material-ui-old/svg-icons/action/exit-to-app';
 
-import Divider from 'material-ui/Divider';
+import Divider from 'material-ui-old/Divider';
 
 import { FormattedMessage, injectIntl } from 'react-intl';
 
@@ -76,7 +76,7 @@ class Header extends React.Component {
           primaryText={(
             <div style={{ paddingTop: 12, lineHeight: '24px' }}>
               <div> {user.email} </div>
-              <div style={{ color: theme.palette.disabledColor }}> Scope: {user.scope} </div>
+              <div style={{ color: theme.legacyPalette.disabledColor }}> Scope: {user.scope} </div>
             </div>
           )}
           onTouchTap={() => preferences()}

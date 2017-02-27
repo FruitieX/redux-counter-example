@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react';
 
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
+import DropDownMenu from 'material-ui-old/DropDownMenu';
+import MenuItem from 'material-ui-old/MenuItem';
+import Button from 'material-ui/Button';
 import { FormattedMessage } from 'react-intl';
 
 import {
   Card,
   CardText,
   CardTitle,
-} from 'material-ui/Card';
+} from 'material-ui-old/Card';
 
 import jwtDecode from 'jwt-decode';
 
@@ -58,7 +58,13 @@ const Preferences = ({ activeLanguage, changeLanguage, doClearState, user }) => 
         subtitle={<FormattedMessage id="resetStateExplanation" />}
       />
       <CardText>
-        <RaisedButton label={<FormattedMessage id="resetStateButton" />} secondary onTouchTap={doClearState} />
+        <Button
+          raised
+          accent
+          onTouchTap={doClearState}
+        >
+          {<FormattedMessage id="resetStateButton" />}
+        </Button>
       </CardText>
     </Card>
   </div>

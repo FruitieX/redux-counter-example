@@ -6,8 +6,15 @@ import { ConnectedRouter } from 'connected-react-router';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
+// material-ui 'next' branch
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import createMuiTheme from 'material-ui/styles/theme';
+
+// Old material-ui
+/* eslint-disable import/no-extraneous-dependencies */
+import LegacyMuiThemeProvider from 'material-ui-old/styles/MuiThemeProvider';
+import legacyGetMuiTheme from 'material-ui-old/styles/getMuiTheme';
+/* eslint-enable import/no-extraneous-dependencies */
 
 import { IntlProvider } from 'react-intl-redux';
 
@@ -20,7 +27,8 @@ import routeConfigs, { IndexRoute, ConfiguredRoutes } from './utils/routes';
 import store, { history } from './utils/store';
 import theme from './utils/theme';
 
-const muiTheme = getMuiTheme(theme);
+const muiTheme = createMuiTheme(theme);
+const legacyMuiTheme = legacyGetMuiTheme({ palette: theme.legacyPalette, spacing: theme.spacing });
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -74,23 +82,25 @@ const style = {
 
 const Root = () => (
   <Provider store={store}>
-    <MuiThemeProvider muiTheme={muiTheme}>
-      <IntlProvider>
-        <ConnectedRouter history={history}>
-          <div style={style.appContainer}>
-            <NavigationDrawer />
-            <Header />
+    <LegacyMuiThemeProvider muiTheme={legacyMuiTheme}>
+      <MuiThemeProvider theme={muiTheme}>
+        <IntlProvider>
+          <ConnectedRouter history={history}>
+            <div style={style.appContainer}>
+              <NavigationDrawer />
+              <Header />
 
-            <div style={style.viewContainer}>
-              <IndexRoute routeConfig={routeConfigs[0]} />
-              <ConfiguredRoutes />
+              <div style={style.viewContainer}>
+                <IndexRoute routeConfig={routeConfigs[0]} />
+                <ConfiguredRoutes />
 
-              <ErrorSnackbar />
+                <ErrorSnackbar />
+              </div>
             </div>
-          </div>
-        </ConnectedRouter>
-      </IntlProvider>
-    </MuiThemeProvider>
+          </ConnectedRouter>
+        </IntlProvider>
+      </MuiThemeProvider>
+    </LegacyMuiThemeProvider>
   </Provider>
 );
 

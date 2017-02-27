@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 
-import TextField from 'material-ui/TextField';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import RefreshIndicator from 'material-ui/RefreshIndicator';
+import TextField from 'material-ui-old/TextField';
+import Dialog from 'material-ui-old/Dialog';
+import Button from 'material-ui/Button';
+import RefreshIndicator from 'material-ui-old/RefreshIndicator';
 
 import ImageUpload from '../components/ImageUpload';
 
@@ -78,25 +78,26 @@ class DialogWithButtons extends React.Component {
     const actions = [];
     if (cancelAction) {
       actions.push(
-        <FlatButton
-          label={cancelAction}
+        <Button
           primary
           onTouchTap={close}
-        />,
+        >
+          {cancelAction}
+        </Button>,
       );
     }
 
     actions.push(
-      <FlatButton
-        label={submitAction}
+      <Button
         primary
-        keyboardFocused
         disabled={(textField && !this.state.value) || (imageUpload && !this.state.file)}
         onTouchTap={() => {
           submit(this.state);
           close();
         }}
-      />,
+      >
+        {submitAction}
+      </Button>,
     );
 
     const dialogContents = (

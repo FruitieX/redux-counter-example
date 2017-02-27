@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button';
 
 const styles = {
   preview: {
@@ -47,11 +47,13 @@ class ImageUpload extends React.Component {
           {$imagePreview}
         </div>
         <div>
-          <RaisedButton
-            label={this.props.label}
+          <Button
+            raised
             primary
             onClick={() => this.fileUpload.click()}
-          />
+          >
+            {this.props.label}
+          </Button>
           <input
             type="file"
             ref={fileUpload => (this.fileUpload = fileUpload)}

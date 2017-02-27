@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 
 import { FormattedMessage } from 'react-intl';
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import Divider from 'material-ui/Divider';
-import MenuItem from 'material-ui/MenuItem';
+import AppBar from 'material-ui-old/AppBar';
+import Drawer from 'material-ui-old/Drawer';
+import Divider from 'material-ui-old/Divider';
+import MenuItem from 'material-ui-old/MenuItem';
 import isArray from 'lodash/isArray';
 
 import {
@@ -50,7 +50,7 @@ const NavigationDrawer = ({ closeDrawer, changeView, drawerOpened, path, user })
             {route.separator ? <Divider /> : null}
             <MenuItem
               leftIcon={React.createElement(route.icon)}
-              style={{ color: active ? theme.palette.primary1Color : null }}
+              style={{ color: active ? theme.legacyPalette.primary1Color : null }}
               onTouchTap={() => { changeView(route.path); }}
             >
 

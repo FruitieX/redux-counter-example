@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button';
 import {
   Table,
   TableBody,
@@ -10,7 +10,7 @@ import {
   TableHeaderColumn,
   TableRow,
   TableRowColumn,
-} from 'material-ui/Table';
+} from 'material-ui-old/Table';
 
 import DialogWithButtons from '../components/DialogWithButtons';
 
@@ -92,14 +92,16 @@ class Users extends React.Component {
                   <TableRowColumn>{user.id}</TableRowColumn>
                   <TableRowColumn>{user.email}</TableRowColumn>
                   <TableRowColumn>
-                    <RaisedButton
-                      label={formatMessage({ id: 'showUserDetails' })}
+                    <Button
+                      raised
                       primary
                       onTouchTap={() => {
                         refreshUser(user);
                         this.setState({ dialogOpen: true });
                       }}
-                    />
+                    >
+                      {formatMessage({ id: 'showUserDetails' })}
+                    </Button>
                   </TableRowColumn>
                 </TableRow>
               ))

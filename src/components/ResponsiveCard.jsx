@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import stylePropType from 'react-style-proptype';
-import { Card } from 'material-ui/Card';
+import { Card } from 'material-ui-old/Card';
 
 import theme from '../utils/theme';
 

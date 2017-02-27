@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
 // Icons
-import HomeIcon from 'material-ui/svg-icons/action/home';
-import UsersIcon from 'material-ui/svg-icons/action/supervisor-account';
-import PreferencesIcon from 'material-ui/svg-icons/action/settings';
-import LoginIcon from 'material-ui/svg-icons/action/account-circle';
-import LogoutIcon from 'material-ui/svg-icons/action/exit-to-app';
+import HomeIcon from 'material-ui-old/svg-icons/action/home';
+import UsersIcon from 'material-ui-old/svg-icons/action/supervisor-account';
+import PreferencesIcon from 'material-ui-old/svg-icons/action/settings';
+import LoginIcon from 'material-ui-old/svg-icons/action/account-circle';
+import LogoutIcon from 'material-ui-old/svg-icons/action/exit-to-app';
 
 // Components
 import Home from '../modules/Home';

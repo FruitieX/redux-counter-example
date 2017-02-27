@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import CircularProgress from 'material-ui/CircularProgress';
+import CircularProgress from 'material-ui-old/CircularProgress';
 import { connect } from 'react-redux';
 import { clearState } from '../utils/persist';
 

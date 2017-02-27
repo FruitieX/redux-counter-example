@@ -4,7 +4,7 @@ import {
   CardText,
   CardTitle,
   CardMedia,
-} from 'material-ui/Card';
+} from 'material-ui-old/Card';
 
 import CardWrapper from '../components/CardWrapper';
 import ResponsiveCard from '../components/ResponsiveCard';
@@ -18,7 +18,7 @@ const styles = {
   chilicornHeader: {
     height: 240,
     background: `url(${chilicorn})`,
-    backgroundColor: theme.palette.primary3Color,
+    backgroundColor: theme.legacyPalette.primary3Color,
     backgroundSize: 'contain',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
