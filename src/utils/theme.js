@@ -1,5 +1,5 @@
 import createPalette from 'material-ui/styles/palette';
-import { indigo, pink, grey, red, orange, black, white, green, lightGreen } from 'material-ui/styles/colors';
+import { indigo, pink, grey, red, blue, orange, black, white, green, lightGreen, deepOrange } from 'material-ui/styles/colors';
 
 import * as Colors from 'material-ui-old/styles/colors';
 import * as ColorManipulator from 'material-ui-old/utils/colorManipulator';
@@ -28,7 +28,7 @@ export default {
   fontFamily: 'Roboto, sans-serif',
 
   palette: createPalette({
-    primary: lightGreen,
+    primary: blue,
     accent: orange,
     error: red,
     type: 'light',

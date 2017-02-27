@@ -1,10 +1,14 @@
 import React, { PropTypes } from 'react';
 
-import AppBar from 'material-ui-old/AppBar';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Text from 'material-ui/Text';
+import IconButton from 'material-ui/IconButton';
+import MenuIcon from 'material-ui/svg-icons/menu';
 
+import OldIconButton from 'material-ui-old/IconButton';
 import IconMenu from 'material-ui-old/IconMenu';
 import MenuItem from 'material-ui-old/MenuItem';
-import IconButton from 'material-ui-old/IconButton';
 
 import MoreVertIcon from 'material-ui-old/svg-icons/navigation/more-vert';
 import AvatarIcon from 'material-ui-old/svg-icons/action/account-circle';
@@ -67,7 +71,7 @@ class Header extends React.Component {
 
     const rightElement = user ? (
       <IconMenu
-        iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+        iconButtonElement={<OldIconButton><MoreVertIcon /></OldIconButton>}
         anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
         targetOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
@@ -91,7 +95,7 @@ class Header extends React.Component {
       </IconMenu>
     ) : (
       <IconMenu
-        iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+        iconButtonElement={<OldIconButton><MoreVertIcon /></OldIconButton>}
         anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
         targetOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
@@ -104,13 +108,26 @@ class Header extends React.Component {
     );
 
     return (
-      <div>
-        <AppBar
-          title={<FormattedMessage id={getTitle(path)} />}
-          onLeftIconButtonTouchTap={() => doToggleDrawer()}
-          iconElementRight={rightElement}
-        />
-      </div>
+      <AppBar
+        style={{ position: 'relative' }}
+      >
+        <Toolbar>
+          <IconButton
+            contrast
+            onTouchTap={() => doToggleDrawer()}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Text
+            style={{ flex: 1 }}
+            type="title"
+            colorInherit
+          >
+            <FormattedMessage id={getTitle(path)} />
+          </Text>
+          { rightElement }
+        </Toolbar>
+      </AppBar>
     );
   }
 }

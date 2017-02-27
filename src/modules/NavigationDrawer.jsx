@@ -1,10 +1,18 @@
 import React, { PropTypes } from 'react';
 
 import { FormattedMessage } from 'react-intl';
-import AppBar from 'material-ui-old/AppBar';
-import Drawer from 'material-ui-old/Drawer';
+
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Text from 'material-ui/Text';
+import IconButton from 'material-ui/IconButton';
+import MenuIcon from 'material-ui/svg-icons/menu';
+
+import Drawer from 'material-ui/Drawer';
+
 import Divider from 'material-ui-old/Divider';
 import MenuItem from 'material-ui-old/MenuItem';
+
 import isArray from 'lodash/isArray';
 
 import {
@@ -23,14 +31,28 @@ import theme from '../utils/theme';
 const NavigationDrawer = ({ closeDrawer, changeView, drawerOpened, path, user }) => (
   <Drawer
     open={drawerOpened}
-    docked={false}
-    onRequestChange={() => closeDrawer()}
+    onRequestClose={() => closeDrawer()}
   >
 
     <AppBar
-      title={<FormattedMessage id="navigation" />}
-      onLeftIconButtonTouchTap={() => closeDrawer()}
-    />
+      style={{ position: 'relative' }}
+    >
+      <Toolbar>
+        <IconButton
+          contrast
+          onTouchTap={() => closeDrawer()}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Text
+          style={{ flex: 1 }}
+          type="title"
+          colorInherit
+        >
+          <FormattedMessage id="navigation" />
+        </Text>
+      </Toolbar>
+    </AppBar>
 
     {
       routes.map((route) => {
