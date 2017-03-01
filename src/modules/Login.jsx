@@ -121,7 +121,7 @@ class Login extends React.Component {
                 width: '100%',
               }}
               primary
-              onTouchTap={() =>
+              onClick={() =>
                 this.props.doLogin({ email: this.state.email, password: this.state.password })
               }
             >

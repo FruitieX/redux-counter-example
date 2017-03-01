@@ -85,7 +85,7 @@ class DialogWithButtons extends React.Component {
         <Button
           primary
           key="cancel"
-          onTouchTap={close}
+          onClick={close}
         >
           {cancelAction}
         </Button>,
@@ -97,7 +97,7 @@ class DialogWithButtons extends React.Component {
         primary
         key="submit"
         disabled={(textField && !this.state.value) || (imageUpload && !this.state.file)}
-        onTouchTap={() => {
+        onClick={() => {
           submit(this.state);
           close();
         }}

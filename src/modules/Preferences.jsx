@@ -71,7 +71,10 @@ class Preferences extends React.Component {
                   <MenuItem
                     key={language}
                     selected={language === activeLanguage}
-                    onTouchTap={() => changeLanguage(user, language)}
+                    onClick={() => {
+                      changeLanguage(user, language);
+                      this.setState({ languageMenuOpen: false });
+                    }}
                   >
                     {languages[language].name}
                   </MenuItem>
@@ -87,7 +90,7 @@ class Preferences extends React.Component {
             <Button
               raised
               accent
-              onTouchTap={doClearState}
+              onClick={doClearState}
             >
               {formatMessage({ id: 'resetStateButton' })}
             </Button>

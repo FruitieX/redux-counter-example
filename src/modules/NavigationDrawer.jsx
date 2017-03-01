@@ -44,7 +44,7 @@ const NavigationDrawer = ({ closeDrawer, changeView, drawerOpened, path, user })
       <Toolbar>
         <IconButton
           contrast
-          onTouchTap={() => closeDrawer()}
+          onClick={() => closeDrawer()}
         >
           menu
         </IconButton>
@@ -78,7 +78,7 @@ const NavigationDrawer = ({ closeDrawer, changeView, drawerOpened, path, user })
               <ListItem
                 button
                 divider={route.separator}
-                onTouchTap={() => { changeView(route.path); }}
+                onClick={() => { changeView(route.path); }}
               >
                 <ListItemIcon
                   style={active ? { color: theme.palette.primary[500] } : null}

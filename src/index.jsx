@@ -30,7 +30,7 @@ import theme from './utils/theme';
 const muiTheme = createMuiTheme(theme);
 const legacyMuiTheme = legacyGetMuiTheme({ palette: theme.legacyPalette, spacing: theme.spacing });
 
-// Needed for onTouchTap
+// Needed for onClick
 // http://stackoverflow.com/a/34015469/988941
 try {
   injectTapEventPlugin();

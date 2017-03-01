@@ -82,7 +82,7 @@ class Header extends React.Component {
       >
         <ListItem
           button
-          onTouchTap={() => { hideMenu(); preferences(); }}
+          onClick={() => { hideMenu(); preferences(); }}
         >
           <ListItemIcon>
             <Icon>account_circle</Icon>
@@ -92,7 +92,7 @@ class Header extends React.Component {
         <Divider />
         <ListItem
           button
-          onTouchTap={() => { hideMenu(); logout(); }}
+          onClick={() => { hideMenu(); logout(); }}
         >
           <ListItemIcon>
             <Icon>exit_to_app</Icon>
@@ -108,7 +108,7 @@ class Header extends React.Component {
       >
         <ListItem
           button
-          onTouchTap={() => { hideMenu(); login(); }}
+          onClick={() => { hideMenu(); login(); }}
         >
           <ListItemIcon>
             <Icon>account_circle</Icon>
@@ -125,7 +125,7 @@ class Header extends React.Component {
         <Toolbar>
           <IconButton
             contrast
-            onTouchTap={() => doToggleDrawer()}
+            onClick={() => doToggleDrawer()}
           >
             menu
           </IconButton>
@@ -138,7 +138,7 @@ class Header extends React.Component {
           </Text>
           <IconButton
             contrast
-            onTouchTap={e => this.setState({
+            onClick={e => this.setState({
               rightMenuAnchorEl: e.currentTarget,
               rightMenuOpen: true,
             })}

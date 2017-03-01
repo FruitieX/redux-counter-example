@@ -90,7 +90,7 @@ class Users extends React.Component {
                   <TableCell numeric>
                     <Button
                       primary
-                      onTouchTap={() => {
+                      onClick={() => {
                         refreshUser(user);
                         this.setState({ dialogOpen: true });
                       }}
