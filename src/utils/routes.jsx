@@ -28,7 +28,7 @@ Each route contains the following keys:
   showHeader: Should the header be visible when route is active?
 
 Routes may optionally contain the following keys:
-  separator: Whether to show a separator above route in the navigation drawer
+  separator: Whether to show a separator below route in the navigation drawer
 
 The first route will be aliased to '/' (index route)
 */
@@ -45,6 +45,7 @@ const routeConfigs = [{
   name: 'Users',
   component: Users,
   icon: UsersIcon,
+  separator: true,
   requiresLogin: true,
   showHeader: true,
 }, {
@@ -52,7 +53,6 @@ const routeConfigs = [{
   name: 'Preferences',
   component: Preferences,
   icon: PreferencesIcon,
-  separator: true,
   requiresLogin: true,
   showHeader: true,
 }, {

@@ -10,8 +10,12 @@ import MenuIcon from 'material-ui/svg-icons/menu';
 
 import Drawer from 'material-ui/Drawer';
 
-import Divider from 'material-ui/Divider';
-import MenuItem from 'material-ui-old/MenuItem';
+import {
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+} from 'material-ui/List';
 
 import isArray from 'lodash/isArray';
 
@@ -54,34 +58,44 @@ const NavigationDrawer = ({ closeDrawer, changeView, drawerOpened, path, user })
       </Toolbar>
     </AppBar>
 
-    {
-      routes.map((route) => {
-        let active = (path === route.path);
-        if (route.path === routes[0].path && path === '/') {
-          active = true;
-        }
+    <List>
+      {
+        routes.map((route) => {
+          let active = (path === route.path);
 
-        const scope = user ? user.scope : null;
+          if (route.path === routes[0].path && path === '/') {
+            active = true;
+          }
 
-        if (isArray(route.hideWhenScope) && route.hideWhenScope.includes(scope)) {
-          return null;
-        }
+          const scope = user ? user.scope : null;
 
-        return (
-          <div key={route.path}>
-            {route.separator ? <Divider /> : null}
-            <MenuItem
-              leftIcon={React.createElement(route.icon)}
-              style={{ color: active ? theme.palette.primary[500] : null }}
-              onTouchTap={() => { changeView(route.path); }}
-            >
+          if (isArray(route.hideWhenScope) && route.hideWhenScope.includes(scope)) {
+            return null;
+          }
 
-              <FormattedMessage id={route.name} />
-            </MenuItem>
-          </div>
-        );
-      })
-    }
+          return (
+            <div key={route.path}>
+              <ListItem
+                button
+                divider={route.separator}
+                onTouchTap={() => { changeView(route.path); }}
+              >
+                <ListItemIcon>
+                  {React.createElement(route.icon)}
+                </ListItemIcon>
+
+                <ListItemText
+                  style={
+                    active ? { color: theme.palette.primary[500] } : null
+                  }
+                  primary={<FormattedMessage id={route.name} />}
+                />
+              </ListItem>
+            </div>
+          );
+        })
+      }
+    </List>
   </Drawer>
 );
 
