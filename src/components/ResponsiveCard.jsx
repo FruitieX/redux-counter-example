@@ -10,20 +10,20 @@ const cardStyles = {
   flexBasis: 380,
 };
 
-const ResponsiveCard = ({ children, styles, ...rest }) => (
-  <Card style={{ ...cardStyles, ...styles }} {...rest} >
+const ResponsiveCard = ({ children, style, ...rest }) => (
+  <Card style={{ ...cardStyles, ...style }} {...rest} >
     {children}
   </Card>
 );
 
 ResponsiveCard.propTypes = {
   children: PropTypes.node,
-  styles: stylePropType,
+  style: stylePropType,
 };
 
 ResponsiveCard.defaultProps = {
   children: null,
-  styles: {},
+  style: {},
 };
 
 export default ResponsiveCard;

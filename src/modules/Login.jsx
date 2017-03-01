@@ -1,20 +1,20 @@
 import React, { PropTypes } from 'react';
 
 import Button from 'material-ui/Button';
-import TextField from 'material-ui-old/TextField';
+import TextField from 'material-ui/TextField';
 
-import CircularProgress from 'material-ui-old/CircularProgress';
-import {
-  Card,
-  CardActions,
-  CardHeader,
-  CardText,
-} from 'material-ui-old/Card';
-import Account from 'material-ui-old/svg-icons/action/account-circle';
+import { CardActions, CardHeader, CardContent } from 'material-ui/Card';
+import Avatar from 'material-ui/Avatar';
+import Icon from 'material-ui/Icon';
+
+import { LinearProgress } from 'material-ui/Progress';
 
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { updateIntl } from 'react-intl-redux';
+
+import CardWrapper from '../components/CardWrapper';
+import ResponsiveCard from '../components/ResponsiveCard';
 
 import { getLocaleForUser, languages } from '../utils/intl';
 import rest from '../utils/rest';
@@ -31,7 +31,7 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    this.email.focus();
+    document.querySelector('input').focus();
   }
 
   shouldComponentUpdate(props) {
@@ -62,123 +62,75 @@ class Login extends React.Component {
   render() {
     const { auth } = this.props;
 
-    const loading = false;
+    const loading = auth.loading;
 
-    const spinner = loading ? <CircularProgress /> : null;
+    const spinner = loading ? <LinearProgress /> : null;
 
     return (
-      <div
-        style={{
-          textAlign: 'center',
-          margin: theme.spacing.desktopGutter,
-        }}
-      >
-        <div
-          style={{
-            textAlign: 'left',
-            display: 'flex',
-            justifyContent: 'center',
-            margin: theme.spacing.desktopGutter,
-          }}
-        >
-          <Card
-            style={{
-              flex: 1,
-              maxWidth: '350px',
-            }}
-          >
-            <CardHeader
-              title="frontend-hipster-kit"
-              subtitle="Please log in:"
-              style={{
-                backgroundColor: theme.legacyPalette.primary1Color,
+      <CardWrapper>
+        <ResponsiveCard style={{ maxWidth: 360 }}>
+          <CardHeader
+            avatar={
+              <Avatar style={{ backgroundColor: theme.palette.primary[500] }}>
+                <Icon>account_circle</Icon>
+              </Avatar>
+            }
+            title="frontend-hipster-kit"
+            subhead="Please log in:"
+          />
+          <CardContent>
+            <TextField
+              ref={(c) => { this.email = c; }}
+              type="text"
+              label="Email"
+              onChange={(event) => {
+                if (event.keyCode !== 13) {
+                  this.handleChange(event, 'email');
+                }
               }}
-              titleStyle={{
-                color: theme.legacyPalette.alternateTextColor,
-              }}
-              subtitleStyle={{
-                color: theme.legacyPalette.accent2Color,
+              onKeyDown={(event) => {
+                if (event.keyCode === 13) {
+                  this.props.doLogin({ email: this.state.email, password: this.state.password });
+                }
               }}
             />
-            <div style={{ textAlign: 'center', marginTop: theme.spacing.desktopGutter }}>
-              <Account
-                style={{
-                  height: '100px',
-                  width: '100px',
-                  textAlign: 'center',
-                  color: theme.legacyPalette.primary3Color,
-                }}
-              />
-            </div>
-            <CardText>
-              <TextField
-                ref={(c) => { this.email = c; }}
-                type="text"
-                floatingLabelText="Email"
-                hintText="Enter your email"
-                fullWidth
-                onChange={(event) => {
-                  if (event.keyCode !== 13) {
-                    this.handleChange(event, 'email');
-                  }
-                }}
-                onKeyDown={(event) => {
-                  if (event.keyCode === 13) {
-                    this.props.doLogin({ email: this.state.email, password: this.state.password });
-                  }
-                }}
-              />
-              <TextField
-                type="password"
-                floatingLabelText="Password"
-                hintText="Password"
-                fullWidth
-                onChange={(event) => {
-                  if (event.keyCode !== 13) {
-                    this.handleChange(event, 'password');
-                  }
-                }}
-                onKeyDown={(event) => {
-                  if (event.keyCode === 13) {
-                    this.props.doLogin({ email: this.state.email, password: this.state.password });
-                  }
-                }}
-              />
-            </CardText>
-            <CardText
-              style={{
-                textAlign: 'center',
-              }}
-            >
-              {!auth.error && auth.data && auth.data.message ? String(`Note: ${auth.data.message}`) : ''}
-              {auth.error && auth.error.message ? String(`Error: ${auth.error.message}`) : ''}
-            </CardText>
-            <CardActions
-              style={{
-                margin: theme.spacing.desktopGutter,
-                marginTop: '0px',
-              }}
-            >
-              <Button
-                raised
-                disabled={
-                  loading || !this.state.email.length || !this.state.password.length
+            <TextField
+              type="password"
+              label="Password"
+              onChange={(event) => {
+                if (event.keyCode !== 13) {
+                  this.handleChange(event, 'password');
                 }
-                style={{
-                  width: '100%',
-                }}
-                primary
-                onTouchTap={() =>
-                  this.props.doLogin({ email: this.state.email, password: this.state.password })
+              }}
+              onKeyDown={(event) => {
+                if (event.keyCode === 13) {
+                  this.props.doLogin({ email: this.state.email, password: this.state.password });
                 }
-              >
-                Login
-              </Button>
-            </CardActions>
-          </Card>
-        </div>
-        {spinner}
-      </div>
+              }}
+            />
+          </CardContent>
+          <CardActions
+            style={{
+              margin: theme.spacing.desktopGutter,
+              marginTop: '0px',
+            }}
+          >
+            <Button
+              raised
+              style={{
+                width: '100%',
+              }}
+              primary
+              onTouchTap={() =>
+                this.props.doLogin({ email: this.state.email, password: this.state.password })
+              }
+            >
+              Login
+            </Button>
+          </CardActions>
+          {spinner}
+        </ResponsiveCard>
+      </CardWrapper>
     );
   }
 }
