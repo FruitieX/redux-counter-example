@@ -80,14 +80,14 @@ const NavigationDrawer = ({ closeDrawer, changeView, drawerOpened, path, user })
                 divider={route.separator}
                 onTouchTap={() => { changeView(route.path); }}
               >
-                <ListItemIcon>
+                <ListItemIcon
+                  style={active ? { color: theme.palette.primary[500] } : null}
+                >
                   {React.createElement(route.icon)}
                 </ListItemIcon>
 
                 <ListItemText
-                  style={
-                    active ? { color: theme.palette.primary[500] } : null
-                  }
+                  style={active ? { color: theme.palette.primary[500] } : null}
                   primary={<FormattedMessage id={route.name} />}
                 />
               </ListItem>
