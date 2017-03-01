@@ -6,11 +6,10 @@ import Button from 'material-ui/Button';
 import {
   Table,
   TableBody,
-  TableHeader,
-  TableHeaderColumn,
+  TableHead,
   TableRow,
-  TableRowColumn,
-} from 'material-ui-old/Table';
+  TableCell,
+} from 'material-ui/Table';
 
 import DialogWithButtons from '../components/DialogWithButtons';
 
@@ -76,22 +75,22 @@ class Users extends React.Component {
           close={() => this.setState({ dialogOpen: false })}
         />
 
-        <Table selectable={false}>
-          <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+        <Table>
+          <TableHead>
             <TableRow>
-              <TableHeaderColumn>{formatMessage({ id: 'userId' })}</TableHeaderColumn>
-              <TableHeaderColumn>{formatMessage({ id: 'email' })}</TableHeaderColumn>
-              <TableHeaderColumn />
+              <TableCell>{formatMessage({ id: 'userId' })}</TableCell>
+              <TableCell>{formatMessage({ id: 'email' })}</TableCell>
+              <TableCell />
             </TableRow>
-          </TableHeader>
-          <TableBody displayRowCheckbox={false}>
+          </TableHead>
+          <TableBody>
             {
               // Loop over each user and render a <TableRow>
               users.data.map(user => (
-                <TableRow key={user.id} selectable>
-                  <TableRowColumn>{user.id}</TableRowColumn>
-                  <TableRowColumn>{user.email}</TableRowColumn>
-                  <TableRowColumn>
+                <TableRow key={user.id}>
+                  <TableCell>{user.id}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell numeric>
                     <Button
                       raised
                       primary
@@ -102,7 +101,7 @@ class Users extends React.Component {
                     >
                       {formatMessage({ id: 'showUserDetails' })}
                     </Button>
-                  </TableRowColumn>
+                  </TableCell>
                 </TableRow>
               ))
             }
