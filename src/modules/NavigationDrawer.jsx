@@ -6,6 +6,7 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Text from 'material-ui/Text';
 import IconButton from 'material-ui/IconButton';
+import Icon from 'material-ui/Icon';
 
 import Drawer from 'material-ui/Drawer';
 
@@ -82,7 +83,7 @@ const NavigationDrawer = ({ closeDrawer, changeView, drawerOpened, path, user })
                 <ListItemIcon
                   style={active ? { color: theme.palette.primary[500] } : null}
                 >
-                  {React.createElement(route.icon)}
+                  <Icon>{route.icon}</Icon>
                 </ListItemIcon>
 
                 <ListItemText

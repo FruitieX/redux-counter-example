@@ -2,12 +2,34 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
-// Icons
-import HomeIcon from 'material-ui-old/svg-icons/action/home';
-import UsersIcon from 'material-ui-old/svg-icons/action/supervisor-account';
-import PreferencesIcon from 'material-ui-old/svg-icons/action/settings';
-import LoginIcon from 'material-ui-old/svg-icons/action/account-circle';
-import LogoutIcon from 'material-ui-old/svg-icons/action/exit-to-app';
+/*
+Configure all your app's routes here.
+
+The first route will be aliased to '/' (index route)
+
+Each route contains the following keys:
+  - path:
+    * URL path of route.
+  - name:
+    * Name of route as displayed in header.
+    * Used as i18n id, remember to add translations to translations/*.js
+  - component:
+    * Which component to render when route is active.
+    * Remember to import it below.
+  - icon:
+    * Which icon to use in NavigationDrawer for route.
+    * Takes icon font string as found on: https://material.io/icons
+  - requiresLogin:
+    * Does the route require user to be authenticated?
+    * Redirects to login screen for unauthenticated users.
+
+Routes may optionally contain the following keys:
+  - separator:
+    * Whether to show a separator in NavigationDrawer below route
+  - hideWhenScope:
+    * Array of scopes, if user scope found in array hide route from NavigationDrawer.
+    * null scope in array means unauthenticated.
+*/
 
 // Components
 import Home from '../modules/Home';
@@ -16,71 +38,54 @@ import Preferences from '../modules/Preferences';
 import Login from '../modules/Login';
 import Logout from '../modules/Logout';
 
-/*
-Configure all your app's routes here.
-
-Each route contains the following keys:
-  path: URL path of route
-  name: Name of route, displayed in header. Used as i18n id, add translations to translations/*.js
-  component: Which component to render when route is active, remember to import it above
-  icon: Which icon to use in navigation drawer for route, remember to import it above
-  requiresLogin: Does the route require user to be authenticated?
-  showHeader: Should the header be visible when route is active?
-
-Routes may optionally contain the following keys:
-  separator: Whether to show a separator below route in the navigation drawer
-
-The first route will be aliased to '/' (index route)
-*/
-
+// Routes
 const routeConfigs = [{
   path: '/home',
   name: 'Home',
   component: Home,
-  icon: HomeIcon,
+  icon: 'home',
   requiresLogin: false,
-  showHeader: true,
 }, {
   path: '/users',
   name: 'Users',
   component: Users,
-  icon: UsersIcon,
+  icon: 'supervisor_account',
   separator: true,
   requiresLogin: true,
-  showHeader: true,
 }, {
   path: '/preferences',
   name: 'Preferences',
   component: Preferences,
-  icon: PreferencesIcon,
+  icon: 'settings',
   requiresLogin: true,
-  showHeader: true,
 }, {
   path: '/login',
   name: 'Login',
   component: Login,
-  icon: LoginIcon,
+  icon: 'account_circle',
   requiresLogin: false,
-  showHeader: false,
   hideWhenScope: ['user', 'admin'],
 }, {
   path: '/logout',
   name: 'Logout',
   component: Logout,
-  icon: LogoutIcon,
+  icon: 'exit_to_app',
   requiresLogin: false,
-  showHeader: true,
   hideWhenScope: [null],
 }];
 
 export default routeConfigs;
+
+/*
+Code below this line configures the routes as given by routeConfigs
+*/
 
 // PropTypes "schema" for routeConfig
 export const RouteConfigShape = PropTypes.shape({
   path: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   component: PropTypes.func.isRequired,
-  icon: PropTypes.func.isRequired,
+  icon: PropTypes.string.isRequired,
   requiresLogin: PropTypes.bool.isRequired,
   showHeader: PropTypes.bool.isRequired,
 });

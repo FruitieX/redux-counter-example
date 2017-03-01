@@ -1,5 +1,9 @@
 import React from 'react';
+
+// Snackbar component not yet available in material-ui@next
+/* eslint-disable import/no-extraneous-dependencies */
 import Snackbar from 'material-ui-old/Snackbar';
+/* eslint-enable import/no-extraneous-dependencies */
 
 import { connect } from 'react-redux';
 import {

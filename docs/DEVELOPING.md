@@ -32,7 +32,6 @@ TODO: use a tool such as https://plopjs.com/
 * Configure a new route in `utils/routes.jsx`:
 
   ```
-  import MyModuleIcon from 'material-ui-old/svg-icons/action/extension';
   ...
   import MyModule from '../modules/MyModule';
 
@@ -44,7 +43,7 @@ TODO: use a tool such as https://plopjs.com/
     path: '/mymodule',
     name: 'MyModule',
     component: MyModule,
-    icon: MyModuleIcon,
+    icon: 'my_module_icon',
     requiresLogin: false,
   }
   ```
