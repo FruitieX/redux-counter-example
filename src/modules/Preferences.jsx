@@ -56,7 +56,7 @@ class Preferences extends React.Component {
               >
                 <ListItemText
                   primary={formatMessage({ id: 'selectedLanguage' })}
-                  secondary={languages[activeLanguage].name}
+                  secondary={languages[activeLanguage] ? languages[activeLanguage].name : 'unknown'}
                 />
               </ListItem>
             </List>
