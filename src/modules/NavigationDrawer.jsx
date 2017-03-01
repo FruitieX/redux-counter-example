@@ -6,7 +6,6 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Text from 'material-ui/Text';
 import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui/svg-icons/menu';
 
 import Drawer from 'material-ui/Drawer';
 
@@ -46,7 +45,7 @@ const NavigationDrawer = ({ closeDrawer, changeView, drawerOpened, path, user })
           contrast
           onTouchTap={() => closeDrawer()}
         >
-          <MenuIcon />
+          menu
         </IconButton>
         <Text
           style={{ flex: 1 }}
