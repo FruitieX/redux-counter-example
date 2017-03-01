@@ -1,9 +1,15 @@
 import React, { PropTypes } from 'react';
 
-import TextField from 'material-ui-old/TextField';
-import Dialog from 'material-ui-old/Dialog';
+import TextField from 'material-ui/TextField';
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
-import RefreshIndicator from 'material-ui-old/RefreshIndicator';
+import { LinearProgress } from 'material-ui/Progress';
 
 import ImageUpload from '../components/ImageUpload';
 
@@ -18,10 +24,6 @@ const styles = {
     opacity: 1,
     maxHeight: 200,
     transition: 'all .5s',
-  },
-  refresh: {
-    marginLeft: '50%',
-    marginTop: 20,
   },
   refreshContainer: {
     flex: 1,
@@ -75,6 +77,8 @@ class DialogWithButtons extends React.Component {
       loading,
     } = this.props;
 
+    const progress = loading ? <LinearProgress /> : null;
+
     const actions = [];
     if (cancelAction) {
       actions.push(
@@ -102,15 +106,14 @@ class DialogWithButtons extends React.Component {
 
     const dialogContents = (
       <div style={styles.container}>
-        <RefreshIndicator style={styles.refresh} size={40} top={0} left={-20} status={loading ? 'loading' : 'hide'} />
 
         <div style={loading ? styles.fadeContainer : styles.opaqueContainer}>
-          <div>
+          <DialogContentText>
             { description }
-          </div>
+          </DialogContentText>
 
           { textField ?
-            <div>
+            <DialogContentText>
               <TextField
                 floatingLabelText={textField.label}
                 value={this.state.value}
@@ -118,40 +121,44 @@ class DialogWithButtons extends React.Component {
                 autoFocus
                 onKeyDown={this.keyDown}
               />
-            </div>
+            </DialogContentText>
             :
             null
           }
 
-          <p>
+          <DialogContentText>
             { textField && textField.textAfter }
-          </p>
+          </DialogContentText>
 
           { imageUpload ?
-            <div>
+            <DialogContentText>
               <ImageUpload setImageUrl={this.setImageUrl} label={imageUpload.label} />
-            </div>
+            </DialogContentText>
             :
             null
           }
 
-          <p>
+          <DialogContentText>
             { imageUpload && imageUpload.textAfter }
-          </p>
+          </DialogContentText>
         </div>
       </div>
     );
 
     return (
       <Dialog
-        title={title}
-        actions={actions}
         modal={false}
         open={isOpen}
         onRequestClose={close}
         autoScrollBodyContent
       >
+        <DialogTitle>{title}</DialogTitle>
+        <DialogContent>
         { dialogContents }
+        </DialogContent>
+        <DialogActions>{actions}</DialogActions>
+
+        { progress }
       </Dialog>
     );
   }

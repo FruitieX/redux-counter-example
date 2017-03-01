@@ -64,7 +64,7 @@ class Login extends React.Component {
 
     const loading = auth.loading;
 
-    const spinner = loading ? <LinearProgress /> : null;
+    const progress = loading ? <LinearProgress /> : null;
 
     return (
       <CardWrapper>
@@ -128,7 +128,7 @@ class Login extends React.Component {
               Login
             </Button>
           </CardActions>
-          {spinner}
+          {progress}
         </ResponsiveCard>
       </CardWrapper>
     );
