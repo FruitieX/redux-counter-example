@@ -95,6 +95,10 @@ NavigationDrawer.propTypes = {
   }),
 };
 
+NavigationDrawer.defaultProps = {
+  user: null,
+};
+
 // Action creators
 export const closeDrawer = createAction('Close menu drawer');
 export const openDrawer = createAction('Open menu drawer');
