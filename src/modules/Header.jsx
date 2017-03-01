@@ -71,7 +71,7 @@ class Header extends React.Component {
 
     const rightElement = user ? (
       <IconMenu
-        iconButtonElement={<OldIconButton><MoreVertIcon /></OldIconButton>}
+        iconButtonElement={<OldIconButton iconStyle={{ color: 'white' }}><MoreVertIcon /></OldIconButton>}
         anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
         targetOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
@@ -95,7 +95,7 @@ class Header extends React.Component {
       </IconMenu>
     ) : (
       <IconMenu
-        iconButtonElement={<OldIconButton><MoreVertIcon /></OldIconButton>}
+        iconButtonElement={<OldIconButton iconStyle={{ color: 'white' }}><MoreVertIcon /></OldIconButton>}
         anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
         targetOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
