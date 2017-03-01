@@ -84,6 +84,7 @@ class DialogWithButtons extends React.Component {
       actions.push(
         <Button
           primary
+          key="cancel"
           onTouchTap={close}
         >
           {cancelAction}
@@ -94,6 +95,7 @@ class DialogWithButtons extends React.Component {
     actions.push(
       <Button
         primary
+        key="submit"
         disabled={(textField && !this.state.value) || (imageUpload && !this.state.file)}
         onTouchTap={() => {
           submit(this.state);
@@ -108,9 +110,7 @@ class DialogWithButtons extends React.Component {
       <div style={styles.container}>
 
         <div style={loading ? styles.fadeContainer : styles.opaqueContainer}>
-          <DialogContentText>
-            { description }
-          </DialogContentText>
+          { description }
 
           { textField ?
             <DialogContentText>
@@ -147,10 +147,8 @@ class DialogWithButtons extends React.Component {
 
     return (
       <Dialog
-        modal={false}
         open={isOpen}
         onRequestClose={close}
-        autoScrollBodyContent
       >
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>

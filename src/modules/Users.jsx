@@ -11,15 +11,10 @@ import {
   TableCell,
 } from 'material-ui/Table';
 
+import { DialogContentText } from 'material-ui/Dialog';
 import DialogWithButtons from '../components/DialogWithButtons';
 
 import rest from '../utils/rest';
-
-const styles = {
-  userDetail: {
-    paddingTop: 10,
-  },
-};
 
 // We need to use a 'stateful' component here, because we want to refresh the
 // user list whenever this component is mounted (ie. user navigates to this view)
@@ -51,15 +46,15 @@ class Users extends React.Component {
     // Show the following user details in the dialog
     const userDetailsDescription = (
       <div>
-        <div style={styles.userDetail}>
+        <DialogContentText>
           <b>{ formatMessage({ id: 'userId' })}</b>{`: ${userDetails.data.id}` }
-        </div>
-        <div style={styles.userDetail}>
+        </DialogContentText>
+        <DialogContentText>
           <b>{ formatMessage({ id: 'email' })}</b>{`: ${userDetails.data.email}` }
-        </div>
-        <div style={styles.userDetail}>
+        </DialogContentText>
+        <DialogContentText>
           <b>{ formatMessage({ id: 'description' })}</b>{`: ${userDetails.data.description}` }
-        </div>
+        </DialogContentText>
       </div>
     );
 
