@@ -11,6 +11,8 @@ import {
   TableCell,
 } from 'material-ui/Table';
 
+import Icon from 'material-ui/Icon';
+
 import { DialogContentText } from 'material-ui/Dialog';
 import DialogWithButtons from '../components/DialogWithButtons';
 
@@ -87,13 +89,13 @@ class Users extends React.Component {
                   <TableCell>{user.email}</TableCell>
                   <TableCell numeric>
                     <Button
-                      raised
                       primary
                       onTouchTap={() => {
                         refreshUser(user);
                         this.setState({ dialogOpen: true });
                       }}
                     >
+                      <Icon style={{ paddingRight: 10 }}>list</Icon>
                       {formatMessage({ id: 'showUserDetails' })}
                     </Button>
                   </TableCell>
