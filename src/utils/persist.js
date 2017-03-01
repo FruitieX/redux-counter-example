@@ -30,6 +30,9 @@ export const loadState = () => {
       }
     });
 
+    // Don't restore navigation state
+    state.router = undefined;
+
     // Clear any errors from previous app state
     state.err = undefined;
 
