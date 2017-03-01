@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react';
+import { injectIntl } from 'react-intl';
 
-import DropDownMenu from 'material-ui-old/DropDownMenu';
-import MenuItem from 'material-ui-old/MenuItem';
+import { List, ListItem, ListItemText } from 'material-ui/List';
+import { Menu, MenuItem } from 'material-ui/Menu';
+import Text from 'material-ui/Text';
+
 import Button from 'material-ui/Button';
-import { FormattedMessage } from 'react-intl';
 
 import {
-  Card,
-  CardText,
-  CardTitle,
-} from 'material-ui-old/Card';
+  CardContent,
+} from 'material-ui/Card';
 
 import jwtDecode from 'jwt-decode';
 
@@ -18,63 +18,94 @@ import { updateIntl } from 'react-intl-redux';
 
 import { clearState } from '../utils/persist';
 
-import theme from '../utils/theme';
 import { languages, storeLocaleForUser } from '../utils/intl';
 
-const styles = {
-  wrapper: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    padding: theme.spacing.desktopGutter,
-  },
-  card: {
-    margin: theme.spacing.desktopGutter,
-    flex: 1,
-    flexBasis: '450px',
-  },
-};
+import CardWrapper from '../components/CardWrapper';
+import ResponsiveCard from '../components/ResponsiveCard';
 
-const Preferences = ({ activeLanguage, changeLanguage, doClearState, user }) => (
-  <div style={styles.wrapper}>
-    <Card style={styles.card}>
-      <CardTitle
-        title={<FormattedMessage id="language" />}
-      />
-      <CardText>
-        <DropDownMenu
-          value={activeLanguage}
-          onChange={(event, index, locale) => changeLanguage(user, locale)}
-        >
-          {
-            Object.keys(languages).map(language => (
-              <MenuItem key={language} value={language} primaryText={languages[language].name} />
-            ))
-          }
-        </DropDownMenu>
-      </CardText>
-      <CardTitle
-        title={<FormattedMessage id="resetState" />}
-        subtitle={<FormattedMessage id="resetStateExplanation" />}
-      />
-      <CardText>
-        <Button
-          raised
-          accent
-          onTouchTap={doClearState}
-        >
-          {<FormattedMessage id="resetStateButton" />}
-        </Button>
-      </CardText>
-    </Card>
-  </div>
-);
+class Preferences extends React.Component {
+  state = {
+    languageMenuOpen: false,
+    languageMenuAnchor: null,
+  };
+
+  render() {
+    const {
+      activeLanguage,
+      changeLanguage,
+      doClearState,
+      user,
+      intl: { formatMessage },
+    } = this.props;
+
+    return (
+      <CardWrapper>
+        <ResponsiveCard>
+          <CardContent>
+            <Text type="headline">{formatMessage({ id: 'language' })}</Text>
+            <List>
+              <ListItem
+                button
+                aria-haspopup="true"
+                aria-controls="language-menu"
+                aria-label="App language"
+                onClick={e => this.setState({
+                  languageMenuOpen: true,
+                  languageMenuAnchor: e.currentTarget,
+                })}
+              >
+                <ListItemText
+                  primary={formatMessage({ id: 'selectedLanguage' })}
+                  secondary={languages[activeLanguage].name}
+                />
+              </ListItem>
+            </List>
+            <Menu
+              id="language-menu"
+              anchorEl={this.state.languageMenuAnchor}
+              open={this.state.languageMenuOpen}
+              onRequestClose={() => this.setState({ languageMenuOpen: false })}
+            >
+              {
+                Object.keys(languages).map(language => (
+                  <MenuItem
+                    key={language}
+                    selected={language === activeLanguage}
+                    onTouchTap={() => changeLanguage(user, language)}
+                  >
+                    {languages[language].name}
+                  </MenuItem>
+                ))
+              }
+            </Menu>
+          </CardContent>
+          <CardContent>
+            <Text type="headline">{formatMessage({ id: 'resetState' })}</Text>
+            <Text>{formatMessage({ id: 'resetStateExplanation' })}</Text>
+          </CardContent>
+          <CardContent>
+            <Button
+              raised
+              accent
+              onTouchTap={doClearState}
+            >
+              {formatMessage({ id: 'resetStateButton' })}
+            </Button>
+          </CardContent>
+        </ResponsiveCard>
+      </CardWrapper>
+    );
+  }
+}
 
 Preferences.propTypes = {
   activeLanguage: PropTypes.string.isRequired,
   user: PropTypes.shape({
     email: PropTypes.string.isRequired,
     scope: PropTypes.string.isRequired,
+  }).isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
   }).isRequired,
   changeLanguage: PropTypes.func.isRequired,
   doClearState: PropTypes.func.isRequired,
@@ -87,7 +118,7 @@ Preferences.defaultProps = {
   },
 };
 
-export default connect(
+export default injectIntl(connect(
   state => ({
     activeLanguage: state.intl.locale,
     // TODO: get rid of this jwtDecode()
@@ -108,4 +139,4 @@ export default connect(
       location.reload();
     },
   }),
-)(Preferences);
+)(Preferences));
