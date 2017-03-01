@@ -72,7 +72,7 @@ const NavigationDrawer = ({ closeDrawer, changeView, drawerOpened, path, user })
             {route.separator ? <Divider /> : null}
             <MenuItem
               leftIcon={React.createElement(route.icon)}
-              style={{ color: active ? theme.legacyPalette.primary1Color : null }}
+              style={{ color: active ? theme.palette.primary[500] : null }}
               onTouchTap={() => { changeView(route.path); }}
             >
 
