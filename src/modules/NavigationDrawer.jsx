@@ -10,7 +10,7 @@ import MenuIcon from 'material-ui/svg-icons/menu';
 
 import Drawer from 'material-ui/Drawer';
 
-import Divider from 'material-ui-old/Divider';
+import Divider from 'material-ui/Divider';
 import MenuItem from 'material-ui-old/MenuItem';
 
 import isArray from 'lodash/isArray';

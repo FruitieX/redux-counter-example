@@ -5,6 +5,7 @@ import Toolbar from 'material-ui/Toolbar';
 import Text from 'material-ui/Text';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui/svg-icons/menu';
+import Divider from 'material-ui/Divider';
 
 import OldIconButton from 'material-ui-old/IconButton';
 import IconMenu from 'material-ui-old/IconMenu';
@@ -13,8 +14,6 @@ import MenuItem from 'material-ui-old/MenuItem';
 import MoreVertIcon from 'material-ui-old/svg-icons/navigation/more-vert';
 import AvatarIcon from 'material-ui-old/svg-icons/action/account-circle';
 import LogOutIcon from 'material-ui-old/svg-icons/action/exit-to-app';
-
-import Divider from 'material-ui-old/Divider';
 
 import { FormattedMessage, injectIntl } from 'react-intl';
 
