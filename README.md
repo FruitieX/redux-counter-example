@@ -17,7 +17,7 @@ stack quickly:
 
 * [react](https://facebook.github.io/react/), component based UI library
 * [react-router v4](https://github.com/ReactTraining/react-router/tree/v4), keep UI in sync with the URL
-* [material-ui](http://www.material-ui.com/), React components that implement Google's Material Design
+* [material-ui@next](http://www.material-ui.com/), React components that implement Google's Material Design
 * [react-intl](https://github.com/yahoo/react-intl), internationalisation support
 
 ### Redux

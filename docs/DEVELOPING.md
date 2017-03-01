@@ -1,6 +1,26 @@
-# Developing, how do I:
+# Developing
 
-## Add a new view/route:
+## Notes
+
+### material-ui
+
+The [material-ui](https://github.com/callemall/material-ui) library is being rewritten for its next
+major version. At the time of writing this document, this rewrite is in alpha stage, and from my
+experience has better UX than the old version. We use the alpha version (from next branch) by default.
+
+The rewrite is available in the [next branch](https://github.com/callemall/material-ui/tree/next) or
+`@next` npm tag. **In order to import components from the `next` branch of material-ui, use `import
+material-ui/...`** Documentation for next branch components is available here at the time of
+writing: https://material-ui-1dab0.firebaseapp.com
+
+All components have not been migrated/rewritten yet, but luckily we can use these few components
+from the old stable version alongside the next version. **In order to import from the stable
+material-ui version, use `import material-ui-old/...`**. Stable documentation available at:
+http://www.material-ui.com
+
+## How do I:
+
+### Add a new view/route:
 
 TODO: use a tool such as https://plopjs.com/
 
@@ -48,7 +68,7 @@ TODO: use a tool such as https://plopjs.com/
 * Now your view should be selectable in the `NavigationDrawer`, and also
   accessible as `/mymodule`
 
-## Connect a module to the redux store:
+### Connect a module to the redux store:
 
 E.g. `MyModule.jsx`.
 
@@ -68,7 +88,7 @@ the redux store), as well as dispatch actions ('write' to the redux store).
   )(MyModule);
   ```
 
-### "Read" from the redux store
+#### "Read" from the redux store
 
 * Now think about what you want read access to in the redux store. To view the
   entire store state for debugging purposes, use `redux-devtools` (see end of
@@ -93,7 +113,7 @@ the redux store), as well as dispatch actions ('write' to the redux store).
 
 Now your module can access the drawerOpened state via `this.props.open`.
 
-### "Write" to the redux store
+#### "Write" to the redux store
 
 Changing state in redux is only possible with "actions". Let's say we want to
 toggle the navigation drawer open state. There are readily made actions for
@@ -127,7 +147,7 @@ this in `src/modules/NavigationDrawer.jsx`. The action we want is exported as
 
 * Now your module can toggle the NavigationDrawer by calling `this.props.toggle()`.
 
-## Call a REST API:
+### Call a REST API:
 
 Thanks to `redux-api`, all you need to do is:
 
