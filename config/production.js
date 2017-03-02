@@ -1,3 +1,3 @@
 export default {
-  apiRoot: 'https://app.herokuapp.com',
+  apiRoot: 'https://backend-hipster-kit.herokuapp.com',
 };
