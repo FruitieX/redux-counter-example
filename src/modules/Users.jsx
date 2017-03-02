@@ -27,14 +27,32 @@ import rest from '../utils/rest';
 // https://facebook.github.io/react/docs/components-and-props.html
 // http://stackoverflow.com/questions/36097965/react-when-to-use-es6-class-based-components-vs-functional-es6-components
 class Users extends React.Component {
-  constructor() {
-    super();
 
-    this.state = {
-      dialogOpen: false,
-    };
-  }
+  // Here we specify which props the component requires. This is especially useful in larger
+  // projects. When someone else uses your component and if they forget to pass a required prop,
+  // React will warn the developer through the console.
 
+  // See https://facebook.github.io/react/docs/typechecking-with-proptypes.html for more info.
+  static propTypes = {
+    users: PropTypes.shape({
+      data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    }).isRequired,
+    userDetails: PropTypes.shape({
+      data: PropTypes.object.isRequired,
+    }).isRequired,
+    refresh: PropTypes.func.isRequired,
+    refreshUser: PropTypes.func.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+  };
+
+  // Component initial state
+  state = {
+    dialogOpen: false,
+  };
+
+  // Ran when component is first mounted, i.e. has rendered for the first time
   componentDidMount() {
     const { refresh } = this.props;
 
@@ -108,25 +126,6 @@ class Users extends React.Component {
     );
   }
 }
-
-// Here we specify which props the component requires. This is especially useful in larger projects.
-// When someone else uses your component and if they forget to pass a required prop, React will
-// warn the developer through the console.
-
-// See https://facebook.github.io/react/docs/typechecking-with-proptypes.html for more info.
-Users.propTypes = {
-  users: PropTypes.shape({
-    data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-  userDetails: PropTypes.shape({
-    data: PropTypes.object.isRequired,
-  }).isRequired,
-  refresh: PropTypes.func.isRequired,
-  refreshUser: PropTypes.func.isRequired,
-  intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired,
-  }).isRequired,
-};
 
 // Here we 'connect' the component to the Redux store. This means that the component will receive
 // parts of the Redux store as its props. Exactly which parts is chosen by the first function (

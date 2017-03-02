@@ -33,14 +33,40 @@ const styles = {
 };
 
 class DialogWithButtons extends React.Component {
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    textField: PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      textAfter: PropTypes.string,
+    }),
+    imageUpload: PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      textAfter: PropTypes.string,
+    }),
+    title: PropTypes.string.isRequired,
+    cancelAction: PropTypes.string,
+    submitAction: PropTypes.string.isRequired,
+    description: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.node,
+    ]),
+    submit: PropTypes.func.isRequired,
+    close: PropTypes.func.isRequired,
+    isOpen: PropTypes.bool.isRequired,
+    loading: PropTypes.bool,
+  };
 
-    this.state = {
-      value: '',
-      file: null,
-    };
-  }
+  static defaultProps = {
+    textField: null,
+    imageUpload: null,
+    description: '',
+    cancelAction: null,
+    loading: false,
+  };
+
+  state = {
+    value: '',
+    file: null,
+  };
 
   setImageUrl = file => (
     this.setState({
@@ -152,7 +178,7 @@ class DialogWithButtons extends React.Component {
       >
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
-        { dialogContents }
+          { dialogContents }
         </DialogContent>
         <DialogActions>{actions}</DialogActions>
 
@@ -161,35 +187,5 @@ class DialogWithButtons extends React.Component {
     );
   }
 }
-
-DialogWithButtons.propTypes = {
-  textField: PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    textAfter: PropTypes.string,
-  }),
-  imageUpload: PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    textAfter: PropTypes.string,
-  }),
-  title: PropTypes.string.isRequired,
-  cancelAction: PropTypes.string,
-  submitAction: PropTypes.string.isRequired,
-  description: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-  ]),
-  submit: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  loading: PropTypes.bool,
-};
-
-DialogWithButtons.defaultProps = {
-  textField: null,
-  imageUpload: null,
-  description: '',
-  cancelAction: null,
-  loading: false,
-};
 
 export default DialogWithButtons;

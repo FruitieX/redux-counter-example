@@ -21,14 +21,21 @@ import rest from '../utils/rest';
 import theme from '../utils/theme';
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    redirectPath: PropTypes.string.isRequired,
+    doLogin: PropTypes.func.isRequired,
+    redirect: PropTypes.func.isRequired,
+    auth: PropTypes.shape({
+      sync: PropTypes.bool,
+      syncing: PropTypes.bool,
+      loading: PropTypes.bool,
+    }).isRequired,
+  };
 
-    this.state = {
-      email: '',
-      password: '',
-    };
-  }
+  state = {
+    email: '',
+    password: '',
+  };
 
   componentDidMount() {
     document.querySelector('input').focus();
@@ -134,17 +141,6 @@ class Login extends React.Component {
     );
   }
 }
-
-Login.propTypes = {
-  redirectPath: PropTypes.string.isRequired,
-  doLogin: PropTypes.func.isRequired,
-  redirect: PropTypes.func.isRequired,
-  auth: PropTypes.shape({
-    sync: PropTypes.bool,
-    syncing: PropTypes.bool,
-    loading: PropTypes.bool,
-  }).isRequired,
-};
 
 export default withRouter(connect(
   (state, ownProps) => ({

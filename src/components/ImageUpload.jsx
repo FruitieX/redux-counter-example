@@ -11,12 +11,14 @@ const styles = {
 };
 
 class ImageUpload extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      imagePreviewUrl: '',
-    };
-  }
+  static propTypes = {
+    label: PropTypes.string.isRequired,
+    setImageUrl: PropTypes.func.isRequired,
+  };
+
+  state = {
+    imagePreviewUrl: '',
+  };
 
   handleImageChange(e) {
     e.preventDefault();
@@ -65,10 +67,5 @@ class ImageUpload extends React.Component {
     );
   }
 }
-
-ImageUpload.propTypes = {
-  label: PropTypes.string.isRequired,
-  setImageUrl: PropTypes.func.isRequired,
-};
 
 export default ImageUpload;

@@ -40,17 +40,26 @@ const getTitle = (path) => {
   return `ERROR: Title not found for path: ${path}`;
 };
 
-const styles = {
-  profileMenuItem: {
-    height: 72,
-  },
-  profilePictureIcon: {
-    height: 48,
-    width: 48,
-  },
-};
-
 class Header extends React.Component {
+  static propTypes = {
+    path: PropTypes.string.isRequired,
+    doToggleDrawer: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
+    preferences: PropTypes.func.isRequired,
+    user: PropTypes.shape({
+      email: PropTypes.string.isRequired,
+      scope: PropTypes.string.isRequired,
+    }),
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+  };
+
+  static defaultProps = {
+    user: null,
+  };
+
   state = {
     rightMenuOpen: false,
     rightMenuAnchorEl: null,
@@ -151,25 +160,6 @@ class Header extends React.Component {
     );
   }
 }
-
-Header.propTypes = {
-  path: PropTypes.string.isRequired,
-  doToggleDrawer: PropTypes.func.isRequired,
-  login: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired,
-  preferences: PropTypes.func.isRequired,
-  user: PropTypes.shape({
-    email: PropTypes.string.isRequired,
-    scope: PropTypes.string.isRequired,
-  }),
-  intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired,
-  }).isRequired,
-};
-
-Header.defaultProps = {
-  user: null,
-};
 
 export default injectIntl(withRouter(connect(
   (state, ownProps) => ({

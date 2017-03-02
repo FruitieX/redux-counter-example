@@ -24,6 +24,26 @@ import CardWrapper from '../components/CardWrapper';
 import ResponsiveCard from '../components/ResponsiveCard';
 
 class Preferences extends React.Component {
+  static propTypes = {
+    activeLanguage: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+      email: PropTypes.string.isRequired,
+      scope: PropTypes.string.isRequired,
+    }).isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+    changeLanguage: PropTypes.func.isRequired,
+    doClearState: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    user: {
+      email: 'Default user',
+      scope: 'user',
+    },
+  };
+
   state = {
     languageMenuOpen: false,
     languageMenuAnchor: null,
@@ -100,26 +120,6 @@ class Preferences extends React.Component {
     );
   }
 }
-
-Preferences.propTypes = {
-  activeLanguage: PropTypes.string.isRequired,
-  user: PropTypes.shape({
-    email: PropTypes.string.isRequired,
-    scope: PropTypes.string.isRequired,
-  }).isRequired,
-  intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired,
-  }).isRequired,
-  changeLanguage: PropTypes.func.isRequired,
-  doClearState: PropTypes.func.isRequired,
-};
-
-Preferences.defaultProps = {
-  user: {
-    email: 'Default user',
-    scope: 'user',
-  },
-};
 
 export default injectIntl(connect(
   state => ({
