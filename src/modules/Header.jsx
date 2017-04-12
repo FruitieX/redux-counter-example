@@ -17,8 +17,6 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 
 import { withRouter } from 'react-router';
 
-import jwtDecode from 'jwt-decode';
-
 import { connect } from 'react-redux';
 
 import { push } from 'connected-react-router';
@@ -46,7 +44,7 @@ const getTitle = (path) => {
 
 const mapStateToProps = (state, ownProps) => ({
   path: ownProps.location.pathname,
-  user: state.auth.data.token && jwtDecode(state.auth.data.token),
+  user: state.auth.data.decoded,
 });
 
 const mapDispatchToProps = dispatch => ({
