@@ -87,7 +87,7 @@ export const RouteConfigShape = PropTypes.shape({
   component: PropTypes.func.isRequired,
   icon: PropTypes.string.isRequired,
   requiresLogin: PropTypes.bool.isRequired,
-  showHeader: PropTypes.bool.isRequired,
+  showHeader: PropTypes.bool,
 });
 
 // Takes a routeConfig and wraps it in react-router's <Route> component.
