@@ -33,6 +33,12 @@ const styles = {
 };
 
 class DialogWithButtons extends React.Component {
+  // Here we specify which props the component requires. This is especially useful in larger
+  // projects. When someone else uses your component and if they forget to pass a required prop,
+  // React will warn the developer through the console.
+
+  // See https://facebook.github.io/react/docs/typechecking-with-proptypes.html for more info.
+
   static propTypes = {
     textField: PropTypes.shape({
       label: PropTypes.string.isRequired,

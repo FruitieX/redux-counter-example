@@ -1,3 +1,6 @@
+// Disable prop type checking in modules
+/* eslint-disable react/prop-types */
+
 import React from 'react';
 
 // Snackbar component not yet available in material-ui@next
@@ -11,7 +14,12 @@ import {
   createReducer,
 } from 'redux-act';
 
-class ErrorSnackbar extends React.Component {
+const mapStateToProps = state => ({
+  err: state.err,
+});
+
+@connect(mapStateToProps)
+export default class ErrorSnackbar extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -48,12 +56,6 @@ class ErrorSnackbar extends React.Component {
     />);
   }
 }
-
-export default connect(
-  state => ({
-    err: state.err,
-  }),
-)(ErrorSnackbar);
 
 // Action creators
 export const showError = createAction('Show error message');

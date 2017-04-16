@@ -1,4 +1,7 @@
-import React, { PropTypes } from 'react';
+// Disable prop type checking in modules
+/* eslint-disable react/prop-types */
+
+import React from 'react';
 
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -40,22 +43,31 @@ const getTitle = (path) => {
   return `ERROR: Title not found for path: ${path}`;
 };
 
-class Header extends React.Component {
-  static propTypes = {
-    path: PropTypes.string.isRequired,
-    doToggleDrawer: PropTypes.func.isRequired,
-    login: PropTypes.func.isRequired,
-    logout: PropTypes.func.isRequired,
-    preferences: PropTypes.func.isRequired,
-    user: PropTypes.shape({
-      email: PropTypes.string.isRequired,
-      scope: PropTypes.string.isRequired,
-    }),
-    intl: PropTypes.shape({
-      formatMessage: PropTypes.func.isRequired,
-    }).isRequired,
-  };
 
+const mapStateToProps = (state, ownProps) => ({
+  path: ownProps.location.pathname,
+  user: state.auth.data.token && jwtDecode(state.auth.data.token),
+});
+
+const mapDispatchToProps = dispatch => ({
+  doToggleDrawer() {
+    dispatch(toggleDrawer());
+  },
+  login() {
+    dispatch(push('/login'));
+  },
+  logout() {
+    dispatch(push('/logout'));
+  },
+  preferences() {
+    dispatch(push('/preferences'));
+  },
+});
+
+@withRouter
+@injectIntl
+@connect(mapStateToProps, mapDispatchToProps)
+export default class Header extends React.Component {
   static defaultProps = {
     user: null,
   };
@@ -160,24 +172,3 @@ class Header extends React.Component {
     );
   }
 }
-
-export default injectIntl(withRouter(connect(
-  (state, ownProps) => ({
-    path: ownProps.location.pathname,
-    user: state.auth.data.token && jwtDecode(state.auth.data.token),
-  }),
-  dispatch => ({
-    doToggleDrawer() {
-      dispatch(toggleDrawer());
-    },
-    login() {
-      dispatch(push('/login'));
-    },
-    logout() {
-      dispatch(push('/logout'));
-    },
-    preferences() {
-      dispatch(push('/preferences'));
-    },
-  }),
-)(Header)));

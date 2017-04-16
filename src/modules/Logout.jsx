@@ -1,14 +1,23 @@
-import React, { PropTypes } from 'react';
+// Disable prop type checking in modules
+/* eslint-disable react/prop-types */
+
+import React from 'react';
 
 import { CircularProgress } from 'material-ui/Progress';
 import { connect } from 'react-redux';
 import { clearState } from '../utils/persist';
 
-class Logout extends React.Component {
-  static propTypes = {
-    doLogout: PropTypes.func.isRequired,
-  };
+const mapDispatchToProps = () => ({
+  doLogout() {
+    clearState();
 
+    // reload app
+    location.pathname = '/';
+  },
+});
+
+@connect(undefined, mapDispatchToProps)
+export default class Logout extends React.Component {
   componentDidMount() {
     this.props.doLogout();
   }
@@ -28,15 +37,3 @@ class Logout extends React.Component {
     );
   }
 }
-
-export default connect(
-  undefined,
-  () => ({
-    doLogout() {
-      clearState();
-
-      // reload app
-      location.pathname = '/';
-    },
-  }),
-)(Logout);

@@ -1,4 +1,7 @@
-import React, { PropTypes } from 'react';
+// Disable prop type checking in modules
+/* eslint-disable react/prop-types */
+
+import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 
@@ -98,16 +101,6 @@ const NavigationDrawer = ({ closeDrawer, changeView, drawerOpened, path, user })
     </List>
   </Drawer>
 );
-
-NavigationDrawer.propTypes = {
-  closeDrawer: PropTypes.func.isRequired,
-  changeView: PropTypes.func.isRequired,
-  drawerOpened: PropTypes.bool.isRequired,
-  path: PropTypes.string.isRequired,
-  user: PropTypes.shape({
-    scope: PropTypes.string.isRequired,
-  }),
-};
 
 NavigationDrawer.defaultProps = {
   user: null,

@@ -1,4 +1,7 @@
-import React, { PropTypes } from 'react';
+// Disable prop type checking in modules
+/* eslint-disable react/prop-types */
+
+import React from 'react';
 import { injectIntl } from 'react-intl';
 
 import { List, ListItem, ListItemText } from 'material-ui/List';
@@ -23,20 +26,32 @@ import { languages, storeLocaleForUser } from '../utils/intl';
 import CardWrapper from '../components/CardWrapper';
 import ResponsiveCard from '../components/ResponsiveCard';
 
-class Preferences extends React.Component {
-  static propTypes = {
-    activeLanguage: PropTypes.string.isRequired,
-    user: PropTypes.shape({
-      email: PropTypes.string.isRequired,
-      scope: PropTypes.string.isRequired,
-    }).isRequired,
-    intl: PropTypes.shape({
-      formatMessage: PropTypes.func.isRequired,
-    }).isRequired,
-    changeLanguage: PropTypes.func.isRequired,
-    doClearState: PropTypes.func.isRequired,
-  };
 
+const mapStateToProps = state => ({
+  activeLanguage: state.intl.locale,
+  // TODO: get rid of this jwtDecode()
+  user: state.auth.data.token && jwtDecode(state.auth.data.token),
+});
+
+const mapDispatchToProps = dispatch => ({
+  changeLanguage: (user, locale) => {
+    storeLocaleForUser(user.email, locale);
+    dispatch(updateIntl({
+      locale,
+      messages: languages[locale].translations,
+    }));
+  },
+  doClearState: () => {
+    clearState(true);
+
+    // reload app
+    location.reload();
+  },
+});
+
+@injectIntl
+@connect(mapStateToProps, mapDispatchToProps)
+export default class Preferences extends React.Component {
   static defaultProps = {
     user: {
       email: 'Default user',
@@ -120,26 +135,3 @@ class Preferences extends React.Component {
     );
   }
 }
-
-export default injectIntl(connect(
-  state => ({
-    activeLanguage: state.intl.locale,
-    // TODO: get rid of this jwtDecode()
-    user: state.auth.data.token && jwtDecode(state.auth.data.token),
-  }),
-  dispatch => ({
-    changeLanguage: (user, locale) => {
-      storeLocaleForUser(user.email, locale);
-      dispatch(updateIntl({
-        locale,
-        messages: languages[locale].translations,
-      }));
-    },
-    doClearState: () => {
-      clearState(true);
-
-      // reload app
-      location.reload();
-    },
-  }),
-)(Preferences));

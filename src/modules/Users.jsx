@@ -1,4 +1,7 @@
-import React, { PropTypes } from 'react';
+// Disable prop type checking in modules
+/* eslint-disable react/prop-types */
+
+import React from 'react';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 
@@ -18,41 +21,49 @@ import DialogWithButtons from '../components/DialogWithButtons';
 
 import rest from '../utils/rest';
 
-// We need to use a 'stateful' component here, because we want to refresh the
-// user list whenever this component is mounted (ie. user navigates to this view)
+// Here we 'connect' the component to the Redux store. This means that the component will receive
+// parts of the Redux store as its props. Exactly which parts is chosen by mapStateToProps.
 
-// Also, in this component's state we keep track of whether the details dialog should be open.
+// We should map only necessary values as props, in order to avoid unnecessary re-renders. In this
+// case we need the list of users, as returned by the REST API. The component will be able to access
+// the users list via `this.props.users`. Additionally, we need details about the selected user,
+// which will be available as `this.props.userDetails`.
 
-// Functional vs Class Components:
-// https://facebook.github.io/react/docs/components-and-props.html
-// http://stackoverflow.com/questions/36097965/react-when-to-use-es6-class-based-components-vs-functional-es6-components
-class Users extends React.Component {
+// The second function (mapDispatchToProps) allows us to 'make changes' to the Redux store, by
+// dispatching Redux actions. The functions we define here will be available to the component as
+// props, so in our example the component will be able to call `this.props.refresh()` in order to
+// refresh the users list, and `this.props.refreshUser(user)` to fetch more info about a specific
+// user.
 
-  // Here we specify which props the component requires. This is especially useful in larger
-  // projects. When someone else uses your component and if they forget to pass a required prop,
-  // React will warn the developer through the console.
+// More details: https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
 
-  // See https://facebook.github.io/react/docs/typechecking-with-proptypes.html for more info.
-  static propTypes = {
-    users: PropTypes.shape({
-      data: PropTypes.arrayOf(PropTypes.object).isRequired,
-    }).isRequired,
-    userDetails: PropTypes.shape({
-      data: PropTypes.object.isRequired,
-    }).isRequired,
-    refresh: PropTypes.func.isRequired,
-    refreshUser: PropTypes.func.isRequired,
-    intl: PropTypes.shape({
-      formatMessage: PropTypes.func.isRequired,
-    }).isRequired,
-  };
+// The injectIntl decorator makes this.props.intl.formatMessage available to the component, which
+// is used for localization.
 
-  // Component initial state
+const mapStateToProps = state => ({
+  users: state.users,
+  userDetails: state.userDetails,
+});
+
+const mapDispatchToProps = dispatch => ({
+  refresh: () => {
+    dispatch(rest.actions.users());
+  },
+  refreshUser: (user) => {
+    dispatch(rest.actions.userDetails({ userId: user.id }));
+  },
+});
+
+@injectIntl
+@connect(mapStateToProps, mapDispatchToProps)
+export default class Users extends React.Component {
+  // Component initial state.
+  // Here we keep track of whether the user details dialog is open.
   state = {
     dialogOpen: false,
   };
 
-  // Ran when component is first mounted, i.e. has rendered for the first time
+  // Refresh user list when component is first mounted
   componentDidMount() {
     const { refresh } = this.props;
 
@@ -126,34 +137,3 @@ class Users extends React.Component {
     );
   }
 }
-
-// Here we 'connect' the component to the Redux store. This means that the component will receive
-// parts of the Redux store as its props. Exactly which parts is chosen by the first function (
-// receives `state` as parameter).
-
-// We should map only necessary values as props, in order to avoid unnecessary re-renders. In this
-// case we need the list of users, as returned by the REST API. The component will be able to access
-// the users list via `this.props.users`. Additionally, we need details about the selected user,
-// which will be available as `this.props.userDetails`.
-
-// The second function (receives `dispatch` as parameter) allows us to 'make changes' to the Redux
-// store, by dispatching Redux actions. The functions we define here will be available to the
-// component as props, so in our example the component will be able to call `this.props.refresh()`
-// in order to refresh the users list, and `this.props.refreshUser(user)` to fetch more info about a
-// specific user.
-
-// More details: https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
-export default injectIntl(connect(
-  state => ({
-    users: state.users,
-    userDetails: state.userDetails,
-  }),
-  dispatch => ({
-    refresh: () => {
-      dispatch(rest.actions.users());
-    },
-    refreshUser: (user) => {
-      dispatch(rest.actions.userDetails({ userId: user.id }));
-    },
-  }),
-)(Users));

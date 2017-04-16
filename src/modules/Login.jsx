@@ -1,4 +1,7 @@
-import React, { PropTypes } from 'react';
+// Disable prop type checking in modules
+/* eslint-disable react/prop-types */
+
+import React from 'react';
 
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
@@ -20,18 +23,33 @@ import { getLocaleForUser, languages } from '../utils/intl';
 import rest from '../utils/rest';
 import theme from '../utils/theme';
 
-class Login extends React.Component {
-  static propTypes = {
-    redirectPath: PropTypes.string.isRequired,
-    doLogin: PropTypes.func.isRequired,
-    redirect: PropTypes.func.isRequired,
-    auth: PropTypes.shape({
-      sync: PropTypes.bool,
-      syncing: PropTypes.bool,
-      loading: PropTypes.bool,
-    }).isRequired,
-  };
+const mapStateToProps = (state, ownProps) => ({
+  auth: state.auth,
+  redirectPath: ownProps.location.state
+    ? ownProps.location.state.from.pathname
+    : '/',
+});
 
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  doLogin(creds) {
+    dispatch(rest.actions.auth({}, { body: JSON.stringify(creds) }));
+
+    const storedLocale = getLocaleForUser(creds.email);
+    if (storedLocale && languages[storedLocale]) {
+      dispatch(updateIntl({
+        locale: storedLocale,
+        messages: languages[storedLocale].translations,
+      }));
+    }
+  },
+  redirect(path) {
+    ownProps.replace(path);
+  },
+});
+
+@withRouter
+@connect(mapStateToProps, mapDispatchToProps)
+export default class Login extends React.Component {
   state = {
     email: '',
     password: '',
@@ -141,28 +159,3 @@ class Login extends React.Component {
     );
   }
 }
-
-export default withRouter(connect(
-  (state, ownProps) => ({
-    auth: state.auth,
-    redirectPath: ownProps.location.state
-      ? ownProps.location.state.from.pathname
-      : '/',
-  }),
-  (dispatch, ownProps) => ({
-    doLogin(creds) {
-      dispatch(rest.actions.auth({}, { body: JSON.stringify(creds) }));
-
-      const storedLocale = getLocaleForUser(creds.email);
-      if (storedLocale && languages[storedLocale]) {
-        dispatch(updateIntl({
-          locale: storedLocale,
-          messages: languages[storedLocale].translations,
-        }));
-      }
-    },
-    redirect(path) {
-      ownProps.replace(path);
-    },
-  }),
-)(Login));
