@@ -14,8 +14,6 @@ import {
   CardContent,
 } from 'material-ui/Card';
 
-import jwtDecode from 'jwt-decode';
-
 import { connect } from 'react-redux';
 import { updateIntl } from 'react-intl-redux';
 
@@ -29,8 +27,7 @@ import ResponsiveCard from '../components/ResponsiveCard';
 
 const mapStateToProps = state => ({
   activeLanguage: state.intl.locale,
-  // TODO: get rid of this jwtDecode()
-  user: state.auth.data.token && jwtDecode(state.auth.data.token),
+  user: state.auth.data.decoded,
 });
 
 const mapDispatchToProps = dispatch => ({

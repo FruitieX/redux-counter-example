@@ -1,7 +1,7 @@
 // Disable prop type checking in modules
 /* eslint-disable react/prop-types */
 
-import React from 'react';
+import React, { Component } from 'react';
 
 import { FormattedMessage } from 'react-intl';
 
@@ -27,84 +27,11 @@ import {
   createReducer,
 } from 'redux-act';
 
-import jwtDecode from 'jwt-decode';
-
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 import routes from '../utils/routes';
 import theme from '../utils/theme';
-
-const NavigationDrawer = ({ closeDrawer, changeView, drawerOpened, path, user }) => (
-  <Drawer
-    open={drawerOpened}
-    onRequestClose={() => closeDrawer()}
-  >
-
-    <AppBar
-      style={{ position: 'relative' }}
-    >
-      <Toolbar>
-        <IconButton
-          contrast
-          onClick={() => closeDrawer()}
-        >
-          menu
-        </IconButton>
-        <Text
-          style={{ flex: 1 }}
-          type="title"
-          colorInherit
-        >
-          <FormattedMessage id="navigation" />
-        </Text>
-      </Toolbar>
-    </AppBar>
-
-    <List>
-      {
-        routes.map((route) => {
-          let active = (path === route.path);
-
-          if (route.path === routes[0].path && path === '/') {
-            active = true;
-          }
-
-          const scope = user ? user.scope : null;
-
-          if (isArray(route.hideWhenScope) && route.hideWhenScope.includes(scope)) {
-            return null;
-          }
-
-          return (
-            <div key={route.path}>
-              <ListItem
-                button
-                divider={route.separator}
-                onClick={() => { changeView(route.path); }}
-              >
-                <ListItemIcon
-                  style={active ? { color: theme.palette.primary[500] } : null}
-                >
-                  <Icon>{route.icon}</Icon>
-                </ListItemIcon>
-
-                <ListItemText
-                  style={active ? { color: theme.palette.primary[500] } : null}
-                  primary={<FormattedMessage id={route.name} />}
-                />
-              </ListItem>
-            </div>
-          );
-        })
-      }
-    </List>
-  </Drawer>
-);
-
-NavigationDrawer.defaultProps = {
-  user: null,
-};
 
 // Action creators
 export const closeDrawer = createAction('Close menu drawer');
@@ -132,19 +59,97 @@ export const reducer = createReducer({
   }),
 }, initialState);
 
-export default withRouter(connect(
-  (state, ownProps) => ({
-    drawerOpened: state.drawer.drawerOpened,
-    path: ownProps.location.pathname,
-    user: state.auth.data.token && jwtDecode(state.auth.data.token),
-  }),
-  (dispatch, ownProps) => ({
-    changeView(view) {
-      dispatch(closeDrawer());
-      ownProps.push(view.toLowerCase());
-    },
-    closeDrawer() {
-      dispatch(toggleDrawer());
-    },
-  }),
-)(NavigationDrawer));
+const mapStateToProps = (state, ownProps) => ({
+  drawerOpened: state.drawer.drawerOpened,
+  path: ownProps.location.pathname,
+  user: state.auth.data.decoded,
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  changeView(view) {
+    dispatch(closeDrawer());
+    ownProps.push(view.toLowerCase());
+  },
+  close() {
+    dispatch(closeDrawer());
+  },
+});
+
+@withRouter
+@connect(mapStateToProps, mapDispatchToProps)
+export default class NavigationDrawer extends Component {
+  static defaultProps = {
+    user: null,
+  };
+
+  render() {
+    const { close, changeView, drawerOpened, path, user } = this.props;
+
+    return (
+      <Drawer
+        open={drawerOpened}
+        onRequestClose={() => close()}
+      >
+
+        <AppBar
+          style={{ position: 'relative' }}
+        >
+          <Toolbar>
+            <IconButton
+              contrast
+              onClick={() => closeDrawer()}
+            >
+              menu
+            </IconButton>
+            <Text
+              style={{ flex: 1 }}
+              type="title"
+              colorInherit
+            >
+              <FormattedMessage id="navigation" />
+            </Text>
+          </Toolbar>
+        </AppBar>
+
+        <List>
+          {
+            routes.map((route) => {
+              let active = (path === route.path);
+
+              if (route.path === routes[0].path && path === '/') {
+                active = true;
+              }
+
+              const scope = user ? user.scope : null;
+
+              if (isArray(route.hideWhenScope) && route.hideWhenScope.includes(scope)) {
+                return null;
+              }
+
+              return (
+                <div key={route.path}>
+                  <ListItem
+                    button
+                    divider={route.separator}
+                    onClick={() => { changeView(route.path); }}
+                  >
+                    <ListItemIcon
+                      style={active ? { color: theme.palette.primary[500] } : null}
+                    >
+                      <Icon>{route.icon}</Icon>
+                    </ListItemIcon>
+
+                    <ListItemText
+                      style={active ? { color: theme.palette.primary[500] } : null}
+                      primary={<FormattedMessage id={route.name} />}
+                    />
+                  </ListItem>
+                </div>
+              );
+            })
+          }
+        </List>
+      </Drawer>
+    );
+  }
+}
