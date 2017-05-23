@@ -3,7 +3,9 @@ import reduxApi, { transformers } from 'redux-api';
 import adapterFetch from 'redux-api/lib/adapters/fetch';
 import jwtDecode from 'jwt-decode';
 
+/* eslint-disable */
 import config from 'config';
+/* eslint-enable */
 
 import { showError } from '../modules/ErrorSnackbar';
 
