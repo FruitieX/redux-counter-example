@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
@@ -103,7 +103,7 @@ const mapStateToProps = state => ({
 });
 
 @connect(mapStateToProps)
-class AuthRedirectRoute extends Component {
+class AuthRedirectRoute extends React.Component {
   static propTypes = {
     loggedIn: PropTypes.bool,
     requiresLogin: PropTypes.bool,

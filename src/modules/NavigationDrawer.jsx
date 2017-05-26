@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 import { push } from 'react-router-redux';
@@ -74,7 +74,7 @@ const mapDispatchToProps = dispatch => ({
 
 @withRouter
 @connect(mapStateToProps, mapDispatchToProps)
-export default class NavigationDrawer extends Component {
+export default class NavigationDrawer extends React.Component {
   static defaultProps = {
     user: null,
   };
