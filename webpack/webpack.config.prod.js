@@ -53,12 +53,12 @@ module.exports = {
         pure_getters: true,
         unsafe: true,
         unsafe_comps: true,
-        screw_ie8: true
+        screw_ie8: true,
       },
       output: {
         comments: false,
       },
-      exclude: [/\.min\.js$/gi] // skip pre-minified libs
+      exclude: [/\.min\.js$/gi], // Skip pre-minified libs
     }),
     new webpack.optimize.AggressiveMergingPlugin(), // Merge chunks
     new webpack.optimize.CommonsChunkPlugin({
