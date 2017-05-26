@@ -29,7 +29,7 @@ module.exports = {
         use: 'babel-loader',
       },
       {
-        test: /\.(png|jpg)$/,
+        test: /\.(png|jpg|json)$/,
         use: 'file-loader',
       },
     ],
