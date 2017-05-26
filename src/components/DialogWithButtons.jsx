@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import TextField from 'material-ui/TextField';
-import {
-  Dialog,
+import Dialog, {
   DialogActions,
   DialogContent,
   DialogContentText,
@@ -32,7 +32,7 @@ const styles = {
   },
 };
 
-class DialogWithButtons extends React.Component {
+class DialogWithButtons extends Component {
   // Here we specify which props the component requires. This is especially useful in larger
   // projects. When someone else uses your component and if they forget to pass a required prop,
   // React will warn the developer through the console.

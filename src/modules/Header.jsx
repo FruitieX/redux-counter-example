@@ -5,12 +5,12 @@ import React from 'react';
 
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import Divider from 'material-ui/Divider';
 import Icon from 'material-ui/Icon';
 
-import { Menu } from 'material-ui/Menu';
+import Menu from 'material-ui/Menu';
 import { ListItem, ListItemText, ListItemIcon } from 'material-ui/List';
 
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -19,7 +19,7 @@ import { withRouter } from 'react-router';
 
 import { connect } from 'react-redux';
 
-import { push } from 'connected-react-router';
+import { push } from 'react-router-redux';
 
 import { toggleDrawer } from './NavigationDrawer';
 import routes from '../utils/routes';
@@ -148,13 +148,13 @@ export default class Header extends React.Component {
           >
             menu
           </IconButton>
-          <Text
+          <Typography
             style={{ flex: 1 }}
             type="title"
             colorInherit
           >
             <FormattedMessage id={getTitle(path)} />
-          </Text>
+          </Typography>
           <IconButton
             contrast
             onClick={e => this.setState({

@@ -16,7 +16,7 @@ stack quickly:
 ### React
 
 * [react](https://facebook.github.io/react/), component based UI library
-* [react-router v4](https://github.com/ReactTraining/react-router/tree/v4), keep UI in sync with the URL
+* [react-router v4](https://github.com/ReactTraining/react-router), keep UI in sync with the URL
 * [material-ui@next](http://www.material-ui.com/), React components that implement Google's Material Design
 * [react-intl](https://github.com/yahoo/react-intl), internationalisation support
 
@@ -25,7 +25,7 @@ stack quickly:
 * [redux](http://redux.js.org/), predictable container for app state
 * [redux-thunk](https://github.com/gaearon/redux-thunk), async support for redux actions
 * [redux-api](https://github.com/lexich/redux-api), store REST API responses and status in redux
-* [connected-react-router](https://github.com/supasate/connected-react-router), sync router state with redux
+* [react-router-redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux), sync router state with redux
 * [redux-act](https://github.com/pauldijou/redux-act), use actions themselves as references inside reducers
 
 ### Misc

@@ -4,17 +4,17 @@
 import React, { Component } from 'react';
 
 import { FormattedMessage } from 'react-intl';
+import { push } from 'react-router-redux';
 
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 
 import Drawer from 'material-ui/Drawer';
 
-import {
-  List,
+import List, {
   ListItem,
   ListItemText,
   ListItemIcon,
@@ -65,10 +65,10 @@ const mapStateToProps = (state, ownProps) => ({
   user: state.auth.data.decoded,
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   changeView(view) {
     dispatch(closeDrawer());
-    ownProps.push(view.toLowerCase());
+    dispatch(push(view.toLowerCase()));
   },
   close() {
     dispatch(closeDrawer());
@@ -90,24 +90,23 @@ export default class NavigationDrawer extends Component {
         open={drawerOpened}
         onRequestClose={() => close()}
       >
-
         <AppBar
           style={{ position: 'relative' }}
         >
           <Toolbar>
             <IconButton
               contrast
-              onClick={() => closeDrawer()}
+              onClick={() => close()}
             >
               menu
             </IconButton>
-            <Text
+            <Typography
               style={{ flex: 1 }}
               type="title"
               colorInherit
             >
               <FormattedMessage id="navigation" />
-            </Text>
+            </Typography>
           </Toolbar>
         </AppBar>
 

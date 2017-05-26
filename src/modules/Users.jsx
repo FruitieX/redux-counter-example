@@ -6,8 +6,7 @@ import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 
 import Button from 'material-ui/Button';
-import {
-  Table,
+import Table, {
   TableBody,
   TableHead,
   TableRow,

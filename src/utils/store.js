@@ -1,7 +1,7 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { createBrowserHistory } from 'history';
-import { connectRouter, routerMiddleware } from 'connected-react-router';
+import createHistory from 'history/createBrowserHistory';
+import { routerMiddleware } from 'react-router-redux';
 import throttle from 'lodash/throttle';
 
 import { saveState, loadState } from './persist';
@@ -12,9 +12,9 @@ import { injectStore } from './rest';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-disable no-underscore-dangle */
 
-export const history = createBrowserHistory();
+export const history = createHistory();
 
-const store = createStore(connectRouter(history)(rootReducer), loadState(),
+const store = createStore(rootReducer, loadState(),
   composeEnhancers(
     applyMiddleware(
       routerMiddleware(history),

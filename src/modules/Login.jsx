@@ -13,7 +13,7 @@ import Icon from 'material-ui/Icon';
 import { LinearProgress } from 'material-ui/Progress';
 
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { replace } from 'react-router-redux';
 import { updateIntl } from 'react-intl-redux';
 
 import CardWrapper from '../components/CardWrapper';
@@ -30,7 +30,7 @@ const mapStateToProps = (state, ownProps) => ({
     : '/',
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   doLogin(creds) {
     dispatch(rest.actions.auth({}, { body: JSON.stringify(creds) }));
 
@@ -43,11 +43,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     }
   },
   redirect(path) {
-    ownProps.replace(path);
+    dispatch(replace(path));
   },
 });
 
-@withRouter
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Login extends React.Component {
   state = {
@@ -56,6 +55,7 @@ export default class Login extends React.Component {
   };
 
   componentDidMount() {
+    // FIXME: omg hax
     document.querySelector('input').focus();
   }
 
@@ -69,13 +69,14 @@ export default class Login extends React.Component {
   }
 
   authSuccess() {
-    let redirect = this.props.redirectPath;
+    const { redirect } = this.props;
+    let path = this.props.redirectPath;
 
-    if (!redirect || redirect === '/logout') {
-      redirect = '/';
+    if (!path || path === '/logout') {
+      path = '/';
     }
 
-    this.props.redirect(redirect);
+    redirect(path);
   }
 
   handleChange(event, field) {
@@ -101,7 +102,7 @@ export default class Login extends React.Component {
               </Avatar>
             }
             title="frontend-hipster-kit"
-            subhead="Please log in:"
+            subheader="Please log in:"
           />
           <CardContent>
             <TextField

@@ -1,6 +1,8 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router';
+import { Route } from 'react-router-dom';
 
 /*
 Configure all your app's routes here.
@@ -86,49 +88,55 @@ export const RouteConfigShape = PropTypes.shape({
   name: PropTypes.string.isRequired,
   component: PropTypes.func.isRequired,
   icon: PropTypes.string.isRequired,
-  requiresLogin: PropTypes.bool.isRequired,
+  requiresLogin: PropTypes.bool,
   showHeader: PropTypes.bool,
 });
 
 // Takes a routeConfig and wraps it in react-router's <Route> component.
 // If requiresLogin is true, redirect to /login if user has not authenticated
-let AuthRedirectRoute = ({ loggedIn, routeConfig, ...rest }) => (
-  <Route
-    {...rest}
-    exact path={routeConfig.path}
-    render={props => (
-    routeConfig.requiresLogin && !loggedIn ? (
-      <Redirect
-        to={{
-          pathname: '/login',
-          state: { from: props.location },
-        }}
+
+// Must supply pathname here to avoid this:
+// https://reacttraining.com/react-router/web/guides/dealing-with-update-blocking
+const mapStateToProps = state => ({
+  pathname: state.router.location.pathname,
+  loggedIn: !!state.auth.data.token,
+});
+
+@connect(mapStateToProps)
+class AuthRedirectRoute extends Component {
+  static propTypes = {
+    loggedIn: PropTypes.bool,
+    requiresLogin: PropTypes.bool,
+    component: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    loggedIn: false,
+    requiresLogin: false,
+  };
+
+  render() {
+    const { component: ChildComponent, loggedIn, requiresLogin, ...rest } = this.props;
+
+    return (
+      <Route
+        {...rest}
+        render={props => (
+          !requiresLogin || loggedIn ? (
+            <ChildComponent {...props} />
+          ) : (
+            <Redirect
+              to={{
+                pathname: '/login',
+                state: { from: props.location },
+              }}
+            />
+          )
+        )}
       />
-    ) : (
-      <div>
-        { React.createElement(routeConfig.component, props) }
-      </div>
-    )
-  )}
-  />
-);
-
-AuthRedirectRoute.propTypes = {
-  loggedIn: PropTypes.bool.isRequired,
-  routeConfig: RouteConfigShape.isRequired,
-  location: PropTypes.string,
-};
-
-AuthRedirectRoute.defaultProps = {
-  location: null,
-};
-
-// Connect AuthRedirectRoute to redux store, get loggedIn status
-AuthRedirectRoute = connect(
-  state => ({
-    loggedIn: !!state.auth.data.token,
-  }),
-)(AuthRedirectRoute);
+    );
+  }
+}
 
 // AuthRedirectRoute wrapper which mounts routeConfig at '/' regardless of configured path
 export const IndexRoute = ({ routeConfig, ...rest }) => {
@@ -139,8 +147,9 @@ export const IndexRoute = ({ routeConfig, ...rest }) => {
 
   return (
     <AuthRedirectRoute
+      exact
       {...rest}
-      routeConfig={indexRoute}
+      {...indexRoute}
     />
   );
 };
@@ -155,11 +164,16 @@ export const ConfiguredRoutes = ({ ...rest }) => (
     {
       routeConfigs.map(routeConfig => (
         <AuthRedirectRoute
-          {...rest}
           key={routeConfig.path}
-          routeConfig={routeConfig}
+          {...routeConfig}
+          {...rest}
         />
       ))
     }
   </div>
 );
+
+// Check that routeConfigs array is a valid RouteConfigShape
+PropTypes.checkPropTypes({
+  routeConfigs: PropTypes.arrayOf(RouteConfigShape).isRequired,
+}, { routeConfigs }, 'prop', 'routeConfigs');

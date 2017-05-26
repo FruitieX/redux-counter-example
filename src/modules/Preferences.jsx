@@ -4,9 +4,9 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
 
-import { List, ListItem, ListItemText } from 'material-ui/List';
-import { Menu, MenuItem } from 'material-ui/Menu';
-import Text from 'material-ui/Text';
+import List, { ListItem, ListItemText } from 'material-ui/List';
+import Menu, { MenuItem } from 'material-ui/Menu';
+import Typography from 'material-ui/Typography';
 
 import Button from 'material-ui/Button';
 
@@ -74,7 +74,7 @@ export default class Preferences extends React.Component {
       <CardWrapper>
         <ResponsiveCard>
           <CardContent>
-            <Text type="headline">{formatMessage({ id: 'language' })}</Text>
+            <Typography type="headline">{formatMessage({ id: 'language' })}</Typography>
             <List>
               <ListItem
                 button
@@ -115,8 +115,8 @@ export default class Preferences extends React.Component {
             </Menu>
           </CardContent>
           <CardContent>
-            <Text type="headline">{formatMessage({ id: 'resetState' })}</Text>
-            <Text>{formatMessage({ id: 'resetStateExplanation' })}</Text>
+            <Typography type="headline">{formatMessage({ id: 'resetState' })}</Typography>
+            <Typography>{formatMessage({ id: 'resetStateExplanation' })}</Typography>
           </CardContent>
           <CardContent>
             <Button
