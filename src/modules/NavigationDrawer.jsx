@@ -1,6 +1,3 @@
-// Disable prop type checking in modules
-/* eslint-disable react/prop-types */
-
 import React, { Component } from 'react';
 
 import { FormattedMessage } from 'react-intl';

@@ -1,6 +1,3 @@
-// Disable prop type checking in modules
-/* eslint-disable react/prop-types */
-
 import React from 'react';
 
 import Button from 'material-ui/Button';
