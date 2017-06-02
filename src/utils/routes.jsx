@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
+import { Redirect, withRouter } from 'react-router';
 import { Route } from 'react-router-dom';
 
 /*
@@ -92,16 +92,16 @@ export const RouteConfigShape = PropTypes.shape({
   showHeader: PropTypes.bool,
 });
 
-// Takes a routeConfig and wraps it in react-router's <Route> component.
-// If requiresLogin is true, redirect to /login if user has not authenticated
-
-// Must supply pathname here to avoid this:
-// https://reacttraining.com/react-router/web/guides/dealing-with-update-blocking
 const mapStateToProps = state => ({
-  pathname: state.router.location.pathname,
   loggedIn: !!state.auth.data.token,
 });
 
+// Takes a routeConfig and wraps it in react-router's <Route> component.
+// If requiresLogin is true, redirect to /login if user has not authenticated
+
+// Must wrap in withRouter here to avoid this:
+// https://reacttraining.com/react-router/web/guides/dealing-with-update-blocking
+@withRouter
 @connect(mapStateToProps)
 class AuthRedirectRoute extends React.Component {
   static propTypes = {
