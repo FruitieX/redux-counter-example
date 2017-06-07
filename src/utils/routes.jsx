@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 /*
 Configure all your app's routes here.
