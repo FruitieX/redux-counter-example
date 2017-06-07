@@ -160,7 +160,7 @@ IndexRoute.propTypes = {
 
 // Map all configured routes into AuthRedirectRoute components
 export const ConfiguredRoutes = ({ ...rest }) => (
-  <div>
+  <Switch>
     {
       routeConfigs.map(routeConfig => (
         <AuthRedirectRoute
@@ -170,7 +170,8 @@ export const ConfiguredRoutes = ({ ...rest }) => (
         />
       ))
     }
-  </div>
+    <Redirect to={{ pathname: '/' }} />
+  </Switch>
 );
 
 // Check that routeConfigs array is a valid RouteConfigShape
