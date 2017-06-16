@@ -66,7 +66,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      title: 'frontend-hipster-kit',
+      title: 'frontend-kit',
       favicon: 'assets/favicon.ico',
       template: 'webpack/template.html',
     }),

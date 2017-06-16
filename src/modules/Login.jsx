@@ -98,7 +98,7 @@ export default class Login extends React.Component {
                 <Icon>account_circle</Icon>
               </Avatar>
             }
-            title="frontend-hipster-kit"
+            title="frontend-kit"
             subheader="Please log in:"
           />
           <CardContent>

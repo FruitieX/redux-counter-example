@@ -1,5 +1,5 @@
 {
-  "name": "frontend-hipster-kit",
+  "name": "frontend-kit",
   "version": "1.0.0",
   "description": "Get started with frontend development",
   "scripts": {
@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --open --config webpack/webpack.config.dev.js",
     "start-nobrowser": "webpack-dev-server --config webpack/webpack.config.dev.js",
     "build": "rm -rf dist && webpack --config webpack/webpack.config.prod.js && cp -a assets/200.html dist/",
-    "deploy": "rm -rf dist && webpack --config webpack/webpack.config.prod.js  && cp -a assets/200.html dist/ && surge ./dist --domain https://frontend-hipster-kit.surge.sh",
+    "deploy": "rm -rf dist && webpack --config webpack/webpack.config.prod.js  && cp -a assets/200.html dist/ && surge ./dist --domain https://frontend-kit.surge.sh",
     "prod": "serve ./dist -s",
     "lint": "eslint --ext .jsx --ext .js src",
     "lint:fix": "eslint --ext .jsx --ext .js --fix src",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FruitieX/frontend-hipster-kit.git"
+    "url": "git+https://github.com/FruitieX/frontend-kit.git"
   },
   "keywords": [
     "react",
@@ -26,9 +26,9 @@
   "author": "FruitieX",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/FruitieX/frontend-hipster-kit/issues"
+    "url": "https://github.com/FruitieX/frontend-kit/issues"
   },
-  "homepage": "https://github.com/FruitieX/frontend-hipster-kit#readme",
+  "homepage": "https://github.com/FruitieX/frontend-kit#readme",
   "devDependencies": {
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.0.0",

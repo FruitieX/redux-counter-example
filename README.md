@@ -1,4 +1,4 @@
-# frontend-hipster-kit
+# frontend-kit
 
 ## Documentation
 

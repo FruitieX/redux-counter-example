@@ -44,7 +44,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
-      title: 'frontend-hipster-kit',
+      title: 'frontend-kit',
       favicon: 'assets/favicon.ico',
       template: 'webpack/template.html',
     }),
