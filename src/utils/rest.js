@@ -102,7 +102,10 @@ const rest = reduxApi({
 
     // error description
     msg += err.message ? `: ${err.message}` : '';
-    store.dispatch(showError(msg));
+    store.dispatch(showError({
+      msg,
+      details: JSON.stringify(err, Object.getOwnPropertyNames(err), 4),
+    }));
 
     throw err;
   }

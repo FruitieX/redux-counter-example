@@ -1,9 +1,15 @@
 import React from 'react';
 
-// Snackbar component not yet available in material-ui@next
-/* eslint-disable import/no-extraneous-dependencies */
-import Snackbar from 'material-ui-old/Snackbar';
-/* eslint-enable import/no-extraneous-dependencies */
+import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
+import Icon from 'material-ui/Icon';
+import Snackbar from 'material-ui/Snackbar';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
 
 import { connect } from 'react-redux';
 import {
@@ -21,8 +27,10 @@ export default class ErrorSnackbar extends React.Component {
     super();
     this.state = {
       open: false,
+      detailsOpen: false,
       id: -1,
-      message: '',
+      msg: '',
+      details: '',
     };
   }
 
@@ -30,27 +38,87 @@ export default class ErrorSnackbar extends React.Component {
     if (nextProps.err.id !== this.state.id) {
       this.setState({
         open: true,
-        message: nextProps.err.msg,
+        msg: nextProps.err.msg,
+        details: nextProps.err.details,
         id: nextProps.err.id,
       });
     }
   }
 
-  handleRequestClose = () => {
+  handleRequestClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
     this.setState({
       open: false,
     });
   };
 
-  render() {
-    const { open, message } = this.state;
+  openDetails = () => {
+    this.setState({
+      detailsOpen: true,
+    });
+  };
 
-    return (<Snackbar
+  closeDetails = () => {
+    this.setState({
+      detailsOpen: false,
+    });
+  };
+
+  renderSnackbar = (open, msg) => (
+    <Snackbar
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'left',
+      }}
       open={open}
-      message={message}
-      autoHideDuration={4000}
+      autoHideDuration={6000}
+      contentProps={{
+        'aria-describedby': 'error-snackbar',
+      }}
+      message={<span id="error-snackbar">{ msg }</span>}
       onRequestClose={this.handleRequestClose}
-    />);
+      action={[
+        <Button key="undo" color="accent" compact onClick={this.openDetails}>
+          DETAILS
+        </Button>,
+        <IconButton
+          key="close"
+          aria-label="Close"
+          color="inherit"
+          onClick={this.handleRequestClose}
+        >
+          <Icon color="inherit">close</Icon>
+        </IconButton>,
+      ]}
+    />
+  );
+
+  renderDetails = (open, msg) => (
+    <Dialog open={open} onRequestClose={this.closeDetails}>
+      <DialogTitle>{'Error details'}</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          { msg }
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={this.closeDetails} color="primary">Dismiss</Button>
+      </DialogActions>
+    </Dialog>
+  );
+
+  render() {
+    const { open, msg, detailsOpen, details } = this.state;
+
+    return (
+      <div>
+        { this.renderSnackbar(open, msg) }
+        { this.renderDetails(detailsOpen, details) }
+      </div>
+    );
   }
 }
 
@@ -59,14 +127,16 @@ export const showError = createAction('Show error message');
 
 // Initial state
 const initialState = {
-  err: '',
+  msg: null,
+  details: {},
   id: -1,
 };
 
 // Reducer
 export const reducer = createReducer({
   [showError]: (state, payload) => ({
-    msg: payload,
+    msg: payload.msg,
+    details: payload.details,
     id: state.id + 1,
   }),
 }, initialState);
