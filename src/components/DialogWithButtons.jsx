@@ -115,7 +115,7 @@ class DialogWithButtons extends React.Component {
     if (cancelAction) {
       actions.push(
         <Button
-          primary
+          color="primary"
           key="cancel"
           onClick={close}
         >
@@ -126,7 +126,7 @@ class DialogWithButtons extends React.Component {
 
     actions.push(
       <Button
-        primary
+        color="primary"
         key="submit"
         disabled={(textField && !this.state.value) || (imageUpload && !this.state.file)}
         onClick={() => {

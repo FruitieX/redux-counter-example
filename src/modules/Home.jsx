@@ -52,8 +52,8 @@ const Home = () => (
         </Typography>
       </CardContent>
       <CardActions>
-        <Button compact primary>Share</Button>
-        <Button compact primary>Learn More</Button>
+        <Button compact color="primary">Share</Button>
+        <Button compact color="primary">Learn More</Button>
       </CardActions>
     </ResponsiveCard>
 
@@ -74,8 +74,8 @@ const Home = () => (
         </Typography>
       </CardContent>
       <CardActions>
-        <Button compact primary>Share</Button>
-        <Button compact primary>Learn More</Button>
+        <Button compact color="primary">Share</Button>
+        <Button compact color="primary">Learn More</Button>
       </CardActions>
     </ResponsiveCard>
   </CardWrapper>

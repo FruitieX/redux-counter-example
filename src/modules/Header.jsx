@@ -140,7 +140,7 @@ export default class Header extends React.Component {
       >
         <Toolbar>
           <IconButton
-            contrast
+            color="contrast"
             onClick={() => doToggleDrawer()}
           >
             menu
@@ -148,12 +148,12 @@ export default class Header extends React.Component {
           <Typography
             style={{ flex: 1 }}
             type="title"
-            colorInherit
+            color="inherit"
           >
             <FormattedMessage id={getTitle(path)} />
           </Typography>
           <IconButton
-            contrast
+            color="contrast"
             onClick={e => this.setState({
               rightMenuAnchorEl: e.currentTarget,
               rightMenuOpen: true,

@@ -143,7 +143,7 @@ export default class Login extends React.Component {
               style={{
                 width: '100%',
               }}
-              primary
+              color="primary"
               onClick={() =>
                 this.props.doLogin({ email: this.state.email, password: this.state.password })
               }

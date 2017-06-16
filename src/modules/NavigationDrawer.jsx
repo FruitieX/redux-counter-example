@@ -92,7 +92,7 @@ export default class NavigationDrawer extends React.Component {
         >
           <Toolbar>
             <IconButton
-              contrast
+              color="contrast"
               onClick={() => close()}
             >
               menu
@@ -100,7 +100,7 @@ export default class NavigationDrawer extends React.Component {
             <Typography
               style={{ flex: 1 }}
               type="title"
-              colorInherit
+              color="inherit"
             >
               <FormattedMessage id="navigation" />
             </Typography>

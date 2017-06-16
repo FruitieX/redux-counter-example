@@ -118,7 +118,7 @@ export default class Preferences extends React.Component {
           <CardContent>
             <Button
               raised
-              accent
+              color="accent"
               onClick={doClearState}
             >
               {formatMessage({ id: 'resetStateButton' })}

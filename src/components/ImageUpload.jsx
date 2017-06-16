@@ -52,7 +52,7 @@ class ImageUpload extends React.Component {
         <div>
           <Button
             raised
-            primary
+            color="primary"
             onClick={() => this.fileUpload.click()}
           >
             {this.props.label}

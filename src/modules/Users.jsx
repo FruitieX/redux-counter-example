@@ -114,7 +114,7 @@ export default class Users extends React.Component {
                   <TableCell>{user.email}</TableCell>
                   <TableCell numeric>
                     <Button
-                      primary
+                      color="primary"
                       onClick={() => {
                         refreshUser(user);
                         this.setState({ dialogOpen: true });
