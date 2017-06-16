@@ -3,7 +3,7 @@ import React from 'react';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 
-import { CardActions, CardHeader, CardContent } from 'material-ui/Card';
+import Card, { CardActions, CardHeader, CardContent } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import Icon from 'material-ui/Icon';
 
@@ -13,8 +13,7 @@ import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import { updateIntl } from 'react-intl-redux';
 
-import CardWrapper from '../components/CardWrapper';
-import ResponsiveCard from '../components/ResponsiveCard';
+import CardGridWrapper from '../components/CardGridWrapper';
 
 import { getLocaleForUser, languages } from '../utils/intl';
 import rest from '../utils/rest';
@@ -51,11 +50,6 @@ export default class Login extends React.Component {
     password: '',
   };
 
-  componentDidMount() {
-    // FIXME: omg hax
-    document.querySelector('input').focus();
-  }
-
   shouldComponentUpdate(props) {
     if (props.auth.data && props.auth.data.token) {
       this.authSuccess();
@@ -90,8 +84,8 @@ export default class Login extends React.Component {
     const progress = loading ? <LinearProgress /> : null;
 
     return (
-      <CardWrapper>
-        <ResponsiveCard style={{ maxWidth: 360 }}>
+      <CardGridWrapper>
+        <Card>
           <CardHeader
             avatar={
               <Avatar style={{ backgroundColor: theme.palette.primary[500] }}>
@@ -103,7 +97,6 @@ export default class Login extends React.Component {
           />
           <CardContent>
             <TextField
-              ref={(c) => { this.email = c; }}
               type="text"
               label="Email"
               onChange={(event) => {
@@ -115,6 +108,9 @@ export default class Login extends React.Component {
                 if (event.keyCode === 13) {
                   this.props.doLogin({ email: this.state.email, password: this.state.password });
                 }
+              }}
+              inputProps={{
+                autoFocus: true,
               }}
             />
             <TextField
@@ -152,8 +148,8 @@ export default class Login extends React.Component {
             </Button>
           </CardActions>
           {progress}
-        </ResponsiveCard>
-      </CardWrapper>
+        </Card>
+      </CardGridWrapper>
     );
   }
 }

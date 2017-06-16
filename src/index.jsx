@@ -60,16 +60,12 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const style = {
-  appContainer: {
-    height: '100vh',
-    overflow: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-  },
   viewContainer: {
+    /*
     flex: 1,
     overflowY: 'auto',
     WebkitOverflowScrolling: 'touch',
+    */
   },
 };
 

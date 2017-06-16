@@ -7,7 +7,7 @@ import Typography from 'material-ui/Typography';
 
 import Button from 'material-ui/Button';
 
-import {
+import Card, {
   CardContent,
 } from 'material-ui/Card';
 
@@ -18,9 +18,7 @@ import { clearState } from '../utils/persist';
 
 import { languages, storeLocaleForUser } from '../utils/intl';
 
-import CardWrapper from '../components/CardWrapper';
-import ResponsiveCard from '../components/ResponsiveCard';
-
+import CardGridWrapper from '../components/CardGridWrapper';
 
 const mapStateToProps = state => ({
   activeLanguage: state.intl.locale,
@@ -68,8 +66,8 @@ export default class Preferences extends React.Component {
     } = this.props;
 
     return (
-      <CardWrapper>
-        <ResponsiveCard>
+      <CardGridWrapper>
+        <Card>
           <CardContent>
             <Typography type="headline">{formatMessage({ id: 'language' })}</Typography>
             <List>
@@ -124,8 +122,8 @@ export default class Preferences extends React.Component {
               {formatMessage({ id: 'resetStateButton' })}
             </Button>
           </CardContent>
-        </ResponsiveCard>
-      </CardWrapper>
+        </Card>
+      </CardGridWrapper>
     );
   }
 }
