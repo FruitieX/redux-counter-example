@@ -6,7 +6,7 @@ import Card from 'material-ui/Card';
 import theme from '../utils/theme';
 
 const cardStyles = {
-  margin: theme.spacing.desktopGutter,
+  margin: theme.spacing.unit,
   flex: 1,
   flexBasis: 380,
 };

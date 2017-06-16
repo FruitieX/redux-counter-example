@@ -10,12 +10,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import createMuiTheme from 'material-ui/styles/theme';
 
-// Old material-ui
-/* eslint-disable import/no-extraneous-dependencies */
-import LegacyMuiThemeProvider from 'material-ui-old/styles/MuiThemeProvider';
-import legacyGetMuiTheme from 'material-ui-old/styles/getMuiTheme';
-/* eslint-enable import/no-extraneous-dependencies */
-
 import { IntlProvider } from 'react-intl-redux';
 
 import ErrorSnackbar from './modules/ErrorSnackbar';
@@ -28,7 +22,6 @@ import store, { history } from './utils/store';
 import theme from './utils/theme';
 
 const muiTheme = createMuiTheme(theme);
-const legacyMuiTheme = legacyGetMuiTheme({ palette: theme.legacyPalette, spacing: theme.spacing });
 
 // Needed for onClick
 // http://stackoverflow.com/a/34015469/988941
@@ -82,25 +75,23 @@ const style = {
 
 const Root = () => (
   <Provider store={store}>
-    <LegacyMuiThemeProvider muiTheme={legacyMuiTheme}>
-      <MuiThemeProvider theme={muiTheme}>
-        <IntlProvider>
-          <ConnectedRouter history={history}>
-            <div>
-              <NavigationDrawer />
-              <Header />
+    <MuiThemeProvider theme={muiTheme}>
+      <IntlProvider>
+        <ConnectedRouter history={history}>
+          <div>
+            <NavigationDrawer />
+            <Header />
 
-              <div style={style.viewContainer}>
-                <IndexRoute routeConfig={routeConfigs[0]} />
-                <ConfiguredRoutes />
+            <div style={style.viewContainer}>
+              <IndexRoute routeConfig={routeConfigs[0]} />
+              <ConfiguredRoutes />
 
-                <ErrorSnackbar />
-              </div>
+              <ErrorSnackbar />
             </div>
-          </ConnectedRouter>
-        </IntlProvider>
-      </MuiThemeProvider>
-    </LegacyMuiThemeProvider>
+          </div>
+        </ConnectedRouter>
+      </IntlProvider>
+    </MuiThemeProvider>
   </Provider>
 );
 

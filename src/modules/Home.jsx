@@ -21,7 +21,7 @@ const styles = {
   chilicornHeader: {
     height: 240,
     background: `url(${chilicorn})`,
-    backgroundColor: theme.legacyPalette.primary3Color,
+    backgroundColor: theme.palette.primary[100],
     backgroundSize: 'contain',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',

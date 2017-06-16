@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Get started with frontend development",
   "scripts": {
-    "postinstall": "niv material-ui@0.18.3 -d material-ui-old",
     "start": "webpack-dev-server --open --config webpack/webpack.config.dev.js",
     "start-nobrowser": "webpack-dev-server --config webpack/webpack.config.dev.js",
     "build": "rm -rf dist && webpack --config webpack/webpack.config.prod.js && cp -a assets/200.html dist/",

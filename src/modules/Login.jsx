@@ -134,7 +134,7 @@ export default class Login extends React.Component {
           </CardContent>
           <CardActions
             style={{
-              margin: theme.spacing.desktopGutter,
+              margin: theme.spacing.unit,
               marginTop: '0px',
             }}
           >

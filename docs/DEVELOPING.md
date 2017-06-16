@@ -5,18 +5,17 @@
 ### material-ui
 
 The [material-ui](https://github.com/callemall/material-ui) library is being rewritten for its next
-major version. At the time of writing this document, this rewrite is in alpha stage, and from my
-experience has better UX than the old version. We use the alpha version (from next branch) by default.
+major version. The stable branch
+[no longer receives new features](https://github.com/callemall/material-ui/blob/master/ROADMAP.md),
+and with the rewrite already proving quite useful, this template has switched over to the rewritten
+version (`@next`).
 
-The rewrite is available in the [next branch](https://github.com/callemall/material-ui/tree/next) or
-`@next` npm tag. **In order to import components from the `next` branch of material-ui, use `import
-material-ui/...`** Documentation for next branch components is available here at the time of
-writing: https://material-ui-1dab0.firebaseapp.com
+For documentation, please refer to the docs on `@next` components,
+[available here](https://material-ui-1dab0.firebaseapp.com)
 
-All components have not been migrated/rewritten yet, but luckily we can use these few components
-from the old stable version alongside the next version. **In order to import from the stable
-material-ui version, use `import material-ui-old/...`**. Stable documentation available at:
-http://www.material-ui.com
+The rewrite is being worked on in the
+[next branch](https://github.com/callemall/material-ui/tree/next), available under the `@next` npm
+tag.
 
 ## How do I:
 

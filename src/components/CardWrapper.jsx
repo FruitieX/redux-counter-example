@@ -7,7 +7,7 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    padding: theme.spacing.desktopGutter,
+    padding: theme.spacing.unit,
   },
 };
 
