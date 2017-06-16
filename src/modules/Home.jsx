@@ -27,8 +27,11 @@ const styles = {
     backgroundRepeat: 'no-repeat',
   },
   loremHeader: {
-    objectFit: 'cover',
     height: 240,
+    background: `url(${placeholder})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    objectFit: 'cover',
     width: '100%',
   },
 };
@@ -59,7 +62,7 @@ const Home = () => (
 
     <ResponsiveCard>
       <CardMedia>
-        <img src={placeholder} alt="Placeholder" style={styles.loremHeader} />
+        <div style={styles.loremHeader} />
       </CardMedia>
       <CardContent>
         <Typography type="headline" component="h2">Title 2</Typography>

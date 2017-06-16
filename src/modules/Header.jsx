@@ -135,9 +135,7 @@ export default class Header extends React.Component {
     );
 
     return (
-      <AppBar
-        style={{ position: 'relative' }}
-      >
+      <AppBar position="static" >
         <Toolbar>
           <IconButton
             color="contrast"

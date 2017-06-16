@@ -87,9 +87,7 @@ export default class NavigationDrawer extends React.Component {
         open={drawerOpened}
         onRequestClose={() => close()}
       >
-        <AppBar
-          style={{ position: 'relative' }}
-        >
+        <AppBar position="static">
           <Toolbar>
             <IconButton
               color="contrast"

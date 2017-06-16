@@ -1,6 +1,6 @@
 import createPalette from 'material-ui/styles/palette';
 import {
-  blue,
+  lightGreen,
   orange,
   red,
 } from 'material-ui/styles/colors';
@@ -13,7 +13,7 @@ export default {
 
   // App color palette
   palette: createPalette({
-    primary: blue,
+    primary: lightGreen,
     accent: orange,
     error: red,
     type: 'light',
