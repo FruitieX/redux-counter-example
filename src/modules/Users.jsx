@@ -10,6 +10,7 @@ import Table, {
   TableCell,
 } from 'material-ui/Table';
 
+import { LinearProgress } from 'material-ui/Progress';
 import Icon from 'material-ui/Icon';
 
 import { DialogContentText } from 'material-ui/Dialog';
@@ -38,6 +39,7 @@ import rest from '../utils/rest';
 
 const mapStateToProps = state => ({
   users: state.users,
+  usersLoading: state.users.loading,
   userDetails: state.userDetails,
 });
 
@@ -64,6 +66,16 @@ export default class Users extends React.Component {
     const { refresh } = this.props;
 
     refresh();
+  }
+
+  renderProgressBar() {
+    const { usersLoading } = this.props;
+    return usersLoading
+      ? (
+        <div style={{ marginBottom: '-5px' }}>
+          <LinearProgress />
+        </div>
+      ) : null;
   }
 
   render() {
@@ -96,6 +108,8 @@ export default class Users extends React.Component {
           submit={() => this.setState({ dialogOpen: false })}
           close={() => this.setState({ dialogOpen: false })}
         />
+
+        { this.renderProgressBar() }
 
         <Table>
           <TableHead>
