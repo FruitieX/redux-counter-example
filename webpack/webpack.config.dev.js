@@ -1,6 +1,7 @@
 const { resolve, join } = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 module.exports = {
   entry: [
@@ -47,6 +48,12 @@ module.exports = {
       title: 'frontend-kit',
       favicon: 'assets/favicon.ico',
       template: 'webpack/template.html',
+    }),
+    new CircularDependencyPlugin({
+      // exclude detection of files based on a RegExp
+      exclude: /node_modules/,
+      // add errors to webpack instead of warnings
+      failOnError: true
     }),
   ],
   performance: { hints: false },
