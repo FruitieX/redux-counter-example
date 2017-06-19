@@ -6,7 +6,6 @@ import { ConnectedRouter } from 'react-router-redux';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-// material-ui 'next' branch
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import createMuiTheme from 'material-ui/styles/theme';
 
@@ -59,16 +58,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const style = {
-  viewContainer: {
-    /*
-    flex: 1,
-    overflowY: 'auto',
-    WebkitOverflowScrolling: 'touch',
-    */
-  },
-};
-
 const Root = () => (
   <Provider store={store}>
     <MuiThemeProvider theme={muiTheme}>
@@ -78,12 +67,10 @@ const Root = () => (
             <NavigationDrawer />
             <Header />
 
-            <div style={style.viewContainer}>
-              <IndexRoute routeConfig={routeConfigs[0]} />
-              <ConfiguredRoutes />
+            <IndexRoute routeConfig={routeConfigs[0]} />
+            <ConfiguredRoutes />
 
-              <ErrorSnackbar />
-            </div>
+            <ErrorSnackbar />
           </div>
         </ConnectedRouter>
       </IntlProvider>
