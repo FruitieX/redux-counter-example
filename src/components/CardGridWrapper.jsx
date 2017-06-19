@@ -8,7 +8,7 @@ import withWidth, { isWidthDown } from 'material-ui/utils/withWidth';
 
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 
-const styleSheet = createStyleSheet('SimpleMediaCard', {
+const styleSheet = createStyleSheet('CardGridWrapper', {
   mobileContainer: {
     marginTop: 12,
     paddingBottom: 12,

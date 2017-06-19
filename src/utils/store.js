@@ -1,31 +1,24 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import createHistory from 'history/createBrowserHistory';
-import { routerMiddleware } from 'react-router-redux';
-import throttle from 'lodash/throttle';
+import { autoRehydrate } from 'redux-persist';
 
-import { saveState, loadState } from './persist';
 import rootReducer from './reducer';
+import middleware from './middleware';
 import { injectStore } from './rest';
 
-/* eslint-disable no-underscore-dangle */
+// eslint-disable-next-line no-underscore-dangle
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-/* eslint-disable no-underscore-dangle */
 
-export const history = createHistory();
-
-const store = createStore(rootReducer, loadState(),
+const store = createStore(
+  rootReducer,
+  undefined,
   composeEnhancers(
-    applyMiddleware(
-      routerMiddleware(history),
-      thunk,
-    ),
+    applyMiddleware(...middleware),
+    autoRehydrate(),
   ),
 );
-export default store;
 
 // this is to get rid of cyclic dependencies
 // TODO: better way?
 injectStore(store);
 
-store.subscribe(throttle(() => saveState(store.getState()), 1000));
+export default store;

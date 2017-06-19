@@ -14,7 +14,7 @@ import Card, {
 import { connect } from 'react-redux';
 import { updateIntl } from 'react-intl-redux';
 
-import { clearState } from '../utils/persist';
+import { reset } from './Logout';
 
 import { languages, storeLocaleForUser } from '../utils/intl';
 
@@ -34,10 +34,7 @@ const mapDispatchToProps = dispatch => ({
     }));
   },
   doClearState: () => {
-    clearState(true);
-
-    // reload app
-    location.reload();
+    dispatch(reset());
   },
 });
 

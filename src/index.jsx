@@ -17,9 +17,13 @@ import Header from './modules/Header';
 
 import routeConfigs, { IndexRoute, ConfiguredRoutes } from './utils/routes';
 
-import store, { history } from './utils/store';
+import store from './utils/store';
+import persistStore from './utils/persist';
+
+import { history } from './utils/middleware/router';
 import theme from './utils/theme';
 
+persistStore(store);
 const muiTheme = createMuiTheme(theme);
 
 // Needed for onClick
@@ -63,7 +67,7 @@ const Root = () => (
     <MuiThemeProvider theme={muiTheme}>
       <IntlProvider>
         <ConnectedRouter history={history}>
-          <div>
+          <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
             <NavigationDrawer />
             <Header />
 

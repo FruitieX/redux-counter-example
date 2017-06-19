@@ -1,51 +1,28 @@
+import { persistStore } from 'redux-persist';
+import { createBlacklistFilter } from 'redux-persist-transform-filter';
 import { reducers as restReducers } from './rest';
 
-export const saveState = (state) => {
-  try {
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem('state', serializedState);
-  } catch (err) {
-    console.warn(err);
-  }
-};
+/**
+ * Don't save or restore 'loading' flag in rest reducers.
+ *
+ * If the 'loading' flag is set even though there is no request in progress,
+ * redux-api will wait forever and never let us issue any further requests
+ * to the endpoint
+ */
+const apiLoadingFilters = Object.keys(restReducers).map(reducer =>
+  createBlacklistFilter(reducer, ['loading'], ['loading']));
 
-export const loadState = () => {
-  try {
-    const serializedState = localStorage.getItem('state');
-    if (serializedState === null) {
-      return undefined;
-    }
-
-    const state = JSON.parse(serializedState);
-
-    // Set 'loading' property to false for all REST endpoints.
-    // If the 'loading' flag is set even though there is no in flight API request,
-    // redux-api will wait forever and never let us issue any further API requests
-    // to that endpoint
-    Object.keys(restReducers).forEach((endpoint) => {
-      const endpointState = state[endpoint];
-
-      if (endpointState) {
-        endpointState.loading = false;
-      }
-    });
-
-    // Don't restore navigation state
-    state.router = undefined;
+const persistConfig = {
+  transforms: [
+    ...apiLoadingFilters,
+  ],
+  blacklist: [
+     // Don't restore navigation state
+    'router',
 
     // Clear any errors from previous app state
-    state.err = undefined;
-
-    return state;
-  } catch (err) {
-    return undefined;
-  }
+    'err',
+  ],
 };
 
-export const clearState = (everything) => {
-  if (everything) {
-    localStorage.clear();
-  } else {
-    localStorage.setItem('state', undefined);
-  }
-};
+export default store => persistStore(store, persistConfig);

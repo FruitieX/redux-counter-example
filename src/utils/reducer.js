@@ -6,6 +6,8 @@ import { reducer as intl } from './intl';
 import { reducer as err } from '../modules/ErrorSnackbar';
 import { reducers as restReducers } from './rest';
 
+import { reset } from '../modules/Logout';
+
 const reducers = {
   // Navigation drawer state
   drawer,
@@ -23,5 +25,13 @@ const reducers = {
   ...restReducers,
 };
 
-const rootReducer = combineReducers(reducers);
+const appReducer = combineReducers(reducers);
+const rootReducer = (state, action) => {
+  if (action.type === reset.getType()) {
+    return appReducer(undefined, action);
+  }
+
+  return appReducer(state, action);
+};
+
 export default rootReducer;
