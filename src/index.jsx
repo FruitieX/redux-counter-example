@@ -14,6 +14,7 @@ import { IntlProvider } from 'react-intl-redux';
 import ErrorSnackbar from './modules/ErrorSnackbar';
 import NavigationDrawer from './modules/NavigationDrawer';
 import Header from './modules/Header';
+import FullscreenSpinner from './components/FullscreenSpinner';
 
 import routeConfigs, { IndexRoute, ConfiguredRoutes } from './utils/routes';
 
@@ -23,7 +24,6 @@ import persistStore from './utils/persist';
 import { history } from './utils/middleware/router';
 import theme from './utils/theme';
 
-persistStore(store);
 const muiTheme = createMuiTheme(theme);
 
 // Needed for onClick
@@ -62,25 +62,50 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const Root = () => (
-  <Provider store={store}>
-    <MuiThemeProvider theme={muiTheme}>
-      <IntlProvider>
-        <ConnectedRouter history={history}>
-          <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-            <NavigationDrawer />
-            <Header />
+class Root extends React.Component {
+  state = { rehydrated: false };
 
-            <IndexRoute routeConfig={routeConfigs[0]} />
-            <ConfiguredRoutes />
+  componentWillMount() {
+    persistStore(store, () => this.setState({ rehydrated: true }));
+  }
 
-            <ErrorSnackbar />
-          </div>
-        </ConnectedRouter>
-      </IntlProvider>
-    </MuiThemeProvider>
-  </Provider>
-);
+  renderApp = () => (
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <NavigationDrawer />
+      <Header />
+
+      <IndexRoute routeConfig={routeConfigs[0]} />
+      <ConfiguredRoutes />
+
+      <ErrorSnackbar />
+    </div>
+  );
+
+  renderLoading = () => (
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <FullscreenSpinner />
+    </div>
+  );
+
+  render() {
+    const { rehydrated } = this.state;
+
+    return (
+      <MuiThemeProvider theme={muiTheme}>
+        <Provider store={store}>
+          <IntlProvider>
+            <ConnectedRouter history={history}>
+              { rehydrated
+                ? this.renderApp()
+                : this.renderLoading()
+              }
+            </ConnectedRouter>
+          </IntlProvider>
+        </Provider>
+      </MuiThemeProvider>
+    );
+  }
+}
 
 export default Root;
 

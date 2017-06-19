@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { CircularProgress } from 'material-ui/Progress';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import { createAction } from 'redux-act';
+
+import FullscreenSpinner from '../components/FullscreenSpinner';
 
 export const reset = createAction('Reset app state');
 
@@ -46,17 +47,6 @@ export default class Logout extends React.Component {
   };
 
   render() {
-    return (
-      <div
-        style={{
-          flex: 1,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <CircularProgress />
-      </div>
-    );
+    return <FullscreenSpinner />;
   }
 }

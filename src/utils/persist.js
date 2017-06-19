@@ -25,4 +25,4 @@ const persistConfig = {
   ],
 };
 
-export default store => persistStore(store, persistConfig);
+export default (store, callback) => persistStore(store, persistConfig, callback);
