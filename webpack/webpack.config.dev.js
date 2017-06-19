@@ -14,7 +14,7 @@ module.exports = {
     path: resolve(__dirname),
     publicPath: '/',
   },
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-source-map',
   devServer: {
     hot: true,
     host: '0.0.0.0',
