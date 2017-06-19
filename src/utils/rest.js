@@ -27,22 +27,6 @@ Information about request: `state.teams.error`, `state.teams.sync`, `state.teams
 */
 
 const rest = reduxApi({
-  auth: {
-    url: `${config.apiRoot}/users/authenticate`,
-    transformer: (data = {}) => {
-      if (data.token) {
-        return {
-          ...data,
-          decoded: jwtDecode(data.token),
-        };
-      }
-      return data;
-    },
-
-    options: {
-      method: 'POST',
-    },
-  },
   users: {
     url: `${config.apiRoot}/users`,
     transformer: transformers.array,
@@ -52,6 +36,7 @@ const rest = reduxApi({
     url: `${config.apiRoot}/users/:userId`,
     crud: true,
   },
+
   // Add more API endpoints here! Examples below:
 
   /*
@@ -73,6 +58,23 @@ const rest = reduxApi({
     crud: true,
   }
   */
+
+  auth: {
+    url: `${config.apiRoot}/users/authenticate`,
+    transformer: (data = {}) => {
+      if (data.token) {
+        return {
+          ...data,
+          decoded: jwtDecode(data.token),
+        };
+      }
+      return data;
+    },
+
+    options: {
+      method: 'POST',
+    },
+  },
 })
 .use('options', (url, params, getState) => {
   const { auth: { data: { token } } } = getState();

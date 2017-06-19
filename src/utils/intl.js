@@ -8,6 +8,7 @@ import { intlReducer } from 'react-intl-redux';
 import en from '../../translations/en';
 import fi from '../../translations/fi';
 
+// TODO: move these into redux?
 export const storeLocaleForUser = (user, locale) => localStorage.setItem(`locale#${user}`, locale);
 export const getLocaleForUser = user => localStorage.getItem(`locale#${user}`);
 

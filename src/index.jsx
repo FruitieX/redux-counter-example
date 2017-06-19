@@ -62,7 +62,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-class Root extends React.Component {
+export default class Root extends React.Component {
   state = { rehydrated: false };
 
   componentWillMount() {
@@ -106,7 +106,5 @@ class Root extends React.Component {
     );
   }
 }
-
-export default Root;
 
 if (!module.hot) render(<Root />, document.querySelector('react'));
