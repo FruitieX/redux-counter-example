@@ -2,7 +2,7 @@ import React from 'react';
 
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
-import Icon from 'material-ui/Icon';
+import CloseIcon from 'material-ui-icons/Close';
 import Snackbar from 'material-ui/Snackbar';
 import Dialog, {
   DialogActions,
@@ -90,7 +90,7 @@ export default class ErrorSnackbar extends React.Component {
           color="inherit"
           onClick={this.handleRequestClose}
         >
-          <Icon color="inherit">close</Icon>
+          <CloseIcon />
         </IconButton>,
       ]}
     />

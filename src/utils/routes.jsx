@@ -33,6 +33,13 @@ Routes may optionally contain the following keys:
     * null scope in array means unauthenticated.
 */
 
+// Icons
+import HomeIcon from 'material-ui-icons/Home';
+import UsersIcon from 'material-ui-icons/SupervisorAccount';
+import PreferencesIcon from 'material-ui-icons/Settings';
+import LoginIcon from 'material-ui-icons/AccountCircle';
+import LogoutIcon from 'material-ui-icons/ExitToApp';
+
 // Components
 import Home from '../modules/Home';
 import Users from '../modules/Users';
@@ -45,33 +52,33 @@ const routeConfigs = [{
   path: '/home',
   name: 'Home',
   component: Home,
-  icon: 'home',
+  icon: HomeIcon,
   requiresLogin: false,
 }, {
   path: '/users',
   name: 'Users',
   component: Users,
-  icon: 'supervisor_account',
+  icon: UsersIcon,
   separator: true,
   requiresLogin: true,
 }, {
   path: '/preferences',
   name: 'Preferences',
   component: Preferences,
-  icon: 'settings',
+  icon: PreferencesIcon,
   requiresLogin: true,
 }, {
   path: '/login',
   name: 'Login',
   component: Login,
-  icon: 'account_circle',
+  icon: LoginIcon,
   requiresLogin: false,
   hideWhenScope: ['user', 'admin'],
 }, {
   path: '/logout',
   name: 'Logout',
   component: Logout,
-  icon: 'exit_to_app',
+  icon: LogoutIcon,
   requiresLogin: false,
   hideWhenScope: [null],
 }];

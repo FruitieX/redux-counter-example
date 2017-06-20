@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField';
 
 import Card, { CardActions, CardHeader, CardContent } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
-import Icon from 'material-ui/Icon';
+import AccountCircleIcon from 'material-ui-icons/AccountCircle';
 
 import { LinearProgress } from 'material-ui/Progress';
 
@@ -89,7 +89,7 @@ export default class Login extends React.Component {
           <CardHeader
             avatar={
               <Avatar style={{ backgroundColor: theme.palette.primary[500] }}>
-                <Icon>account_circle</Icon>
+                <AccountCircleIcon />
               </Avatar>
             }
             title="frontend-kit"

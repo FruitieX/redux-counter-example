@@ -9,6 +9,10 @@ import Icon from 'material-ui/Icon';
 
 import Menu from 'material-ui/Menu';
 import { ListItem, ListItemText, ListItemIcon } from 'material-ui/List';
+import ExitToAppIcon from 'material-ui-icons/ExitToApp';
+import MenuIcon from 'material-ui-icons/Menu';
+import MoreVertIcon from 'material-ui-icons/MoreVert';
+import AccountCircleIcon from 'material-ui-icons/AccountCircle';
 
 import { FormattedMessage, injectIntl } from 'react-intl';
 
@@ -101,7 +105,7 @@ export default class Header extends React.Component {
           onClick={() => { hideMenu(); preferences(); }}
         >
           <ListItemIcon>
-            <Icon>account_circle</Icon>
+            <AccountCircleIcon />
           </ListItemIcon>
           <ListItemText primary={user.email} secondary={`Scope: ${user.scope}`} />
         </ListItem>
@@ -111,7 +115,7 @@ export default class Header extends React.Component {
           onClick={() => { hideMenu(); logout(); }}
         >
           <ListItemIcon>
-            <Icon>exit_to_app</Icon>
+            <ExitToAppIcon />
           </ListItemIcon>
           <ListItemText primary={formatMessage({ id: 'Logout' })} />
         </ListItem>
@@ -127,7 +131,7 @@ export default class Header extends React.Component {
           onClick={() => { hideMenu(); login(); }}
         >
           <ListItemIcon>
-            <Icon>account_circle</Icon>
+            <AccountCircleIcon />
           </ListItemIcon>
           <ListItemText primary={formatMessage({ id: 'Login' })} />
         </ListItem>
@@ -141,7 +145,7 @@ export default class Header extends React.Component {
             color="contrast"
             onClick={() => doToggleDrawer()}
           >
-            menu
+            <MenuIcon />
           </IconButton>
           <Typography
             style={{ flex: 1 }}
@@ -157,7 +161,7 @@ export default class Header extends React.Component {
               rightMenuOpen: true,
             })}
           >
-            more_vert
+            <MoreVertIcon />
           </IconButton>
           { rightMenu }
         </Toolbar>

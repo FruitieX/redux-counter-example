@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const autoprefixer = require('autoprefixer');
+const flexbugs = require('postcss-flexbugs-fixes');
 
 module.exports = {
   entry: [
@@ -77,7 +78,7 @@ module.exports = {
             options: {
               ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
               plugins: () => [
-                require('postcss-flexbugs-fixes'),
+                flexbugs,
                 autoprefixer({
                   browsers: [
                     '>1%',
@@ -112,7 +113,7 @@ module.exports = {
       // exclude detection of files based on a RegExp
       exclude: /node_modules/,
       // add errors to webpack instead of warnings
-      failOnError: true
+      failOnError: true,
     }),
   ],
   performance: { hints: false },

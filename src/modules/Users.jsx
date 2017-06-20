@@ -11,7 +11,7 @@ import Table, {
 } from 'material-ui/Table';
 
 import { LinearProgress } from 'material-ui/Progress';
-import Icon from 'material-ui/Icon';
+import ListIcon from 'material-ui-icons/List';
 
 import { DialogContentText } from 'material-ui/Dialog';
 import DialogWithButtons from '../components/DialogWithButtons';
@@ -134,7 +134,7 @@ export default class Users extends React.Component {
                         this.setState({ dialogOpen: true });
                       }}
                     >
-                      <Icon style={{ paddingRight: 10 }}>list</Icon>
+                      <ListIcon style={{ paddingRight: 10 }} />
                       {formatMessage({ id: 'showUserDetails' })}
                     </Button>
                   </TableCell>

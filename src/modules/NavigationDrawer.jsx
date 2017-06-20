@@ -7,7 +7,7 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
-import Icon from 'material-ui/Icon';
+import MenuIcon from 'material-ui-icons/Menu';
 
 import Drawer from 'material-ui/Drawer';
 
@@ -93,7 +93,7 @@ export default class NavigationDrawer extends React.Component {
               color="contrast"
               onClick={() => close()}
             >
-              menu
+              <MenuIcon />
             </IconButton>
             <Typography
               style={{ flex: 1 }}
@@ -115,6 +115,7 @@ export default class NavigationDrawer extends React.Component {
               }
 
               const scope = user ? user.scope : null;
+              const Icon = route.icon;
 
               if (isArray(route.hideWhenScope) && route.hideWhenScope.includes(scope)) {
                 return null;
@@ -130,7 +131,7 @@ export default class NavigationDrawer extends React.Component {
                     <ListItemIcon
                       style={active ? { color: theme.palette.primary[500] } : null}
                     >
-                      <Icon>{route.icon}</Icon>
+                      <Icon />
                     </ListItemIcon>
 
                     <ListItemText
