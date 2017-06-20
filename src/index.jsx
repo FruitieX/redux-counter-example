@@ -1,3 +1,5 @@
+import 'typeface-roboto';
+
 import Offline from 'offline-plugin/runtime';
 import React from 'react';
 import { Provider } from 'react-redux';
