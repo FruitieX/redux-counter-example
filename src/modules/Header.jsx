@@ -5,7 +5,6 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import Divider from 'material-ui/Divider';
-import Icon from 'material-ui/Icon';
 
 import Menu from 'material-ui/Menu';
 import { ListItem, ListItemText, ListItemIcon } from 'material-ui/List';

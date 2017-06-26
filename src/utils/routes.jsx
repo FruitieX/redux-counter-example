@@ -94,7 +94,7 @@ export const RouteConfigShape = PropTypes.shape({
   path: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   component: PropTypes.func.isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.func.isRequired,
   requiresLogin: PropTypes.bool,
   showHeader: PropTypes.bool,
 });

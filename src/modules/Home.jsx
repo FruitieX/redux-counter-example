@@ -13,8 +13,8 @@ import CardGridWrapper from '../components/CardGridWrapper';
 
 import theme from '../utils/theme';
 
-import chilicorn from '../../assets/chilicorn/chilicorn_no_text-256.png';
-import placeholder from '../../assets/placeholder.png';
+import chilicorn from '../assets/chilicorn/chilicorn_no_text-256.png';
+import placeholder from '../assets/placeholder.png';
 
 const styles = {
   chilicornHeader: {

@@ -17,8 +17,6 @@ import List, {
   ListItemIcon,
 } from 'material-ui/List';
 
-import isArray from 'lodash/isArray';
-
 import {
   createAction,
   createReducer,
@@ -117,7 +115,7 @@ export default class NavigationDrawer extends React.Component {
               const scope = user ? user.scope : null;
               const Icon = route.icon;
 
-              if (isArray(route.hideWhenScope) && route.hideWhenScope.includes(scope)) {
+              if (Array.isArray(route.hideWhenScope) && route.hideWhenScope.includes(scope)) {
                 return null;
               }
 

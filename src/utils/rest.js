@@ -1,11 +1,6 @@
-import 'isomorphic-fetch';
 import reduxApi, { transformers } from 'redux-api';
 import adapterFetch from 'redux-api/lib/adapters/fetch';
 import jwtDecode from 'jwt-decode';
-
-/* eslint-disable */
-import config from 'config';
-/* eslint-enable */
 
 import { showError } from '../modules/ErrorSnackbar';
 
@@ -26,14 +21,22 @@ Result of request can be found in: `state.teams.data`
 Information about request: `state.teams.error`, `state.teams.sync`, `state.teams.error`...
 */
 
+let apiRoot;
+
+if (process.env.NODE_ENV === 'development') {
+  apiRoot = 'http://localhost:3888';
+} else {
+  apiRoot = 'https://my-app.herokuapp.com';
+}
+
 const rest = reduxApi({
   users: {
-    url: `${config.apiRoot}/users`,
+    url: `${apiRoot}/users`,
     transformer: transformers.array,
     crud: true,
   },
   userDetails: {
-    url: `${config.apiRoot}/users/:userId`,
+    url: `${apiRoot}/users/:userId`,
     crud: true,
   },
 
@@ -42,25 +45,25 @@ const rest = reduxApi({
   /*
   // Endpoints which return an array (data defaults to [])
   teams: {
-    url: `${config.apiRoot}/teams`,
+    url: `${apiRoot}/teams`,
     transformer: transformers.array,
     crud: true,
   },
   companies: {
-    url: `${config.apiRoot}/companies`,
+    url: `${apiRoot}/companies`,
     transformer: transformers.array,
     crud: true,
   }
 
   // Endpoint which returns an object (data defaults to {})
   profile: {
-    url: `${config.apiRoot}/profile`,
+    url: `${apiRoot}/profile`,
     crud: true,
   }
   */
 
   auth: {
-    url: `${config.apiRoot}/users/authenticate`,
+    url: `${apiRoot}/users/authenticate`,
     transformer: (data = {}) => {
       if (data.token) {
         return {

@@ -1,24 +1,15 @@
 # Setup
 
-[yarn](https://github.com/yarnpkg/yarn) 0.18+ must be present on your machine.
-
 ### Install dependencies
 ```
-yarn
+npm install
 ```
 
 ### Start
 
 Run webpack-dev-server, get ready to code with hot reloading
 ```
-yarn start
-```
-
-# Share
-
-Share your localhost running app to anyone with an internet connection
-```
-yarn ngrok
+npm start
 ```
 
 ## Debugging

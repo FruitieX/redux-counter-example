@@ -95,7 +95,7 @@ export default class Login extends React.Component {
             title="frontend-kit"
             subheader="Please log in:"
           />
-          <CardContent>
+          <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
             <TextField
               type="text"
               label="Email"
@@ -112,6 +112,7 @@ export default class Login extends React.Component {
               inputProps={{
                 autoFocus: true,
               }}
+              marginForm
             />
             <TextField
               type="password"
@@ -126,6 +127,7 @@ export default class Login extends React.Component {
                   this.props.doLogin({ email: this.state.email, password: this.state.password });
                 }
               }}
+              marginForm
             />
           </CardContent>
           <CardActions

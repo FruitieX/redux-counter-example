@@ -6,12 +6,14 @@ import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 import { ConnectedRouter } from 'react-router-redux';
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
+// import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import createMuiTheme from 'material-ui/styles/theme';
 
 import { IntlProvider } from 'react-intl-redux';
+
+import './index.css';
 
 import ErrorSnackbar from './modules/ErrorSnackbar';
 import NavigationDrawer from './modules/NavigationDrawer';
@@ -30,12 +32,14 @@ const muiTheme = createMuiTheme(theme);
 
 // Needed for onClick
 // http://stackoverflow.com/a/34015469/988941
+/*
 try {
   injectTapEventPlugin();
 } catch (e) {
   // ignore errors
   // otherwise we break hot reloading
 }
+*/
 
 // offline-plugin: Apply updates immediately
 // https://github.com/NekR/offline-plugin/blob/master/docs/updates.md
@@ -64,7 +68,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-export default class Root extends React.Component {
+export default class App extends React.Component {
   state = { rehydrated: false };
 
   componentWillMount() {
@@ -109,4 +113,4 @@ export default class Root extends React.Component {
   }
 }
 
-if (!module.hot) render(<Root />, document.querySelector('react'));
+render(<App />, document.getElementById('root'));
