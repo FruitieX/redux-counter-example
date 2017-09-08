@@ -101,10 +101,7 @@ export default class App extends React.Component {
         <Provider store={store}>
           <IntlProvider>
             <ConnectedRouter history={history}>
-              { rehydrated
-                ? this.renderApp()
-                : this.renderLoading()
-              }
+              {rehydrated ? this.renderApp() : this.renderLoading()}
             </ConnectedRouter>
           </IntlProvider>
         </Provider>

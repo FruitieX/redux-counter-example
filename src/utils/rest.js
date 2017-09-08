@@ -6,7 +6,7 @@ import { showError } from '../modules/ErrorSnackbar';
 
 let store;
 
-export const injectStore = (_store) => {
+export const injectStore = _store => {
   store = _store;
 };
 
@@ -79,42 +79,44 @@ const rest = reduxApi({
     },
   },
 })
-.use('options', (url, params, getState) => {
-  const { auth: { data: { token } } } = getState();
+  .use('options', (url, params, getState) => {
+    const { auth: { data: { token } } } = getState();
 
-  const headers = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  };
+    const headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    };
 
-  // Add token to request headers
-  if (token) {
-    return { headers: { ...headers, Authorization: `Bearer ${token}` } };
-  }
+    // Add token to request headers
+    if (token) {
+      return { headers: { ...headers, Authorization: `Bearer ${token}` } };
+    }
 
-  return { headers };
-})
-.use('fetch', adapterFetch(fetch))
-.use('responseHandler', (err) => {
-  if (err) {
-    let msg = 'Error';
+    return { headers };
+  })
+  .use('fetch', adapterFetch(fetch))
+  .use('responseHandler', err => {
+    if (err) {
+      let msg = 'Error';
 
-    // error code
-    msg += err.statusCode ? ` ${err.statusCode}` : '';
+      // error code
+      msg += err.statusCode ? ` ${err.statusCode}` : '';
 
-    // error reason
-    msg += err.error ? ` ${err.error}` : '';
+      // error reason
+      msg += err.error ? ` ${err.error}` : '';
 
-    // error description
-    msg += err.message ? `: ${err.message}` : '';
-    store.dispatch(showError({
-      msg,
-      details: JSON.stringify(err, Object.getOwnPropertyNames(err), 4),
-    }));
+      // error description
+      msg += err.message ? `: ${err.message}` : '';
+      store.dispatch(
+        showError({
+          msg,
+          details: JSON.stringify(err, Object.getOwnPropertyNames(err), 4),
+        }),
+      );
 
-    throw err;
-  }
-});
+      throw err;
+    }
+  });
 
 export default rest;
 export const reducers = rest.reducers;
