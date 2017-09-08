@@ -47,14 +47,12 @@ const mapDispatchToProps = dispatch => ({
   refresh: () => {
     dispatch(rest.actions.users());
   },
-  refreshUser: (user) => {
+  refreshUser: user => {
     dispatch(rest.actions.userDetails({ userId: user.id }));
   },
 });
 
-@injectIntl
-@connect(mapStateToProps, mapDispatchToProps)
-export default class Users extends React.Component {
+export class Users extends React.Component {
   // Component initial state.
   // Here we keep track of whether the user details dialog is open.
   state = {
@@ -71,28 +69,43 @@ export default class Users extends React.Component {
   renderProgressBar() {
     const { usersLoading } = this.props;
     return usersLoading
-      ? (
-        <div style={{ marginBottom: '-5px' }}>
+      ? <div style={{ marginBottom: '-5px' }}>
           <LinearProgress />
         </div>
-      ) : null;
+      : null;
   }
 
   render() {
-    const { users, refreshUser, userDetails, intl: { formatMessage } } = this.props;
+    const {
+      users,
+      refreshUser,
+      userDetails,
+      intl: { formatMessage },
+    } = this.props;
     const { dialogOpen } = this.state;
+
+    console.log(users);
 
     // Show the following user details in the dialog
     const userDetailsDescription = (
       <div>
         <DialogContentText>
-          <b>{ formatMessage({ id: 'userId' })}</b>{`: ${userDetails.data.id}` }
+          <b>
+            {formatMessage({ id: 'userId' })}
+          </b>
+          {`: ${userDetails.data.id}`}
         </DialogContentText>
         <DialogContentText>
-          <b>{ formatMessage({ id: 'email' })}</b>{`: ${userDetails.data.email}` }
+          <b>
+            {formatMessage({ id: 'email' })}
+          </b>
+          {`: ${userDetails.data.email}`}
         </DialogContentText>
         <DialogContentText>
-          <b>{ formatMessage({ id: 'description' })}</b>{`: ${userDetails.data.description}` }
+          <b>
+            {formatMessage({ id: 'description' })}
+          </b>
+          {`: ${userDetails.data.description}`}
         </DialogContentText>
       </div>
     );
@@ -109,41 +122,49 @@ export default class Users extends React.Component {
           close={() => this.setState({ dialogOpen: false })}
         />
 
-        { this.renderProgressBar() }
+        {this.renderProgressBar()}
 
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>{formatMessage({ id: 'userId' })}</TableCell>
-              <TableCell>{formatMessage({ id: 'email' })}</TableCell>
+              <TableCell>
+                {formatMessage({ id: 'userId' })}
+              </TableCell>
+              <TableCell>
+                {formatMessage({ id: 'email' })}
+              </TableCell>
               <TableCell />
             </TableRow>
           </TableHead>
           <TableBody>
-            {
-              // Loop over each user and render a <TableRow>
-              users.data.map(user => (
-                <TableRow key={user.id}>
-                  <TableCell>{user.id}</TableCell>
-                  <TableCell>{user.email}</TableCell>
-                  <TableCell numeric>
-                    <Button
-                      color="primary"
-                      onClick={() => {
-                        refreshUser(user);
-                        this.setState({ dialogOpen: true });
-                      }}
-                    >
-                      <ListIcon style={{ paddingRight: 10 }} />
-                      {formatMessage({ id: 'showUserDetails' })}
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))
-            }
+            {// Loop over each user and render a <TableRow>
+            users.data.map(user =>
+              <TableRow key={user.id}>
+                <TableCell>
+                  {user.id}
+                </TableCell>
+                <TableCell>
+                  {user.email}
+                </TableCell>
+                <TableCell numeric>
+                  <Button
+                    color="primary"
+                    onClick={() => {
+                      refreshUser(user);
+                      this.setState({ dialogOpen: true });
+                    }}
+                  >
+                    <ListIcon style={{ paddingRight: 10 }} />
+                    {formatMessage({ id: 'showUserDetails' })}
+                  </Button>
+                </TableCell>
+              </TableRow>,
+            )}
           </TableBody>
         </Table>
       </div>
     );
   }
 }
+
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(Users));

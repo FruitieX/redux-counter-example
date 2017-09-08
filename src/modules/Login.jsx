@@ -32,10 +32,12 @@ const mapDispatchToProps = dispatch => ({
 
     const storedLocale = getLocaleForUser(creds.email);
     if (storedLocale && languages[storedLocale]) {
-      dispatch(updateIntl({
-        locale: storedLocale,
-        messages: languages[storedLocale].translations,
-      }));
+      dispatch(
+        updateIntl({
+          locale: storedLocale,
+          messages: languages[storedLocale].translations,
+        }),
+      );
     }
   },
   redirect(path) {
@@ -43,8 +45,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-@connect(mapStateToProps, mapDispatchToProps)
-export default class Login extends React.Component {
+export class Login extends React.Component {
   state = {
     email: '',
     password: '',
@@ -99,14 +100,17 @@ export default class Login extends React.Component {
             <TextField
               type="text"
               label="Email"
-              onChange={(event) => {
+              onChange={event => {
                 if (event.keyCode !== 13) {
                   this.handleChange(event, 'email');
                 }
               }}
-              onKeyDown={(event) => {
+              onKeyDown={event => {
                 if (event.keyCode === 13) {
-                  this.props.doLogin({ email: this.state.email, password: this.state.password });
+                  this.props.doLogin({
+                    email: this.state.email,
+                    password: this.state.password,
+                  });
                 }
               }}
               inputProps={{
@@ -117,14 +121,17 @@ export default class Login extends React.Component {
             <TextField
               type="password"
               label="Password"
-              onChange={(event) => {
+              onChange={event => {
                 if (event.keyCode !== 13) {
                   this.handleChange(event, 'password');
                 }
               }}
-              onKeyDown={(event) => {
+              onKeyDown={event => {
                 if (event.keyCode === 13) {
-                  this.props.doLogin({ email: this.state.email, password: this.state.password });
+                  this.props.doLogin({
+                    email: this.state.email,
+                    password: this.state.password,
+                  });
                 }
               }}
               marginForm
@@ -143,8 +150,10 @@ export default class Login extends React.Component {
               }}
               color="primary"
               onClick={() =>
-                this.props.doLogin({ email: this.state.email, password: this.state.password })
-              }
+                this.props.doLogin({
+                  email: this.state.email,
+                  password: this.state.password,
+                })}
             >
               Login
             </Button>
@@ -155,3 +164,5 @@ export default class Login extends React.Component {
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

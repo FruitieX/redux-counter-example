@@ -48,40 +48,46 @@ import Login from '../modules/Login';
 import Logout from '../modules/Logout';
 
 // Routes
-const routeConfigs = [{
-  path: '/home',
-  name: 'Home',
-  component: Home,
-  icon: HomeIcon,
-  requiresLogin: false,
-}, {
-  path: '/users',
-  name: 'Users',
-  component: Users,
-  icon: UsersIcon,
-  separator: true,
-  requiresLogin: true,
-}, {
-  path: '/preferences',
-  name: 'Preferences',
-  component: Preferences,
-  icon: PreferencesIcon,
-  requiresLogin: true,
-}, {
-  path: '/login',
-  name: 'Login',
-  component: Login,
-  icon: LoginIcon,
-  requiresLogin: false,
-  hideWhenScope: ['user', 'admin'],
-}, {
-  path: '/logout',
-  name: 'Logout',
-  component: Logout,
-  icon: LogoutIcon,
-  requiresLogin: false,
-  hideWhenScope: [null],
-}];
+const routeConfigs = [
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home,
+    icon: HomeIcon,
+    requiresLogin: false,
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    component: Users,
+    icon: UsersIcon,
+    separator: true,
+    requiresLogin: true,
+  },
+  {
+    path: '/preferences',
+    name: 'Preferences',
+    component: Preferences,
+    icon: PreferencesIcon,
+    requiresLogin: true,
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    icon: LoginIcon,
+    requiresLogin: false,
+    hideWhenScope: ['user', 'admin'],
+  },
+  {
+    path: '/logout',
+    name: 'Logout',
+    component: Logout,
+    icon: LogoutIcon,
+    requiresLogin: false,
+    hideWhenScope: [null],
+  },
+];
 
 export default routeConfigs;
 
@@ -108,8 +114,6 @@ const mapStateToProps = state => ({
 
 // Must wrap in withRouter here to avoid this:
 // https://reacttraining.com/react-router/web/guides/dealing-with-update-blocking
-@withRouter
-@connect(mapStateToProps)
 class AuthRedirectRoute extends React.Component {
   static propTypes = {
     loggedIn: PropTypes.bool,
@@ -123,27 +127,33 @@ class AuthRedirectRoute extends React.Component {
   };
 
   render() {
-    const { component: ChildComponent, loggedIn, requiresLogin, ...rest } = this.props;
+    const {
+      component: ChildComponent,
+      loggedIn,
+      requiresLogin,
+      ...rest
+    } = this.props;
 
     return (
       <Route
         {...rest}
-        render={props => (
-          !requiresLogin || loggedIn ? (
-            <ChildComponent {...props} />
-          ) : (
-            <Redirect
-              to={{
-                pathname: '/login',
-                state: { from: props.location },
-              }}
-            />
-          )
-        )}
+        render={props =>
+          !requiresLogin || loggedIn
+            ? <ChildComponent {...props} />
+            : <Redirect
+                to={{
+                  pathname: '/login',
+                  state: { from: props.location },
+                }}
+              />}
       />
     );
   }
 }
+
+const ConnectedAuthRedirectRoute = withRouter(
+  connect(mapStateToProps)(AuthRedirectRoute),
+);
 
 // AuthRedirectRoute wrapper which mounts routeConfig at '/' regardless of configured path
 export const IndexRoute = ({ routeConfig, ...rest }) => {
@@ -152,13 +162,7 @@ export const IndexRoute = ({ routeConfig, ...rest }) => {
     path: '/',
   };
 
-  return (
-    <AuthRedirectRoute
-      exact
-      {...rest}
-      {...indexRoute}
-    />
-  );
+  return <ConnectedAuthRedirectRoute exact {...rest} {...indexRoute} />;
 };
 
 IndexRoute.propTypes = {
@@ -166,22 +170,24 @@ IndexRoute.propTypes = {
 };
 
 // Map all configured routes into AuthRedirectRoute components
-export const ConfiguredRoutes = ({ ...rest }) => (
+export const ConfiguredRoutes = ({ ...rest }) =>
   <Switch>
-    {
-      routeConfigs.map(routeConfig => (
-        <AuthRedirectRoute
-          key={routeConfig.path}
-          {...routeConfig}
-          {...rest}
-        />
-      ))
-    }
+    {routeConfigs.map(routeConfig =>
+      <ConnectedAuthRedirectRoute
+        key={routeConfig.path}
+        {...routeConfig}
+        {...rest}
+      />,
+    )}
     <Redirect to={{ pathname: '/' }} />
-  </Switch>
-);
+  </Switch>;
 
 // Check that routeConfigs array is a valid RouteConfigShape
-PropTypes.checkPropTypes({
-  routeConfigs: PropTypes.arrayOf(RouteConfigShape).isRequired,
-}, { routeConfigs }, 'prop', 'routeConfigs');
+PropTypes.checkPropTypes(
+  {
+    routeConfigs: PropTypes.arrayOf(RouteConfigShape).isRequired,
+  },
+  { routeConfigs },
+  'prop',
+  'routeConfigs',
+);

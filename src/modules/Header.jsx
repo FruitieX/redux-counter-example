@@ -24,14 +24,14 @@ import { push } from 'react-router-redux';
 import { toggleDrawer } from './NavigationDrawer';
 import routes from '../utils/routes';
 
-const getTitle = (path) => {
+const getTitle = path => {
   if (path === '/') {
     return routes[0].name;
   }
 
-  const foundRoute = routes.find(route => (
-    route.path === path ? route.name : null
-  ));
+  const foundRoute = routes.find(
+    route => (route.path === path ? route.name : null),
+  );
 
   if (foundRoute) {
     return foundRoute.name;
@@ -40,7 +40,6 @@ const getTitle = (path) => {
   console.warn('Make sure the title name is defined in src/routes.js');
   return `ERROR: Title not found for path: ${path}`;
 };
-
 
 const mapStateToProps = (state, ownProps) => ({
   path: ownProps.location.pathname,
@@ -62,10 +61,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-@withRouter
-@injectIntl
-@connect(mapStateToProps, mapDispatchToProps)
-export default class Header extends React.Component {
+export class Header extends React.Component {
   static defaultProps = {
     user: null,
   };
@@ -86,85 +82,90 @@ export default class Header extends React.Component {
       intl: { formatMessage },
     } = this.props;
 
-    const {
-      rightMenuOpen,
-      rightMenuAnchorEl,
-    } = this.state;
+    const { rightMenuOpen, rightMenuAnchorEl } = this.state;
 
     const hideMenu = () => this.setState({ rightMenuOpen: false });
 
-    const rightMenu = user ? (
-      <Menu
-        open={rightMenuOpen}
-        anchorEl={rightMenuAnchorEl}
-        onRequestClose={() => hideMenu()}
-      >
-        <ListItem
-          button
-          onClick={() => { hideMenu(); preferences(); }}
+    const rightMenu = user
+      ? <Menu
+          open={rightMenuOpen}
+          anchorEl={rightMenuAnchorEl}
+          onRequestClose={() => hideMenu()}
         >
-          <ListItemIcon>
-            <AccountCircleIcon />
-          </ListItemIcon>
-          <ListItemText primary={user.email} secondary={`Scope: ${user.scope}`} />
-        </ListItem>
-        <Divider />
-        <ListItem
-          button
-          onClick={() => { hideMenu(); logout(); }}
+          <ListItem
+            button
+            onClick={() => {
+              hideMenu();
+              preferences();
+            }}
+          >
+            <ListItemIcon>
+              <AccountCircleIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary={user.email}
+              secondary={`Scope: ${user.scope}`}
+            />
+          </ListItem>
+          <Divider />
+          <ListItem
+            button
+            onClick={() => {
+              hideMenu();
+              logout();
+            }}
+          >
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary={formatMessage({ id: 'Logout' })} />
+          </ListItem>
+        </Menu>
+      : <Menu
+          open={rightMenuOpen}
+          anchorEl={rightMenuAnchorEl}
+          onRequestClose={() => hideMenu()}
         >
-          <ListItemIcon>
-            <ExitToAppIcon />
-          </ListItemIcon>
-          <ListItemText primary={formatMessage({ id: 'Logout' })} />
-        </ListItem>
-      </Menu>
-    ) : (
-      <Menu
-        open={rightMenuOpen}
-        anchorEl={rightMenuAnchorEl}
-        onRequestClose={() => hideMenu()}
-      >
-        <ListItem
-          button
-          onClick={() => { hideMenu(); login(); }}
-        >
-          <ListItemIcon>
-            <AccountCircleIcon />
-          </ListItemIcon>
-          <ListItemText primary={formatMessage({ id: 'Login' })} />
-        </ListItem>
-      </Menu>
-    );
+          <ListItem
+            button
+            onClick={() => {
+              hideMenu();
+              login();
+            }}
+          >
+            <ListItemIcon>
+              <AccountCircleIcon />
+            </ListItemIcon>
+            <ListItemText primary={formatMessage({ id: 'Login' })} />
+          </ListItem>
+        </Menu>;
 
     return (
-      <AppBar position="static" >
+      <AppBar position="static">
         <Toolbar>
-          <IconButton
-            color="contrast"
-            onClick={() => doToggleDrawer()}
-          >
+          <IconButton color="contrast" onClick={() => doToggleDrawer()}>
             <MenuIcon />
           </IconButton>
-          <Typography
-            style={{ flex: 1 }}
-            type="title"
-            color="inherit"
-          >
+          <Typography style={{ flex: 1 }} type="title" color="inherit">
             <FormattedMessage id={getTitle(path)} />
           </Typography>
           <IconButton
             color="contrast"
-            onClick={e => this.setState({
-              rightMenuAnchorEl: e.currentTarget,
-              rightMenuOpen: true,
-            })}
+            onClick={e =>
+              this.setState({
+                rightMenuAnchorEl: e.currentTarget,
+                rightMenuOpen: true,
+              })}
           >
             <MoreVertIcon />
           </IconButton>
-          { rightMenu }
+          {rightMenu}
         </Toolbar>
       </AppBar>
     );
   }
 }
+
+export default withRouter(
+  injectIntl(connect(mapStateToProps, mapDispatchToProps)(Header)),
+);
