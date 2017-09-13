@@ -116,7 +116,6 @@ export class Login extends React.Component {
               inputProps={{
                 autoFocus: true,
               }}
-              marginForm
             />
             <TextField
               type="password"
@@ -134,7 +133,6 @@ export class Login extends React.Component {
                   });
                 }
               }}
-              marginForm
             />
           </CardContent>
           <CardActions

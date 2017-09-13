@@ -68,11 +68,11 @@ export class Users extends React.Component {
 
   renderProgressBar() {
     const { usersLoading } = this.props;
-    return usersLoading
-      ? <div style={{ marginBottom: '-5px' }}>
-          <LinearProgress />
-        </div>
-      : null;
+    return usersLoading ? (
+      <div style={{ marginBottom: '-5px' }}>
+        <LinearProgress />
+      </div>
+    ) : null;
   }
 
   render() {
@@ -84,27 +84,19 @@ export class Users extends React.Component {
     } = this.props;
     const { dialogOpen } = this.state;
 
-    console.log(users);
-
     // Show the following user details in the dialog
     const userDetailsDescription = (
       <div>
         <DialogContentText>
-          <b>
-            {formatMessage({ id: 'userId' })}
-          </b>
+          <b>{formatMessage({ id: 'userId' })}</b>
           {`: ${userDetails.data.id}`}
         </DialogContentText>
         <DialogContentText>
-          <b>
-            {formatMessage({ id: 'email' })}
-          </b>
+          <b>{formatMessage({ id: 'email' })}</b>
           {`: ${userDetails.data.email}`}
         </DialogContentText>
         <DialogContentText>
-          <b>
-            {formatMessage({ id: 'description' })}
-          </b>
+          <b>{formatMessage({ id: 'description' })}</b>
           {`: ${userDetails.data.description}`}
         </DialogContentText>
       </div>
@@ -127,25 +119,17 @@ export class Users extends React.Component {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>
-                {formatMessage({ id: 'userId' })}
-              </TableCell>
-              <TableCell>
-                {formatMessage({ id: 'email' })}
-              </TableCell>
+              <TableCell>{formatMessage({ id: 'userId' })}</TableCell>
+              <TableCell>{formatMessage({ id: 'email' })}</TableCell>
               <TableCell />
             </TableRow>
           </TableHead>
           <TableBody>
             {// Loop over each user and render a <TableRow>
-            users.data.map(user =>
+            users.data.map(user => (
               <TableRow key={user.id}>
-                <TableCell>
-                  {user.id}
-                </TableCell>
-                <TableCell>
-                  {user.email}
-                </TableCell>
+                <TableCell>{user.id}</TableCell>
+                <TableCell>{user.email}</TableCell>
                 <TableCell numeric>
                   <Button
                     color="primary"
@@ -158,8 +142,8 @@ export class Users extends React.Component {
                     {formatMessage({ id: 'showUserDetails' })}
                   </Button>
                 </TableCell>
-              </TableRow>,
-            )}
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>
