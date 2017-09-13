@@ -32,11 +32,9 @@ const styles = {
 };
 
 export default class Home extends React.Component {
-  renderChilicornCard = () =>
+  renderChilicornCard = () => (
     <Card>
-      <CardMedia>
-        <div style={styles.chilicornHeader} />
-      </CardMedia>
+      <CardMedia style={styles.chilicornHeader} image={chilicorn} />
       <CardContent>
         <Typography type="headline" component="h2">
           Title 1
@@ -53,18 +51,15 @@ export default class Home extends React.Component {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button compact color="primary">
-          Share
-        </Button>
-        <Button compact color="primary">
-          Learn More
-        </Button>
+        <Button color="primary">Share</Button>
+        <Button color="primary">Learn More</Button>
       </CardActions>
-    </Card>;
+    </Card>
+  );
 
-  renderPlaceholderCard = () =>
+  renderPlaceholderCard = () => (
     <Card>
-      <CardMedia>
+      <CardMedia image={placeholder}>
         <div style={styles.loremHeader} />
       </CardMedia>
       <CardContent>
@@ -83,14 +78,11 @@ export default class Home extends React.Component {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button compact color="primary">
-          Share
-        </Button>
-        <Button compact color="primary">
-          Learn More
-        </Button>
+        <Button color="primary">Share</Button>
+        <Button color="primary">Learn More</Button>
       </CardActions>
-    </Card>;
+    </Card>
+  );
 
   render() {
     return (
